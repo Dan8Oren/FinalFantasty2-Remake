@@ -1,4 +1,4 @@
-# Project 3: 80’s
+# Project 3: 80’s - Final Fantasy 2
 
 Screen resolution: 16x9
 
