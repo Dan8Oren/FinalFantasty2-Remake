@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -20340,15 +20340,15 @@ TextureImporter:
       MazeHall_856: -316967862
       MazeHall_857: -485845178
       MazeHall_284: 466503927
-      MazeHall_486: 534914287
       MazeHall_537: 1362571947
-      MazeHall_883: -1478913279
+      MazeHall_486: 534914287
       MazeHall_96: -1383117412
       MazeHall_646: 414771768
       MazeHall_587: -1761609851
       MazeHall_40: -2078305412
       MazeHall_796: -13909526
       MazeHall_652: 236214495
+      MazeHall_883: -1478913279
       MazeHall_898: -911052659
       MazeHall_827: 1070418225
       MazeHall_500: 1876078217
@@ -20568,17 +20568,17 @@ TextureImporter:
       MazeHall_353: -752320694
       MazeHall_608: -603688905
       MazeHall_435: 1653282868
+      MazeHall_620: 1393660605
       MazeHall_292: -654924851
       MazeHall_176: 950248778
-      MazeHall_620: 1393660605
       MazeHall_79: 135174242
       MazeHall_949: -1376424728
       MazeHall_294: -415709064
       MazeHall_88: -100859386
       MazeHall_118: 555238275
-      MazeHall_11: 312331096
-      MazeHall_203: -1610546755
       MazeHall_753: -616152290
+      MazeHall_203: -1610546755
+      MazeHall_11: 312331096
       MazeHall_860: 2071777741
       MazeHall_656: -716039956
       MazeHall_93: -2130498344
@@ -20599,8 +20599,8 @@ TextureImporter:
       MazeHall_116: -1783619746
       MazeHall_307: 162502950
       MazeHall_666: 292161504
-      MazeHall_459: -1090966665
       MazeHall_920: 75200725
+      MazeHall_459: -1090966665
       MazeHall_562: -1535973872
       MazeHall_370: -2020295485
       MazeHall_219: 1824078233
@@ -20816,22 +20816,22 @@ TextureImporter:
       MazeHall_301: -1288623787
       MazeHall_645: -440768760
       MazeHall_23: 265157821
-      MazeHall_269: -480493478
-      MazeHall_640: -534006682
       MazeHall_481: 1200515354
+      MazeHall_269: -480493478
       MazeHall_257: -938449305
       MazeHall_117: -602832751
       MazeHall_746: -1486608177
       MazeHall_179: 1357932450
+      MazeHall_640: -534006682
       MazeHall_460: 1780660787
-      MazeHall_505: -400304838
       MazeHall_648: 845274002
-      MazeHall_952: 1993223509
       MazeHall_755: -1001536807
+      MazeHall_505: -400304838
       MazeHall_189: 1948775365
       MazeHall_239: 1790791860
       MazeHall_248: 1503963607
       MazeHall_942: -1446658547
+      MazeHall_952: 1993223509
       MazeHall_425: 413670062
       MazeHall_19: -455378950
       MazeHall_684: -1205833809
@@ -20839,14 +20839,14 @@ TextureImporter:
       MazeHall_354: 1875561348
       MazeHall_120: 2030122058
       MazeHall_709: 1443706511
-      MazeHall_98: 1584884040
+      MazeHall_959: 136695212
       MazeHall_318: 499484798
       MazeHall_83: -2008270316
       MazeHall_107: -392047769
-      MazeHall_270: 1157357624
-      MazeHall_959: 136695212
+      MazeHall_98: 1584884040
       MazeHall_869: -1819915044
       MazeHall_881: 569163745
+      MazeHall_270: 1157357624
       MazeHall_241: -179853306
       MazeHall_234: -41589056
       MazeHall_880: 246686665
@@ -20861,8 +20861,8 @@ TextureImporter:
       MazeHall_371: -968308075
       MazeHall_50: -1677013691
       MazeHall_192: -776809270
-      MazeHall_3: -537720944
       MazeHall_265: 496321059
+      MazeHall_3: -537720944
       MazeHall_588: -1418388012
       MazeHall_458: 1059991328
       MazeHall_777: 1484201671
@@ -20929,8 +20929,8 @@ TextureImporter:
       MazeHall_603: -1876567890
       MazeHall_757: -2048981447
       MazeHall_273: -863382472
-      MazeHall_390: 302897826
       MazeHall_787: -1933584325
+      MazeHall_390: 302897826
       MazeHall_89: 1305274568
       MazeHall_544: -137144308
       MazeHall_703: -1968596255
@@ -20945,9 +20945,8 @@ TextureImporter:
       MazeHall_373: -1232405827
       MazeHall_247: 901561939
       MazeHall_446: -1843484756
-      MazeHall_532: -1804357429
-      MazeHall_609: 732767966
       MazeHall_729: -1778441806
+      MazeHall_532: -1804357429
       MazeHall_691: 1070851102
       MazeHall_142: 231545840
       MazeHall_28: -1463535811
@@ -20957,6 +20956,7 @@ TextureImporter:
       MazeHall_764: 1657522049
       MazeHall_798: -1144941238
       MazeHall_901: -1977966289
+      MazeHall_609: 732767966
       MazeHall_862: 1934062191
       MazeHall_791: -1351807440
       MazeHall_823: -1751976976
@@ -20965,30 +20965,30 @@ TextureImporter:
       MazeHall_214: 278117006
       MazeHall_859: -816423757
       MazeHall_315: 2060177325
-      MazeHall_85: 1151451327
-      MazeHall_200: 1268811696
       MazeHall_348: -1813754297
+      MazeHall_85: 1151451327
       MazeHall_376: -753362642
       MazeHall_629: -1963977957
+      MazeHall_200: 1268811696
       MazeHall_692: 1648745648
       MazeHall_325: -1744156650
       MazeHall_598: 1614017140
       MazeHall_144: -1343659610
       MazeHall_751: -1236356402
       MazeHall_423: 1173186087
+      MazeHall_617: 669664671
       MazeHall_180: -963745220
       MazeHall_220: 839139273
-      MazeHall_617: 669664671
       MazeHall_217: 1190684994
       MazeHall_516: 871731598
       MazeHall_530: 109200244
       MazeHall_230: 1840459738
-      MazeHall_238: 1748600384
+      MazeHall_349: 1839717146
       MazeHall_302: -417920750
       MazeHall_337: -1289951010
-      MazeHall_349: 1839717146
-      MazeHall_439: 2028854788
       MazeHall_571: 1848314642
+      MazeHall_439: 2028854788
+      MazeHall_238: 1748600384
       MazeHall_930: 1880557372
       MazeHall_748: 291242055
       MazeHall_492: 657995247
