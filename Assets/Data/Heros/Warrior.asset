@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5c92b9395ef8245a8fea91f3e75261, type: 3}
   m_Name: Warrior
   m_EditorClassIdentifier: 
-  characterImage: {fileID: 0}
+  characterImage: {fileID: 21300000, guid: 3eeecccb821a4eb4192f7812d357602f, type: 3}
   attacks:
   - {fileID: 11400000, guid: ecff1df2f37d58047b64194cbb0038e5, type: 2}
   - {fileID: 11400000, guid: c50b1f7e64d89ce40b827b2376422924, type: 2}
@@ -29,10 +29,10 @@ MonoBehaviour:
   stamina: 20
   wisdom: 10
   speed: 7
-  defence: 42
-  resistance: 34
-  attack: 30
-  magic: 15
+  defence: 210
+  resistance: 170
+  attack: 150
+  magic: 75
   items:
   - {fileID: 11400000, guid: d6f5a2b9768a4904e9892afbadb1f191, type: 2}
   - {fileID: 11400000, guid: 92044c66abe85c84db34d600728146c5, type: 2}
