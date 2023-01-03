@@ -43,3 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: pointer
+    uniqueID: 3258546227
+    locked: 0

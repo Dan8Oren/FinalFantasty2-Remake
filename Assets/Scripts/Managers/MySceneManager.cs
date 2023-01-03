@@ -11,6 +11,7 @@ public class MySceneManager : MonoBehaviour
     public GameObject hero;
     public GameObject[] doors;
     [SerializeField] private float afterMovmentDelay;
+    public bool IsInFight { get; private set; }
     public int CurrentEntrance { get; private set; }
     
     private Scene _fightSceneNum; 
@@ -26,6 +27,7 @@ public class MySceneManager : MonoBehaviour
         {
            Destroy(gameObject); 
         }
+        IsInFight = false;
         CurrentEntrance = -1;
         //By convention all-ways the last one. (my convention :P)
         _fightSceneNum = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
@@ -83,6 +85,14 @@ public class MySceneManager : MonoBehaviour
         if (scene != _fightSceneNum)
         {
             OnRegularLevelLoad();
+        }
+        else
+        {
+            IsInFight = !IsInFight;
+            if (IsInFight)
+            {
+                OnRegularLevelLoad();
+            }
         }
     }
 }

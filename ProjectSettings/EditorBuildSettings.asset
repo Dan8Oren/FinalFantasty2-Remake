@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RedQueen.unity
     guid: cf0b384d19cbf4d48b651ff0d03a2fae
+  - enabled: 1
+    path: Assets/Scenes/FightScene.unity
+    guid: 7bdbd16cbe7885f40a27172f9a89364b
   m_configObjects: {}

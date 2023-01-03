@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
     public CharacterScriptableObject[] heroes;
+    public GameObject[] items;
+    public bool isOnFight {get;private set;}
     public int FightLevel
     {
         get { return curLevel; } 
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int curLevel;
     private void Awake()
     {
+        isOnFight = false;
         //singleton pattern the prevent two scene managers
         if ( Instance == null)
         {
@@ -26,7 +29,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject); 
         }
-
         FightLevel = 0;
 
     }

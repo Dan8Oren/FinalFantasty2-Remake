@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterScriptableObject",menuName = "ScriptableObjects/CharacterData")]
 public class CharacterScriptableObject : ScriptableObject
 {
+    private const int DEFAULT_AMOUNT = 5;
+    public bool isHero;
     public Sprite characterImage;
     public AttackScriptableObject[] attacks;
     public MagicScriptableObject[] magics;
@@ -25,14 +27,23 @@ public class CharacterScriptableObject : ScriptableObject
     public int magic;
     public EquipmentScriptableObject[] items;
 
-    private void OnEnable()
+    CharacterScriptableObject(int hp,int mp,bool isHero)
     {
-        foreach (var equipment in items)
-        {
-            attack += equipment.attack;
-            defence += equipment.defence;
-            magic += equipment.magic;
-            resistance += equipment.resistance;
-        }
+        this.isHero = isHero;
+        maxHP = hp;
+        maxMP = mp;
+        currentHP = hp;
+        currentMP = mp;
+        strength = DEFAULT_AMOUNT; 
+        intelligence = DEFAULT_AMOUNT;
+        agility = DEFAULT_AMOUNT;
+        stamina = DEFAULT_AMOUNT;
+        wisdom = DEFAULT_AMOUNT;
+        speed = DEFAULT_AMOUNT;
+        defence = DEFAULT_AMOUNT;
+        attack = DEFAULT_AMOUNT;
+        magic = DEFAULT_AMOUNT;
+        resistance = 0;
     }
+    
 }

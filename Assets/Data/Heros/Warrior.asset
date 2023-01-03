@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5c92b9395ef8245a8fea91f3e75261, type: 3}
   m_Name: Warrior
   m_EditorClassIdentifier: 
+  isHero: 1
   characterImage: {fileID: 21300000, guid: 3eeecccb821a4eb4192f7812d357602f, type: 3}
   attacks:
   - {fileID: 11400000, guid: ecff1df2f37d58047b64194cbb0038e5, type: 2}

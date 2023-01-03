@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class PointerBehavior : MonoBehaviour
 {
     public static PointerBehavior Instance = null;
+    public GameObject SelectedObj { get; private set;}
     private TextMeshProUGUI[] _textMenu;
     private GameObject[] _objects;
     private int _numOfObjectsInARow;
@@ -25,6 +26,7 @@ public class PointerBehavior : MonoBehaviour
         {
             _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             Instance = this;
+            SelectedObj = null;
             return;
         }
         Destroy(gameObject);
@@ -51,13 +53,17 @@ public class PointerBehavior : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // if (!MySceneManager.Instance.IsInFight)
+            // {
+            //     SelectedObj = _objects[_curIndex];
+            // }
             if (_isText)
             {
                 FightManager.Instance.DoChosenAction(_textMenu[_curIndex].text);
             }
             else
             {
-                FightManager.Instance.SetSelectedObject(_objects[_curIndex].name);
+                FightManager.Instance.SetSelectedObject(_objects[_curIndex]);
             }
         }
         
@@ -216,6 +222,7 @@ public class PointerBehavior : MonoBehaviour
         _curIndex = 0;
         _maxIndex = newObjects.Length;
         _objects = newObjects;
+        FixEmptyCharacters(1);
         UpdatePointerLocation();
     }
 }
