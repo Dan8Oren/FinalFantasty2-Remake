@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5c92b9395ef8245a8fea91f3e75261, type: 3}
+  m_Name: BrainWashedKnight
+  m_EditorClassIdentifier: 
+  isHero: 0
+  characterImage: {fileID: 21300000, guid: 426d882c741a17542b7857ebdb5dcef3, type: 2}
+  characterIcon: {fileID: 21300000, guid: d51a7ade8fcaf614b81c2b0ad441d1cd, type: 3}
+  attacks:
+  - {fileID: 11400000, guid: ecff1df2f37d58047b64194cbb0038e5, type: 2}
+  magics:
+  - {fileID: 11400000, guid: 54ba7e765330e3b449ee477f0c446d3b, type: 2}
+  maxHP: 100
+  maxMP: 5
+  currentHP: -25
+  currentMP: 5
+  strength: 5
+  intelligence: 5
+  agility: 5
+  stamina: 5
+  wisdom: 5
+  speed: 5
+  defence: 11
+  resistance: 22
+  attack: 13
+  magic: 0
+  items: []

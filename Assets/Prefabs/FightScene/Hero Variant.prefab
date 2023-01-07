@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6046637891915850124, guid: aecbf9e0f1e57c64a8faededd015b951, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6346109884612993627, guid: aecbf9e0f1e57c64a8faededd015b951, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -278,4 +282,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68235308f0c39934c8d7fa7fd30300c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scriptableObject: {fileID: 0}
+  data: {fileID: 0}
+  slider: {fileID: 0}

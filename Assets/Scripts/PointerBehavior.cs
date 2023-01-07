@@ -99,7 +99,7 @@ public class PointerBehavior : MonoBehaviour
             _curIndex-=_numOfObjectsInARow;
             if (_curIndex < 0)
             {
-                _curIndex += _maxIndex;
+                _curIndex *= -1;
             }
             FixEmptyCharacters(-1);
             UpdatePointerLocation();
@@ -115,6 +115,10 @@ public class PointerBehavior : MonoBehaviour
             {
                 _curIndex = 0;
             }
+            else if(_curIndex < 0)
+            {
+                _curIndex = _maxIndex - 1;
+            }
         }
     }
 
@@ -123,26 +127,45 @@ public class PointerBehavior : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow) && _curIndex+1 < _maxIndex)
         {
             _curIndex++;
+            FixEmptyTexts(1);
             UpdatePointerLocation();
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow)&& _curIndex-1 >= 0)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)&& _curIndex-1 >= 0)
         {
             _curIndex--;
+            FixEmptyTexts(-1);
             UpdatePointerLocation();
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && _curIndex+_numOfObjectsInARow<_maxIndex)
+        else if (Input.GetKeyDown(KeyCode.DownArrow) && _curIndex+_numOfObjectsInARow<_maxIndex)
         {
             _curIndex+=_numOfObjectsInARow;
+            FixEmptyTexts(1);
             UpdatePointerLocation();
         }
-
-        if (Input.GetKeyDown(KeyCode.UpArrow) && _curIndex-_numOfObjectsInARow >= 0)
+        else if (Input.GetKeyDown(KeyCode.UpArrow) && _curIndex-_numOfObjectsInARow >= 0)
         {
             _curIndex-=_numOfObjectsInARow;
+            FixEmptyTexts(-1);
             UpdatePointerLocation();
         }
     }
-
+    
+    private void FixEmptyTexts(int jump)
+    {
+        while (!_textMenu[_curIndex].isActiveAndEnabled)
+        {
+            _curIndex+=jump;
+            if (_curIndex == _maxIndex)
+            {
+                _curIndex = 0;
+            }
+            else if(_curIndex < 0)
+            {
+                _curIndex = _maxIndex - 1;
+            }
+        }
+    }
+    
     /**
      * Updates the pointer's location by the menuButton location of the current index.
      */

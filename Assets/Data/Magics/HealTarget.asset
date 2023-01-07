@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8e81211b1e4464a7bd9fb639395b89, type: 3}
   m_Name: HealTarget
   m_EditorClassIdentifier: 
+  name: HealTarget
   isOnSelf: 0
   isOnSameGroup: 1
   effectAllGroup: 0
