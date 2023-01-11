@@ -99,12 +99,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427e39a54d1c3b841a8ff51791596bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionCanvas: {fileID: 0}
   entranceNumber: 0
   openDoorSprite: {fileID: 21300000, guid: 73dbfaf7079be954fa794e2d5809146a, type: 3}
   transition: {fileID: 0}
+  isAllLevels: 0
+  dialogs: []
   nextScene: Game
-  transitionWaitTime: 1
-  waitTimeBeforeTransition: 0.5
+  transitionWaitTime: 0.5
+  waitTimeBeforeTransition: 0.1
+  messageBoxScript: {fileID: 0}
 --- !u!61 &5862843563339124752
 BoxCollider2D:
   m_ObjectHideFlags: 0

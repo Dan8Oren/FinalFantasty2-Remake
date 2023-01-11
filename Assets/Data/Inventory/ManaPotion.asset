@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   displayName: Mana Potion
-  image: {fileID: 1080697089, guid: 167d784d1c787ad44a25d5960c5bcc0c, type: 3}
+  image: {fileID: 21300000, guid: c64c8025ccaeb834bb8e32cc9cef9ed3, type: 3}
   prefab: {fileID: 0}
   pointsOfEffect: 5

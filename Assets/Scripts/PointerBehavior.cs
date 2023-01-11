@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -32,14 +33,6 @@ public class PointerBehavior : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // private void OnEnable()
-    // {
-    //     _textMenu = FightManager.Instance.mainFightMenuButtons;
-    //     _numOfButtonsInARow = FightManager.Instance.numOfButtonsInARow;
-    //     _curIndex = 0;
-    //     UpdatePointerLocation();
-    // }
-
     // Update is called once per frame
     private void Update()
     {
@@ -53,10 +46,12 @@ public class PointerBehavior : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // if (!MySceneManager.Instance.IsInFight)
-            // {
-            //     SelectedObj = _objects[_curIndex];
-            // }
+            if (!MySceneManager.Instance.IsInFight)
+            {
+                SelectedObj = _objects[_curIndex];
+                enabled = false;
+                return;
+            }
             if (_isText)
             {
                 FightManager.Instance.DoChosenAction(_textMenu[_curIndex].text);
@@ -124,30 +119,37 @@ public class PointerBehavior : MonoBehaviour
 
     private void MenuInputHandler()
     {
+        int jump = 0;
         if (Input.GetKeyDown(KeyCode.RightArrow) && _curIndex+1 < _maxIndex)
         {
             _curIndex++;
-            FixEmptyTexts(1);
-            UpdatePointerLocation();
+            jump = 1;
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow)&& _curIndex-1 >= 0)
         {
             _curIndex--;
-            FixEmptyTexts(-1);
-            UpdatePointerLocation();
+            jump = -1;
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && _curIndex+_numOfObjectsInARow<_maxIndex)
         {
             _curIndex+=_numOfObjectsInARow;
-            FixEmptyTexts(1);
-            UpdatePointerLocation();
+            jump = 1;
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow) && _curIndex-_numOfObjectsInARow >= 0)
         {
             _curIndex-=_numOfObjectsInARow;
-            FixEmptyTexts(-1);
-            UpdatePointerLocation();
+            jump = -1;
         }
+
+        if (jump != 0)
+        {
+            if (_isText){
+                FixEmptyTexts(jump);
+            }else{
+                FixEmptyCharacters(jump);
+            }
+        }
+        UpdatePointerLocation();
     }
     
     private void FixEmptyTexts(int jump)
@@ -248,4 +250,15 @@ public class PointerBehavior : MonoBehaviour
         FixEmptyCharacters(1);
         UpdatePointerLocation();
     }
+
+    private void OnEnable()
+    {
+        gameObject.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        gameObject.SetActive(false);
+    }
+
 }

@@ -625,6 +625,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3025401671460717123, guid: 15e5a5a436ec83344837e3c70e46e181, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00048828125
+      objectReference: {fileID: 0}
     - target: {fileID: 3793713880023554153, guid: 15e5a5a436ec83344837e3c70e46e181, type: 3}
       propertyPath: m_Camera
       value: 
@@ -681,7 +685,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 15e5a5a436ec83344837e3c70e46e181, type: 3}
 --- !u!114 &1707407270 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6771965142022149775, guid: 15e5a5a436ec83344837e3c70e46e181, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6111156499098031658, guid: 15e5a5a436ec83344837e3c70e46e181, type: 3}
   m_PrefabInstance: {fileID: 1707407269}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.026249431, y: 0.186}
   m_AnchorMax: {x: 0.9738853, y: 0.81580955}
-  m_AnchoredPosition: {x: -0.09765625, y: -0.0032997131}
-  m_SizeDelta: {x: -1222.5, y: -78.821}
+  m_AnchoredPosition: {x: 0.51971436, y: 0.0019340515}
+  m_SizeDelta: {x: -1044.4, y: -75.374}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5794177247971919841
 CanvasRenderer:
@@ -68,7 +68,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Wellcom to Final-Fantasy 2 Remake, by Dan.
 
-    press ''space'' to continue'
+    press ''space'' to continuedd'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f0349d3d9afb4d44bb4005417f337ccb, type: 2}
   m_sharedMaterial: {fileID: -1243764166106827831, guid: f0349d3d9afb4d44bb4005417f337ccb, type: 2}
@@ -174,8 +174,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.4035553}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0.80571}
-  m_SizeDelta: {x: 738.3201, y: 4.2858}
+  m_AnchoredPosition: {x: -0.00048828125, y: 0.5465851}
+  m_SizeDelta: {x: 604.09, y: 3.7446}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5794177249604464547
 CanvasRenderer:
@@ -201,7 +201,8 @@ MonoBehaviour:
   - Welcome to Final-Fantasy 2 Remake, By Dan.\nPress 'Space' to Continue...
   - You can move the player with the arrows keys,\nand interact with objects using
     'space'.
-  - While not in a fight,\nyou can press 'i' to open your inventory.
+  - press 'x' to go back, and While not in a fight,\nyou can press 'x' to open your
+    inventory.
   - \t\t\tGood Luck :)!
   textDisplay: {fileID: 5794177247971919846}
   timeBetweenChars: 0.03

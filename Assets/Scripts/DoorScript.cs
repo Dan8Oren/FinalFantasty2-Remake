@@ -16,7 +16,7 @@ public class DoorScript : MonoBehaviour
     [SerializeField] private string nextScene; 
     [SerializeField] private float transitionWaitTime;
     [SerializeField] private float waitTimeBeforeTransition;
-    [SerializeField] private MessageBoxScript messageBoxScript;
+    [SerializeField] private MessageBoxScript messageBoxScript = null;
     private SpriteRenderer _spriteRenderer;
 
     private void OnTriggerEnter2D(Collider2D col)

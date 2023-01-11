@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour 
 {
     private const int POS_Z_NOT_VISIBLE = 100;
     private const int NUM_ITEMS_IN_A_ROW = 13;
@@ -19,8 +19,11 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventorySlotPrefab;
     
     private Dictionary<InventoryItemData, InventoryItemDisplay> _items;
-    private Camera _cameraComponent;
     private Transform _transform;
+    private IEnumerator _wait;
+    private GameObject _selectedItem;
+    private Canvas _canvas;
+    
     private void Awake()
     {
         //singleton pattern the prevent two scene managers
@@ -38,14 +41,12 @@ public class InventoryManager : MonoBehaviour
         {
             obj.SetActive(false);
         }
-
-        _cameraComponent = GetComponent<Camera>();
         _transform = transform;
         Inventory = new Dictionary<InventoryItemDisplay,GameObject>();
         Inventory.EnsureCapacity(capacity);
         _items = new Dictionary<InventoryItemData, InventoryItemDisplay>();
         _items.EnsureCapacity(capacity);
-        
+        _canvas = GetComponent<Canvas>();
         //Default items in the inventory;
         InitInventory();
     }
@@ -109,7 +110,7 @@ public class InventoryManager : MonoBehaviour
 
     public void OpenInventory()
     {
-        _cameraComponent = Camera.main;
+        _canvas.worldCamera = Camera.main;
         Vector3 pos = _transform.position;
         pos.z = 0;
         _transform.position = pos;
@@ -120,14 +121,35 @@ public class InventoryManager : MonoBehaviour
 
         if (PointerBehavior.Instance == null)
         {
-            GameObject temp = Instantiate(pointerPrefab);
+            GameObject temp = Instantiate(pointerPrefab,transform);
+            temp.SetActive(true);
             PointerBehavior.Instance = temp.GetComponent<PointerBehavior>();
+            PointerBehavior.Instance.enabled = true;
         }
+        PointerBehavior.Instance.gameObject.SetActive(true);
         PointerBehavior.Instance.SetNewObjects(Inventory.Values.ToArray(),NUM_ITEMS_IN_A_ROW,true);
+        if (!GameManager.Instance.isOnFight)
+        {
+            _wait = WaitForPlayerToChoose();
+            StartCoroutine(_wait);
+        }
+    }
+    
+    private IEnumerator WaitForPlayerToChoose()
+    {
+        yield return new WaitUntil(() => !PointerBehavior.Instance.isActiveAndEnabled);
+        print("waitUntil");
+        _selectedItem = PointerBehavior.Instance.SelectedObj;
+        GameManager.Instance.OpenHeroesMenu();
+        this.enabled = false;
     }
     
     public void CloseInventory()
     {
+        if (_wait!= null)
+        {
+            StopCoroutine(_wait);
+        }
         Vector3 pos = _transform.position;
         pos.z = POS_Z_NOT_VISIBLE;
         _transform.position = pos;
@@ -135,5 +157,22 @@ public class InventoryManager : MonoBehaviour
         {
             obj.SetActive(false);
         }
+
+        PointerBehavior.Instance.enabled = false;
+    }
+
+    public void ApplyItem(CharacterData heroData)
+    {
+        InventoryItemDisplay res = GetItem(_selectedItem);
+        switch (res.Data.id)
+        {
+            case InventoryItemData.k_HEALTH_POTION_ID:
+                heroData.currentHP += res.Data.pointsOfEffect;
+                break;
+            case InventoryItemData.k_MANA_POTION_ID:
+                heroData.currentHP += res.Data.pointsOfEffect;
+                break;
+        }
+        Remove(res.Data);
     }
 }
