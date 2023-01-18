@@ -21,14 +21,13 @@ public class FightManager : MonoBehaviour
     public int numOfButtonsInARow;
     public DataMenuScript dataMenuScript;
     public ActionsLogScript actionsLogScript;
-    public NextToFightScript nextToFightScript;
+    // public NextToFightScript nextToFightScript;
     public CharacterData[] EnemiesLevel1;
     public CharacterData[] EnemiesLevel2;
     public CharacterData[] EnemiesLevel3;
     public CharacterData[] EnemiesLevel4;
     public CharacterData[] EnemiesLevel5;
     public CharacterData[][] EnemiesByLevels ;
-
     private bool _actionHasTaken;
     private bool _isBackEnabled;
     
@@ -82,9 +81,10 @@ public class FightManager : MonoBehaviour
         _allFighters.AddRange(enemyRow1);
         _allFighters.AddRange(enemyRow2);
         _allFighters.AddRange(heroRow);
+        PointerBehavior.Instance.transform.SetParent(null);
         PointerBehavior.Instance.gameObject.SetActive(false);
         GetBattleOrder();
-        nextToFightScript.SetFightOrder(_charactersFightOrder);
+        // nextToFightScript.SetFightOrder(_charactersFightOrder);
         _startFight = true; // to call continue fight at update and let other objects to start.
     }
 
@@ -118,7 +118,6 @@ public class FightManager : MonoBehaviour
                 UpdateNextAttacker();
             } while (!_charactersFightOrder[_curFighterIndex].isActiveAndEnabled);
             actionsLogScript.ShowLog();
-            ContinueFight();
         }
     }
 
@@ -190,7 +189,7 @@ public class FightManager : MonoBehaviour
             curFighter.EffectMana(-chosenMagic.manaPointsToConsume); //consume mana
             if (chosenMagic.isOnSelf)
             {
-                actionsLogScript.AddToLog($" uses {chosenMagic.name} for {damageCalc}");
+                actionsLogScript.AddToLog($" uses {chosenMagic.characterName} for {damageCalc}");
                 curFighter.EffectHealth((int)damageCalc,actionsLogScript);
                 MagicMenuScript.Instance.CloseMenu();
                 FightMenuScript.Instance.CloseMenu();
@@ -198,7 +197,7 @@ public class FightManager : MonoBehaviour
                 _selectedObjName = null;
                 return;
             }
-            actionsLogScript.AddToLog($" uses {chosenMagic.name} to attack");
+            actionsLogScript.AddToLog($" uses {chosenMagic.characterName} to attack");
             _attackSelected = true;
             _selectedObjName = null;
             //TODO: add multiple enemies?
@@ -219,7 +218,7 @@ public class FightManager : MonoBehaviour
     {
         foreach (var magic in curFighter.magics)
         {
-            if (magic.name.Equals(_selectedObjName))
+            if (magic.characterName.Equals(_selectedObjName))
             {
                 return magic;
             }
@@ -278,7 +277,7 @@ public class FightManager : MonoBehaviour
     private void UpdateNextAttacker()
     {
         _curFighterIndex += 1;
-        nextToFightScript.DisplayNextFighter();
+        // nextToFightScript.DisplayNextFighter();
         if (_curFighterIndex >= _charactersFightOrder.Count)
         {
             _curFighterIndex = 0;
@@ -300,7 +299,7 @@ public class FightManager : MonoBehaviour
             }
             _charactersFightOrder.Remove(obj);
         }
-        nextToFightScript.SetFightOrder(_charactersFightOrder);
+        // nextToFightScript.SetFightOrder(_charactersFightOrder);
     }
 
     /**
@@ -336,7 +335,7 @@ public class FightManager : MonoBehaviour
         {
             print("you win");
             //TODO: Add animations
-            MySceneManager.Instance.LoadScene(MySceneManager.Instance.CurrentEntrance,MySceneManager.Instance.LastSceneName);
+            MySceneManager.Instance.LoadScene(MySceneManager.Instance.CurrentEntrance-1,MySceneManager.Instance.LastSceneName);
             return true;
         }
 
@@ -344,7 +343,7 @@ public class FightManager : MonoBehaviour
     }
     
 
-    private void ContinueFight()
+    public void ContinueFight()
     {
         CharacterDisplayScript curFighter = _charactersFightOrder[_curFighterIndex];
         dataMenuScript.UpdateDisplay();
@@ -403,6 +402,7 @@ public class FightManager : MonoBehaviour
                 battleRow[i].gameObject.SetActive(false);
                 continue;
             }
+            infoRow[i + startInd].ResetStats();
             battleRow[i].SetScriptable(infoRow[i + startInd]);
         }
     }
@@ -432,7 +432,7 @@ public class FightManager : MonoBehaviour
         else
         {
             int actionInd = Random.Range(0, magics.Length);
-            actionsLogScript.AddToLog($" Uses {magics[actionInd].name}");
+            actionsLogScript.AddToLog($" Uses {magics[actionInd].characterName}");
             damage = magics[actionInd].pointsOfEffect;
             if (magics[actionInd].isOnSelf)
             {
@@ -484,7 +484,7 @@ public class FightManager : MonoBehaviour
         int runAttemptValue = Random.Range(0, _totalEnemiesSpeed + _totalHeroesSpeed);
         if (runAttemptValue > _totalEnemiesSpeed)
         {
-            MySceneManager.Instance.LoadScene(MySceneManager.Instance.CurrentEntrance-1,MySceneManager.k_YELLOW_FLOOR);
+            MySceneManager.Instance.LoadScene(MySceneManager.Instance.CurrentEntrance,MySceneManager.k_YELLOW_FLOOR);
             return;
         }
         actionsLogScript.AddToLog(RUN_FAILED_LOG);

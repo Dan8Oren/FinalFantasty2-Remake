@@ -7,26 +7,21 @@ using UnityEngine.Assertions;
 
 public class MessageBoxScript : MonoBehaviour
 {
-    // public static MessageBoxScript Instance { get; private set; }
+    public bool enableSpace;
     [SerializeField] private String[] dialogs;
-    [SerializeField] private TextMeshProUGUI textDisplay;
+    [SerializeField] private TextMeshPro textDisplay;
     [SerializeField] private float timeBetweenChars;
+    [SerializeField] private bool freezeHero;
+    [SerializeField] private bool isNPC;
+    [SerializeField] private bool isLoop = false;
+    [SerializeField] private float timeBeforeLoop;
+    [SerializeField] private float timeAfterLoop;
+    
     private Rigidbody2D _heroRigid;
     private IEnumerator _activeDialog;
 
     private int _curDialogIndex;
-
-    // private void Awake()
-    // {
-    //     //singleton pattern the prevent two scene managers
-    //     if ( Instance != null && Instance != this)
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    //     DontDestroyOnLoad(gameObject);
-    //     Instance = this;
-    // }
-
+    
     private void OnEnable()
     {
         gameObject.SetActive(true);
@@ -36,28 +31,39 @@ public class MessageBoxScript : MonoBehaviour
         _activeDialog = AnimateDialog(dialogs[_curDialogIndex]);
         StartCoroutine(_activeDialog);
     }
+    
+    private void FreezeHero()
+    {
+        Assert.IsFalse(_heroRigid == null);
+        _heroRigid.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+    
 
     private void Start()
     {
         _heroRigid = MySceneManager.Instance.hero.GetComponent<Rigidbody2D>();
-        Assert.IsFalse(_heroRigid == null);
-        if (!GameManager.Instance.isStartOfGame)
+        if (freezeHero)
+        {
+            FreezeHero();
+        }
+        if (!GameManager.Instance.isStartOfGame && ! isNPC)
         {
             StopCoroutine(_activeDialog);
             gameObject.SetActive(false);
-            return;
         }
-        _heroRigid.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     private void OnDisable()
     {
-        _heroRigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+        if (_heroRigid != null)
+        {
+            _heroRigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if ((Input.GetKeyDown(KeyCode.Space) && !isLoop) && enableSpace)
         {
             StopCoroutine(_activeDialog);
             _curDialogIndex++;
@@ -82,17 +88,46 @@ public class MessageBoxScript : MonoBehaviour
             textDisplay.SetText(tempToShow);
             yield return new WaitForSeconds(timeBetweenChars);
         }
+
+        if (MySceneManager.Instance.IsInFight)
+        {
+            FightManager.Instance.ContinueFight();
+        }
+        if (isLoop)
+        {
+            yield return new WaitForSeconds(timeAfterLoop);
+            textDisplay.SetText("");
+            _curDialogIndex++;
+            if (_curDialogIndex >= dialogs.Length)
+            {
+                _curDialogIndex = 0;
+            }
+            yield return new WaitForSeconds(timeBeforeLoop);
+            StartCoroutine(AnimateDialog(dialogs[_curDialogIndex]));
+        }
     }
     
-    public void ShowDialogs(string[] newDialogs=null)
+    public void ShowDialogs(string[] newDialogs,bool toFreeze)
     {
+        if (toFreeze)
+        {
+            FreezeHero();
+        }
         if (newDialogs != null)
         {
             dialogs = newDialogs;
         }
-        _heroRigid.constraints = RigidbodyConstraints2D.FreezeAll;
         gameObject.SetActive(true);
+        if (enabled)
+        {
+            _curDialogIndex = 0;
+            Assert.IsFalse(dialogs.Length == 0);
+            _activeDialog = AnimateDialog(dialogs[_curDialogIndex]);
+            StartCoroutine(_activeDialog);
+        }
         this.enabled = true;
+        
+        
     }
     
     

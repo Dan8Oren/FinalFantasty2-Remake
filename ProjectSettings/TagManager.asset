@@ -9,6 +9,7 @@ TagManager:
   - DisableAfterFight
   - FightTrigger
   - UI
+  - SpawnLocation
   layers:
   - Default
   - TransparentFX

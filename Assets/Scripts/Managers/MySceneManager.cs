@@ -16,11 +16,14 @@ public class MySceneManager : MonoBehaviour
     private const string FIGHT_TRIGGER_TAG = "FightTrigger";
     public static MySceneManager Instance = null;
     public GameObject hero;
+    public GameObject mainCamera;
+    public GameObject cmCamera;
     public GameObject[] doors;
     public string LastSceneName;  //{ get; private set; }
     [SerializeField] private float afterMovmentDelay;
     public bool IsInFight; //{ get; private set; }
-    public int CurrentEntrance { get; private set; }
+    public int CurrentEntrance; //{ get; private set; }
+    private CinemachineVirtualCamera _cmCamera;
     
     // private Scene _fightScene; 
     private void Awake()
@@ -35,8 +38,8 @@ public class MySceneManager : MonoBehaviour
         {
            Destroy(gameObject); 
         }
-        hero = GameObject.FindGameObjectWithTag(k_PLAYER_TAG);
         LastSceneName = SceneManager.GetActiveScene().name;
+        _cmCamera = cmCamera.GetComponent<CinemachineVirtualCamera>();
         IsInFight = false;
         CurrentEntrance = -1;
         //By convention all-ways the last one. (my convention :P)
@@ -45,7 +48,10 @@ public class MySceneManager : MonoBehaviour
 
     private void OnRegularLevelLoad()
     {
-        hero = GameObject.FindGameObjectWithTag(k_PLAYER_TAG);
+        if (_cmCamera.Follow == null)
+        {
+            _cmCamera.Follow = hero.transform;
+        }
         doors = GameObject.FindGameObjectsWithTag(DOORS_TAG);
         var fightTrigger = GameObject.FindWithTag(FIGHT_TRIGGER_TAG);
         if (CurrentEntrance == -1)
@@ -80,6 +86,7 @@ public class MySceneManager : MonoBehaviour
                 print(SceneManager.GetActiveScene().name);
                 Assert.IsFalse(hero == null);
                 hero.transform.position = pos;
+                mainCamera.transform.position = pos;
                 StartCoroutine(DeactivateUntilMovement(doors[i]));
                 if (fightTrigger != null)
                 {
@@ -125,6 +132,8 @@ public class MySceneManager : MonoBehaviour
     {
         Debug.Log("============Level Loaded==============");
         Debug.Log(scene.name); //TODO: REMOVE ME!
+        hero.SetActive(true);
+        mainCamera.SetActive(true);
         if (!scene.name.Equals(k_FIGHT) && !IsInFight)
         {
             OnRegularLevelLoad();
@@ -134,14 +143,16 @@ public class MySceneManager : MonoBehaviour
             IsInFight = !IsInFight;
             if (IsInFight)
             {
+                hero.SetActive(false);
+                mainCamera.SetActive(false);
                 //fightScene
                 return;
             }
-            FightWon();
+            OnRegularLevelLoad();
         }
     }
     
-    private void FightWon()
+    public void FightWon()
     {
      print("Won");   
         //adds loot to player.

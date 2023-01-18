@@ -7,6 +7,7 @@ using UnityEngine.Assertions;
 
 public class ActionsLogScript : MonoBehaviour
 {
+    public MessageBoxScript messageBox;
     [SerializeField] private GameObject _listContent;
     [SerializeField] private GameObject _logPrefab;
     private string _log;
@@ -27,6 +28,8 @@ public class ActionsLogScript : MonoBehaviour
         TextMeshProUGUI logText = obj.GetComponent<TextMeshProUGUI>();
         Assert.IsFalse(logText == null);
         logText.SetText(_log);
+        messageBox.enableSpace = true;
+        messageBox.ShowDialogs(new string[]{_log},false);
         print(_log); //TODO: remove me!
         _log = $"{_roundCounter}. ";
         _data.Clear();

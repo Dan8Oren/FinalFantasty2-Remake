@@ -21,7 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 54ba7e765330e3b449ee477f0c446d3b, type: 2}
   maxHP: 100
   maxMP: 5
-  currentHP: -25
+  currentHP: 100
   currentMP: 5
   strength: 5
   intelligence: 5

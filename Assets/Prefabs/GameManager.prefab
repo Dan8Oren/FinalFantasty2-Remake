@@ -53,8 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayObjects: []
-  heroesParent: {fileID: 0}
-  heroInfoPrefab: {fileID: 0}
+  heroesParent: {fileID: 7759406883211602582}
+  heroInfoPrefab: {fileID: 7982924590600152667, guid: c316e3650bf8b1a4eae72e77d450d2bd, type: 3}
   items: []
   isStartOfGame: 1
   allHeroes:

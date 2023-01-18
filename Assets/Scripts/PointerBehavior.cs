@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class PointerBehavior : MonoBehaviour
 {
     public static PointerBehavior Instance = null;
-    public GameObject SelectedObj { get; private set;}
+    public GameObject SelectedObj { get; set;}
     private TextMeshProUGUI[] _textMenu;
     private GameObject[] _objects;
     private int _numOfObjectsInARow;
@@ -49,7 +49,6 @@ public class PointerBehavior : MonoBehaviour
             if (!MySceneManager.Instance.IsInFight)
             {
                 SelectedObj = _objects[_curIndex];
-                enabled = false;
                 return;
             }
             if (_isText)
@@ -213,16 +212,6 @@ public class PointerBehavior : MonoBehaviour
         {
             pos.x += _spriteRenderer.bounds.size.x / 2;
         }
-        // float val = -image.sprite.bounds.size.x;
-        // if (pos.x > 0)
-        // {
-        //     pos.x -= val - _spriteRenderer.bounds.size.x;
-        // }
-        // else
-        // {
-        //     pos.x += val + _spriteRenderer.bounds.size.x;
-        // }
-
         transform.position = pos;
     }
 
@@ -251,14 +240,14 @@ public class PointerBehavior : MonoBehaviour
         UpdatePointerLocation();
     }
 
-    private void OnEnable()
-    {
-        gameObject.SetActive(true);
-    }
-
-    private void OnDisable()
-    {
-        gameObject.SetActive(false);
-    }
+    // private void OnEnable()
+    // {
+    //     gameObject.SetActive(true);
+    // }
+    //
+    // private void OnDisable()
+    // {
+    //     gameObject.SetActive(false);
+    // }
 
 }

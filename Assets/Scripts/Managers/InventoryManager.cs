@@ -10,6 +10,8 @@ public class InventoryManager : MonoBehaviour
     private const int NUM_ITEMS_IN_A_ROW = 13;
     private const int STARTING_AMOUNT = 5;
     public static InventoryManager Instance = null;
+    public bool disableX;
+    public bool IsOpen { get; private set; }
     public GameObject[] DisplayObjects;
     public GameObject pointerPrefab;
     public InventoryItemData[] startingItems;
@@ -23,7 +25,7 @@ public class InventoryManager : MonoBehaviour
     private IEnumerator _wait;
     private GameObject _selectedItem;
     private Canvas _canvas;
-    
+
     private void Awake()
     {
         //singleton pattern the prevent two scene managers
@@ -41,6 +43,8 @@ public class InventoryManager : MonoBehaviour
         {
             obj.SetActive(false);
         }
+
+        disableX = IsOpen = false;
         _transform = transform;
         Inventory = new Dictionary<InventoryItemDisplay,GameObject>();
         Inventory.EnsureCapacity(capacity);
@@ -110,6 +114,7 @@ public class InventoryManager : MonoBehaviour
 
     public void OpenInventory()
     {
+        IsOpen = true;
         _canvas.worldCamera = Camera.main;
         Vector3 pos = _transform.position;
         pos.z = 0;
@@ -122,13 +127,13 @@ public class InventoryManager : MonoBehaviour
         if (PointerBehavior.Instance == null)
         {
             GameObject temp = Instantiate(pointerPrefab,transform);
-            temp.SetActive(true);
             PointerBehavior.Instance = temp.GetComponent<PointerBehavior>();
             PointerBehavior.Instance.enabled = true;
         }
+        PointerBehavior.Instance.transform.SetParent(transform);
         PointerBehavior.Instance.gameObject.SetActive(true);
         PointerBehavior.Instance.SetNewObjects(Inventory.Values.ToArray(),NUM_ITEMS_IN_A_ROW,true);
-        if (!GameManager.Instance.isOnFight)
+        if (!GameManager.Instance.IsOnFight)
         {
             _wait = WaitForPlayerToChoose();
             StartCoroutine(_wait);
@@ -137,11 +142,12 @@ public class InventoryManager : MonoBehaviour
     
     private IEnumerator WaitForPlayerToChoose()
     {
-        yield return new WaitUntil(() => !PointerBehavior.Instance.isActiveAndEnabled);
+        yield return new WaitUntil(() => (PointerBehavior.Instance.SelectedObj != null));
         print("waitUntil");
         _selectedItem = PointerBehavior.Instance.SelectedObj;
+        PointerBehavior.Instance.SelectedObj = null;
         GameManager.Instance.OpenHeroesMenu();
-        this.enabled = false;
+        disableX = true;
     }
     
     public void CloseInventory()
@@ -158,7 +164,10 @@ public class InventoryManager : MonoBehaviour
             obj.SetActive(false);
         }
 
+        disableX = false;
+        IsOpen = false;
         PointerBehavior.Instance.enabled = false;
+        PointerBehavior.Instance.gameObject.SetActive(false);
     }
 
     public void ApplyItem(CharacterData heroData)

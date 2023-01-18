@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance { get; private set; }
     [SerializeField] private float speed = 5;
     private Rigidbody2D _rb;
     private Animator _animator;
@@ -16,29 +17,31 @@ public class PlayerMovement : MonoBehaviour
     private static readonly int Speed = Animator.StringToHash("Speed");
     #endregion
     
-    private static bool _isInventoryOpen;
     private void Start()
     {
-        _isInventoryOpen = false;
+        if (Instance != null && this != Instance)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && !InventoryManager.Instance.disableX)
         {
-            if (_isInventoryOpen)
+            if (InventoryManager.Instance.IsOpen)
             {
                 InventoryManager.Instance.CloseInventory();
-                _isInventoryOpen = false;
                 return;
             }
-            _isInventoryOpen = true;
             InventoryManager.Instance.OpenInventory();
         }
 
-        if (!_isInventoryOpen)
+        if (!InventoryManager.Instance.IsOpen)
         {
             _movement.x = Input.GetAxisRaw("Horizontal");
             _movement.y = Input.GetAxisRaw("Vertical");

@@ -24,14 +24,14 @@ public class DoorScript : MonoBehaviour
         if (!isAllLevels && entranceNumber > GameManager.Instance.FightLevel)
         {
             dialogs = new string[] { BAD_LEVEL_MSG };
-            messageBoxScript.ShowDialogs(dialogs);
+            messageBoxScript.ShowDialogs(dialogs,true);
             return;
         }
 
         if (!isAllLevels)
         {
             dialogs = new string[] { DOOR_UNLOCKED_MSG };
-            messageBoxScript.ShowDialogs(dialogs);
+            messageBoxScript.ShowDialogs(dialogs,true);
         }
         // If the collider that entered the trigger has the "Player" tag, animate the door and load the new scene
         if (col.CompareTag(MySceneManager.k_PLAYER_TAG))

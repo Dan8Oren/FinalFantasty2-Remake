@@ -30,6 +30,12 @@ public class CharacterData : ScriptableObject
     public int magic;
     public EquipmentData[] items;
 
+    public void ResetStats()
+    {
+        currentHP = maxHP;
+        currentMP = maxMP;
+    }
+    
     CharacterData(int hp,int mp,bool isHero)
     {
         this.isHero = isHero;

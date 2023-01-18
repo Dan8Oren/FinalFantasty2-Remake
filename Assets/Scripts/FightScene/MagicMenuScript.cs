@@ -52,7 +52,7 @@ public class MagicMenuScript : MonoBehaviour
                 magicsText[i].enabled = false;
                 continue;
             }
-            magicsText[i].SetText(Magics[i].name);
+            magicsText[i].SetText(Magics[i].characterName);
             //TODO: description
         }
     }
