@@ -19,17 +19,19 @@ public class MessageBoxScript : MonoBehaviour
     
     private Rigidbody2D _heroRigid;
     private IEnumerator _activeDialog;
-
     private int _curDialogIndex;
-    
+    private bool _isContinue;
+
     private void OnEnable()
     {
         gameObject.SetActive(true);
         _curDialogIndex = 0;
         // textDisplay.SetText(dialogs[_curDialogIndex]);
-        Assert.IsFalse(dialogs.Length == 0);
-        _activeDialog = AnimateDialog(dialogs[_curDialogIndex]);
-        StartCoroutine(_activeDialog);
+        if (dialogs.Length > 0)
+        {
+            _activeDialog = AnimateDialog(dialogs[_curDialogIndex]);
+            StartCoroutine(_activeDialog); 
+        }
     }
     
     private void FreezeHero()
@@ -48,7 +50,10 @@ public class MessageBoxScript : MonoBehaviour
         }
         if (!GameManager.Instance.isStartOfGame && ! isNPC)
         {
-            StopCoroutine(_activeDialog);
+            if (_activeDialog != null)
+            {
+                StopCoroutine(_activeDialog);
+            }
             gameObject.SetActive(false);
         }
     }
@@ -65,10 +70,22 @@ public class MessageBoxScript : MonoBehaviour
     {
         if ((Input.GetKeyDown(KeyCode.Space) && !isLoop) && enableSpace)
         {
-            StopCoroutine(_activeDialog);
+            if (_activeDialog != null)
+            {
+                StopCoroutine(_activeDialog);
+            }
             _curDialogIndex++;
             if (_curDialogIndex >= dialogs.Length)
             {
+                if (MySceneManager.Instance.IsInFight)
+                {
+                    enableSpace = false;
+                    PointerBehavior.Instance.disableSpace = false;
+                    if (_isContinue)
+                    {
+                        FightManager.Instance.ContinueFight();
+                    }
+                }
                 gameObject.SetActive(false);
                 this.enabled = false;
                 return;
@@ -88,11 +105,6 @@ public class MessageBoxScript : MonoBehaviour
             textDisplay.SetText(tempToShow);
             yield return new WaitForSeconds(timeBetweenChars);
         }
-
-        if (MySceneManager.Instance.IsInFight)
-        {
-            FightManager.Instance.ContinueFight();
-        }
         if (isLoop)
         {
             yield return new WaitForSeconds(timeAfterLoop);
@@ -107,16 +119,17 @@ public class MessageBoxScript : MonoBehaviour
         }
     }
     
-    public void ShowDialogs(string[] newDialogs,bool toFreeze)
+    public void ShowDialogs(string[] newDialogs,bool toFreezeOrContinue)
     {
-        if (toFreeze)
-        {
-            FreezeHero();
-        }
         if (newDialogs != null)
         {
             dialogs = newDialogs;
         }
+        if (!MySceneManager.Instance.IsInFight && toFreezeOrContinue)
+        {
+            FreezeHero();
+        }
+        _isContinue = toFreezeOrContinue;
         gameObject.SetActive(true);
         if (enabled)
         {

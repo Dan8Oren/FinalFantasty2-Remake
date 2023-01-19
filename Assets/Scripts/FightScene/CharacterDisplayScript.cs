@@ -8,14 +8,26 @@ using UnityEngine.UI;
 
 public class CharacterDisplayScript : MonoBehaviour
 {
-    public TextMeshProUGUI characterNum;
-    [FormerlySerializedAs("scriptableObject")] public CharacterData data;
-    [FormerlySerializedAs("_slider")] [SerializeField] private Slider slider;
-    private Image _image;
+    private static readonly float GameWonAnimationTime = 4f;
+    private static readonly float RegularAnimationTime = 1f;
+    public TextMeshPro characterNum;
+    public CharacterData data;
+    public bool IsStun { get; private set;}
+    [SerializeField] private Slider slider;
+    [SerializeField] private float screenShakeTime;
+    [SerializeField] private float screenShakeForce;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float turnDistance;
+    [SerializeField] private float winDistance;
+    [SerializeField] private float turnWaitTime;
+    [SerializeField] private float winWaitTime;
+    private SpriteRenderer _image;
+    private Animator _animator;
 
     private void Start()
     {
-        _image = GetComponent<Image>();
+        _image = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
     
     /**
@@ -27,11 +39,11 @@ public class CharacterDisplayScript : MonoBehaviour
         data = newScript;
         if (_image == null)
         {
-            _image = GetComponent<Image>();
+            _image = GetComponent<SpriteRenderer>();
         }
-        _image.sprite = newScript.characterImage;
-        slider.maxValue = data.maxHP;
-        slider.value = data.currentHP;
+        _image.sprite = newScript.idleImage;
+        slider.maxValue = data.MaxHp;
+        slider.value = data.currentHp;
     }
     
     /**
@@ -40,19 +52,28 @@ public class CharacterDisplayScript : MonoBehaviour
      */
     public void EffectHealth(int pointsOfEffect,ActionsLogScript actionsLogScript)
     {
-        data.currentHP += pointsOfEffect;
-        print(this.name +" Health "+data.currentHP);
-        if (data.currentHP <= 0)
+        if (pointsOfEffect < 0 && data.isHero)
+        {
+            StartCoroutine(MySceneManager.Instance.Shake(screenShakeTime, screenShakeForce));
+        }
+        data.currentHp += pointsOfEffect;
+        if (data.currentHp <= 0)
         {
             LogDeadCharacter(actionsLogScript);
             slider.value = 0;
-            gameObject.SetActive(false);
+            if (_animator == null)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+            enabled = false;
+            _animator.SetBool("Dead",true);
         }
-        else if (data.currentHP > data.maxHP)
+        else if (data.currentHp > data.MaxHp)
         {
-            data.currentHP = data.maxHP;
+            data.currentHp = data.MaxHp;
         }
-        slider.value = data.currentHP;
+        slider.value = data.currentHp;
     }
 
     private void LogDeadCharacter(ActionsLogScript actionsLogScript)
@@ -60,10 +81,10 @@ public class CharacterDisplayScript : MonoBehaviour
         actionsLogScript.ShowLog();
         if (data.isHero)
         {
-            actionsLogScript.AddToLog($"{data.name} is DEAD!");
+            actionsLogScript.AddToLog($"'{data.name}' is DEAD!");
             return;
         }
-        actionsLogScript.AddToLog($"{data.name}, Enemy number {characterNum.text} is DEAD!");
+        actionsLogScript.AddToLog($"'{data.name}' - (Enemy {characterNum.text}),  is DEAD!");
     }
 
     /**
@@ -71,13 +92,85 @@ public class CharacterDisplayScript : MonoBehaviour
      */
     public void EffectMana(int pointsOfEffect)
     {
-        print(this.name +" Got Mana Effected!");
-        data.currentMP += pointsOfEffect;
-        print(data.currentMP);
-        if (data.currentMP > data.maxMP)
+        data.currentMp += pointsOfEffect;
+        print(data.currentMp);
+        if (data.currentMp > data.MaxMp)
         {
-            data.currentMP = data.maxMP;
+            data.currentMp = data.MaxMp;
         }
-        slider.value = data.currentHP;
+        slider.value = data.currentHp;
     }
+
+    public float AnimateTurn()
+    {
+        if (_animator == null)
+        {
+            return 0;
+        }
+        if (IsStun)
+        {
+            IsStun = false;
+            _animator.SetBool("Stun",false);
+            return RegularAnimationTime;
+        }
+        _animator.SetBool("Turn",true);
+        StartCoroutine(MoveToPosition(turnDistance,turnWaitTime));
+        return RegularAnimationTime;
+    }
+    public float AnimateEndTurn()
+    {
+        if (_animator == null)
+        {
+            return 0;
+        }
+        _animator.SetBool("Turn",false);
+        StartCoroutine(MoveToPosition(-turnDistance,turnWaitTime));
+        return RegularAnimationTime;
+    }
+    public float AnimateGameWon()
+    {
+        if (_animator == null)
+        {
+            return 0;
+        }
+        _animator.SetBool("Won",false);
+        StartCoroutine(MoveToPosition(winDistance,winWaitTime));
+        return GameWonAnimationTime;
+    }
+    
+    public float AnimateAttack()
+    {
+        if (_animator == null)
+        {
+            return 0;
+        }
+        _animator.SetTrigger("Attack");
+        return RegularAnimationTime;
+    }
+
+    public float StunCharacter()
+    {
+        if (_animator == null)
+        {
+            
+            return 0;
+        }
+        IsStun = true;
+        _animator.SetBool("Stun",true);
+        return RegularAnimationTime;
+    }
+
+    private IEnumerator MoveToPosition(float distance,float waitBeforeMovement)
+    {
+        Vector3 curPos = transform.position;
+        float target = curPos.x + distance;
+        yield return new WaitForSeconds(waitBeforeMovement);
+        while (Mathf.Abs(curPos.x - target) > 0.01f)
+        {
+            curPos.x = Mathf.MoveTowards(curPos.x,target,moveSpeed);
+            transform.position = curPos;
+            yield return null;
+        }
+    }
+
 }

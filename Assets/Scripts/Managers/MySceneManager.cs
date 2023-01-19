@@ -5,6 +5,7 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class MySceneManager : MonoBehaviour
 {
@@ -14,18 +15,25 @@ public class MySceneManager : MonoBehaviour
     private const string DOORS_TAG = "Doors";
     private const string DISABLE_AFTER_FIGHT_TAG = "DisableAfterFight";
     private const string FIGHT_TRIGGER_TAG = "FightTrigger";
+    private const string FIGHT_CAMERA_TAG = "Fight Camera";
     public static MySceneManager Instance = null;
     public GameObject hero;
     public GameObject mainCamera;
     public GameObject cmCamera;
+    public GameObject fightCamera;
     public GameObject[] doors;
-    public string LastSceneName;  //{ get; private set; }
+    public MessageBoxScript messageBoxScript { get; private set; }
+    public Rigidbody2D HeroRigid { get; private set; }
+    public string LastSceneName { get; private set; }
     [SerializeField] private float afterMovmentDelay;
-    public bool IsInFight; //{ get; private set; }
-    public int CurrentEntrance; //{ get; private set; }
+
+    [SerializeField] private Animator regularSceneAnimator;
+    [SerializeField] private float regTransitionWaitTime;
+    [SerializeField] private float fightTransitionWaitTime;
+    public bool IsInFight { get; private set; }
+    public int CurrentEntrance { get; private set; }
     private CinemachineVirtualCamera _cmCamera;
     
-    // private Scene _fightScene; 
     private void Awake()
     {
         //singleton pattern the prevent two scene managers
@@ -38,16 +46,18 @@ public class MySceneManager : MonoBehaviour
         {
            Destroy(gameObject); 
         }
+        HeroRigid = hero.GetComponent<Rigidbody2D>();
+        regularSceneAnimator.SetTrigger("Start");
         LastSceneName = SceneManager.GetActiveScene().name;
         _cmCamera = cmCamera.GetComponent<CinemachineVirtualCamera>();
         IsInFight = false;
         CurrentEntrance = -1;
-        //By convention all-ways the last one. (my convention :P)
-        // _fightScene = SceneManager.GetSceneByName(k_FIGHT);
     }
 
     private void OnRegularLevelLoad()
     {
+        HeroRigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+        regularSceneAnimator.SetTrigger("Start");
         if (_cmCamera.Follow == null)
         {
             _cmCamera.Follow = hero.transform;
@@ -107,15 +117,26 @@ public class MySceneManager : MonoBehaviour
             obj.SetActive(true);
         }
     }
+
+    private IEnumerator LoadAfterTransition(float duration,String sceneToLoad)
+    {
+        yield return new WaitForSeconds(duration);
+        SceneManager.LoadScene(sceneToLoad);
+    }
+    
     
     public void LoadScene(int entrance,String sceneToLoad)
     {
-        CurrentEntrance = entrance;
         if (!sceneToLoad.Equals(k_FIGHT))
         {
             LastSceneName = SceneManager.GetActiveScene().name;
+            CurrentEntrance = entrance;
+            regularSceneAnimator.SetTrigger("End");
+            StartCoroutine(LoadAfterTransition(regTransitionWaitTime,sceneToLoad));
+            return;
         }
-        SceneManager.LoadScene(sceneToLoad);
+        //TODO: fight transition
+        StartCoroutine(LoadAfterTransition(fightTransitionWaitTime,sceneToLoad));
     }
     
     private void OnEnable()
@@ -145,7 +166,7 @@ public class MySceneManager : MonoBehaviour
             {
                 hero.SetActive(false);
                 mainCamera.SetActive(false);
-                //fightScene
+                OnFightSceneLoad();
                 return;
             }
             OnRegularLevelLoad();
@@ -161,5 +182,31 @@ public class MySceneManager : MonoBehaviour
         {
             obj.SetActive(false);
         }
+    }
+
+    private void OnFightSceneLoad()
+    {
+        GameObject obj = GameObject.FindGameObjectWithTag(FIGHT_CAMERA_TAG);
+        Assert.IsFalse(obj == null);
+        fightCamera = obj;
+        // obj.GetComponent<Camera>();
+    }
+    
+
+    public IEnumerator Shake( float duration, float force)
+    {
+        Transform trans = (IsInFight)?fightCamera.transform:cmCamera.transform;
+        Vector3 originalPos = trans.position;
+        float activeTime = 0f;
+        while (activeTime <= duration)
+        {
+            float xDistortion = Random.Range(-0.5f, 0.5f) * force;
+            float yDistortion = Random.Range(-0.5f, 0.5f) * force;
+            trans.localPosition = new Vector3(xDistortion, yDistortion, originalPos.z);
+            activeTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = originalPos;
     }
 }

@@ -23,8 +23,8 @@ public class DataMenuScript : MonoBehaviour
                 continue;
             }
             namesTexts[i].SetText(_heroesDatas[i].name);
-            HPTexts[i].SetText($"{_heroesDatas[i].currentHP}/{_heroesDatas[i].maxHP}");
-            ManaTexts[i].SetText($"{_heroesDatas[i].currentMP}");
+            HPTexts[i].SetText($"{_heroesDatas[i].currentHp}/{_heroesDatas[i].MaxHp}");
+            ManaTexts[i].SetText($"{_heroesDatas[i].currentMp}");
         }
     }
 
@@ -36,9 +36,9 @@ public class DataMenuScript : MonoBehaviour
         }
         for (int i=0;i<_heroesDatas.Length;i++)
         {
-            int hp = _heroesDatas[i].currentHP;
-            HPTexts[i].SetText($"{hp}/{_heroesDatas[i].maxHP}");
-            ManaTexts[i].SetText($"{_heroesDatas[i].currentMP}");
+            int hp = _heroesDatas[i].currentHp;
+            HPTexts[i].SetText($"{hp}/{_heroesDatas[i].MaxHp}");
+            ManaTexts[i].SetText($"{_heroesDatas[i].currentMp}");
             if (hp <=0)
             {
                 HPTexts[i].SetText("DEAD");

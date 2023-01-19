@@ -176,10 +176,10 @@ public class InventoryManager : MonoBehaviour
         switch (res.Data.id)
         {
             case InventoryItemData.k_HEALTH_POTION_ID:
-                heroData.currentHP += res.Data.pointsOfEffect;
+                heroData.currentHp += res.Data.pointsOfEffect;
                 break;
             case InventoryItemData.k_MANA_POTION_ID:
-                heroData.currentHP += res.Data.pointsOfEffect;
+                heroData.currentMp += res.Data.pointsOfEffect;
                 break;
         }
         Remove(res.Data);

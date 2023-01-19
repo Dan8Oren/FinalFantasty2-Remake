@@ -8,12 +8,13 @@ using UnityEngine.UI;
 
 public class PointerBehavior : MonoBehaviour
 {
+    public bool disableSpace;
     public static PointerBehavior Instance = null;
     public GameObject SelectedObj { get; set;}
     private TextMeshProUGUI[] _textMenu;
     private GameObject[] _objects;
     private int _numOfObjectsInARow;
-    private int _curIndex;
+    public int CurIndex { get; private set;}
     private SpriteRenderer _spriteRenderer;
     private bool _isText = true; //a flag to indicate if the pointer points at images or text.
     private int _maxIndex;
@@ -44,20 +45,20 @@ public class PointerBehavior : MonoBehaviour
         {
             CharactersInputHandler();
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !disableSpace)
         {
             if (!MySceneManager.Instance.IsInFight)
             {
-                SelectedObj = _objects[_curIndex];
+                SelectedObj = _objects[CurIndex];
                 return;
             }
             if (_isText)
             {
-                FightManager.Instance.DoChosenAction(_textMenu[_curIndex].text);
+                FightManager.Instance.DoChosenAction(_textMenu[CurIndex].name);
             }
             else
             {
-                FightManager.Instance.SetSelectedObject(_objects[_curIndex]);
+                FightManager.Instance.SetSelectedObject(_objects[CurIndex]);
             }
         }
         
@@ -65,24 +66,24 @@ public class PointerBehavior : MonoBehaviour
 
     private void CharactersInputHandler()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow) && _curIndex+1 < _maxIndex)
+        if (Input.GetKeyDown(KeyCode.DownArrow) && CurIndex+1 < _maxIndex)
         {
-            _curIndex++;
+            CurIndex++;
             FixEmptyCharacters(1);
             UpdatePointerLocation();
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow)&& _curIndex-1 >= 0)
+        if (Input.GetKeyDown(KeyCode.UpArrow)&& CurIndex-1 >= 0)
         {
-            _curIndex--;
+            CurIndex--;
             FixEmptyCharacters(-1);
             UpdatePointerLocation();
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            _curIndex+=_numOfObjectsInARow;
-            if (_curIndex>=_maxIndex)
+            CurIndex+=_numOfObjectsInARow;
+            if (CurIndex>=_maxIndex)
             {
-                _curIndex -= _maxIndex;
+                CurIndex -= _maxIndex;
             }
             FixEmptyCharacters(1);
             UpdatePointerLocation();
@@ -90,10 +91,10 @@ public class PointerBehavior : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            _curIndex-=_numOfObjectsInARow;
-            if (_curIndex < 0)
+            CurIndex-=_numOfObjectsInARow;
+            if (CurIndex < 0)
             {
-                _curIndex *= -1;
+                CurIndex *= -1;
             }
             FixEmptyCharacters(-1);
             UpdatePointerLocation();
@@ -102,16 +103,16 @@ public class PointerBehavior : MonoBehaviour
 
     private void FixEmptyCharacters(int jump)
     {
-        while (!_objects[_curIndex].activeSelf)
+        while (!_objects[CurIndex].activeSelf)
         {
-            _curIndex+=jump;
-            if (_curIndex == _maxIndex)
+            CurIndex+=jump;
+            if (CurIndex == _maxIndex)
             {
-                _curIndex = 0;
+                CurIndex = 0;
             }
-            else if(_curIndex < 0)
+            else if(CurIndex < 0)
             {
-                _curIndex = _maxIndex - 1;
+                CurIndex = _maxIndex - 1;
             }
         }
     }
@@ -119,24 +120,24 @@ public class PointerBehavior : MonoBehaviour
     private void MenuInputHandler()
     {
         int jump = 0;
-        if (Input.GetKeyDown(KeyCode.RightArrow) && _curIndex+1 < _maxIndex)
+        if (Input.GetKeyDown(KeyCode.RightArrow) && CurIndex+1 < _maxIndex)
         {
-            _curIndex++;
+            CurIndex++;
             jump = 1;
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow)&& _curIndex-1 >= 0)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)&& CurIndex-1 >= 0)
         {
-            _curIndex--;
+            CurIndex--;
             jump = -1;
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && _curIndex+_numOfObjectsInARow<_maxIndex)
+        else if (Input.GetKeyDown(KeyCode.DownArrow) && CurIndex+_numOfObjectsInARow<_maxIndex)
         {
-            _curIndex+=_numOfObjectsInARow;
+            CurIndex+=_numOfObjectsInARow;
             jump = 1;
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow) && _curIndex-_numOfObjectsInARow >= 0)
+        else if (Input.GetKeyDown(KeyCode.UpArrow) && CurIndex-_numOfObjectsInARow >= 0)
         {
-            _curIndex-=_numOfObjectsInARow;
+            CurIndex-=_numOfObjectsInARow;
             jump = -1;
         }
 
@@ -153,16 +154,16 @@ public class PointerBehavior : MonoBehaviour
     
     private void FixEmptyTexts(int jump)
     {
-        while (!_textMenu[_curIndex].isActiveAndEnabled)
+        while (!_textMenu[CurIndex].isActiveAndEnabled)
         {
-            _curIndex+=jump;
-            if (_curIndex == _maxIndex)
+            CurIndex+=jump;
+            if (CurIndex == _maxIndex)
             {
-                _curIndex = 0;
+                CurIndex = 0;
             }
-            else if(_curIndex < 0)
+            else if(CurIndex < 0)
             {
-                _curIndex = _maxIndex - 1;
+                CurIndex = _maxIndex - 1;
             }
         }
     }
@@ -182,8 +183,8 @@ public class PointerBehavior : MonoBehaviour
 
     private void UpdatePositionByTexts()
     {
-        Vector3 pos = _textMenu[_curIndex].transform.TransformPoint(
-            new Vector3(-_textMenu[_curIndex].rectTransform.rect.width / 2,
+        Vector3 pos = _textMenu[CurIndex].transform.TransformPoint(
+            new Vector3(-_textMenu[CurIndex].rectTransform.rect.width / 2,
                 0, 0));
         if (pos.x > 0)
         {
@@ -200,18 +201,10 @@ public class PointerBehavior : MonoBehaviour
     private void UpdatePositionByObject()
     {
         // Vector3 pos = _objects[_curIndex].transform.position;
-        Image image = _objects[_curIndex].GetComponent<Image>();
-        Vector3 pos = image.transform.TransformPoint(
-            new Vector3(-image.rectTransform.rect.width,
-                0, 0));
-        if (pos.x > 0)
-        {
-            pos.x -= _spriteRenderer.bounds.size.x / 2;
-        }
-        else
-        {
-            pos.x += _spriteRenderer.bounds.size.x / 2;
-        }
+        SpriteRenderer image = _objects[CurIndex].GetComponent<SpriteRenderer>();
+        Vector3 pos = image.transform.position;
+        // pos.x -= (_spriteRenderer.bounds.size.x + image.sprite.rect.width) / 2;
+        pos.x -= (_spriteRenderer.bounds.size.x+image.size.x) / 2;
         transform.position = pos;
     }
 
@@ -222,7 +215,7 @@ public class PointerBehavior : MonoBehaviour
         _isMenu = true;
         _textMenu = newButtons;
         _numOfObjectsInARow = numTextsInARow;
-        _curIndex = 0;
+        CurIndex = 0;
         _maxIndex = newButtons.Length;
         UpdatePointerLocation();
     }
@@ -233,7 +226,7 @@ public class PointerBehavior : MonoBehaviour
         _isText = false;
         _isMenu = isMenu;
         _numOfObjectsInARow = numObjectsInARow;
-        _curIndex = 0;
+        CurIndex = 0;
         _maxIndex = newObjects.Length;
         _objects = newObjects;
         FixEmptyCharacters(1);

@@ -10,6 +10,7 @@ TagManager:
   - FightTrigger
   - UI
   - SpawnLocation
+  - Fight Camera
   layers:
   - Default
   - TransparentFX

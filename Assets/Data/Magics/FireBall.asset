@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8e81211b1e4464a7bd9fb639395b89, type: 3}
   m_Name: FireBall
   m_EditorClassIdentifier: 
-  name: FireBall
+  displayName: Fire Ball
+  info: A mighty Fire ball whice effects one target.
+  sequence: 5
   isOnSelf: 0
-  isOnSameGroup: 0
-  effectAllGroup: 0
+  effectAllSameGroup: 0
+  effectAllEnemyGroup: 0
   turnsOfEffect: 1
   pointsOfEffect: 50
-  manaPointsToConsume: 1
+  manaPointsToConsume: 30
   intelligenceRequirement: 15
   magicEffect: {fileID: 0}

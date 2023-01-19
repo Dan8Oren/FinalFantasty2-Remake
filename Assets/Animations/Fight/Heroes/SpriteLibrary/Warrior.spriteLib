@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: warriorFight_0
+      m_Hash: 918338361
+      m_Sprite: {fileID: 1674936882, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1674936882, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 1
+  - m_Name: Turn
+    m_Hash: 1227385
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: warriorFight_1
+      m_Hash: 29068207
+      m_Sprite: {fileID: -918310320, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -918310320, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    - m_Name: warriorFight_2
+      m_Hash: 414374421
+      m_Sprite: {fileID: -760953800, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -760953800, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    - m_Name: warriorFight_3
+      m_Hash: 800451203
+      m_Sprite: {fileID: 1460727277, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1460727277, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    - m_Name: warriorFight_0
+      m_Hash: 918338361
+      m_Sprite: {fileID: 1674936882, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1674936882, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  - m_Name: Dead
+    m_Hash: 219670042
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: warriorFight_6
+      m_Hash: 534715916
+      m_Sprite: {fileID: 274009996, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 274009996, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 1
+  - m_Name: Stuned
+    m_Hash: 997659090
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: warriorFight_5
+      m_Hash: 114708406
+      m_Sprite: {fileID: 188953906, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 188953906, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 1
+  - m_Name: Attack
+    m_Hash: 7088141
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: warriorFight_0
+      m_Hash: 918338361
+      m_Sprite: {fileID: 1674936882, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1674936882, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    - m_Name: warriorFight_3
+      m_Hash: 800451203
+      m_Sprite: {fileID: 1460727277, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1460727277, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  - m_Name: Won
+    m_Hash: 517855760
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: warriorFight_0
+      m_Hash: 918338361
+      m_Sprite: {fileID: 1674936882, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1674936882, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    - m_Name: warriorFight_4
+      m_Hash: 835813152
+      m_Sprite: {fileID: -1962414039, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1962414039, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    - m_Name: warriorFight_1
+      m_Hash: 29068207
+      m_Sprite: {fileID: -918310320, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -918310320, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    - m_Name: warriorFight_2
+      m_Hash: 414374421
+      m_Sprite: {fileID: -760953800, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -760953800, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    - m_Name: warriorFight_3
+      m_Hash: 800451203
+      m_Sprite: {fileID: 1460727277, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1460727277, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 5
+  m_PrimaryLibraryGUID: 

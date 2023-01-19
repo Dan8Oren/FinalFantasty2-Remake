@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8bd3f40c5b417aae2e7f394527318e, type: 3}
   m_Name: StabsAttack
   m_EditorClassIdentifier: 
+  displayName: Stabs Attack
+  sequence: 3
+  info: 4 quick stabs for the amout of damage.
   turnsOfEffect: 1
   damage: 8
   hits: 4

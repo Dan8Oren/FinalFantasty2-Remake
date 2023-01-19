@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class InventoryItemDisplay : MonoBehaviour
 {
-    public Image Icon;
+    public SpriteRenderer icon;
     public TextMeshProUGUI amountText;
     public bool IsActive { get; private set; }
     public InventoryItemData Data { get; private set; }
@@ -31,7 +31,7 @@ public class InventoryItemDisplay : MonoBehaviour
     }
     public void DisableDisplay()
     {
-        Icon.enabled = false;
+        icon.enabled = false;
         amountText.enabled = false;
         IsActive = false;
     }
@@ -46,9 +46,9 @@ public class InventoryItemDisplay : MonoBehaviour
 
         Data = itemData;
         IncreaseAmount();
-        Icon.enabled = true;
+        icon.enabled = true;
         amountText.enabled = true;
-        Icon.sprite = itemData.image;
+        icon.sprite = itemData.image;
         IsActive = true;
     }
     

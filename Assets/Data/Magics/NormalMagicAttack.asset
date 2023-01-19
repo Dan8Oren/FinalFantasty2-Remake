@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8e81211b1e4464a7bd9fb639395b89, type: 3}
   m_Name: NormalMagicAttack
   m_EditorClassIdentifier: 
-  name: NormalMagicAttack
+  displayName: Zap
+  info: 'Simple electric zap '
+  sequence: 2
   isOnSelf: 0
-  isOnSameGroup: 0
-  effectAllGroup: 0
+  effectAllSameGroup: 0
+  effectAllEnemyGroup: 0
   turnsOfEffect: 1
-  pointsOfEffect: 20
+  pointsOfEffect: 10
   manaPointsToConsume: 0
   intelligenceRequirement: 10
   magicEffect: {fileID: 0}

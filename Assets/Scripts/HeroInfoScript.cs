@@ -8,8 +8,8 @@ public class HeroInfoScript : MonoBehaviour
     public Slider healthBar;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI infoText;
-    [SerializeField]private CharacterData heroData;
-    [SerializeField] private Image image;
+    [SerializeField] private CharacterData heroData;
+    [SerializeField] private SpriteRenderer image;
 
     public CharacterData GetData()
     {
@@ -18,21 +18,23 @@ public class HeroInfoScript : MonoBehaviour
     
     public void SetHeroData(CharacterData data)
     {
-        if (image == null)
-        {
-            image = GetComponent<Image>();
-        }
         image.sprite = data.characterIcon;
         heroData = data;
         nameText.SetText(data.name);
-        String info = $"Health Points: {data.currentHP}/{data.maxHP}\n"+
-                      $"Mana Points: {data.currentMP}/{data.maxMP}\n"+
-                      $"Attack: {data.attack}\n"+
-                      $"Magic attack: {data.magic}\n"+
+        String info = $"Health Points: {data.currentHp}/{data.MaxHp}\n"+
+                      $"Mana Points: {data.currentMp}/{data.MaxMp}\n"+
+                      $"Attack: {data.Attack}\n"+
+                      $"Magic attack: {data.Magic}\n"+
                       $"defence: {data.defence}\n";
         infoText.SetText(info);
-        healthBar.maxValue = data.maxHP;
+        healthBar.maxValue = data.MaxHp;
         healthBar.minValue = 0;
-        healthBar.value = data.currentHP;
+        healthBar.value = data.currentHp;
+    }
+
+
+    public GameObject GetCenterObject()
+    {
+        return image.gameObject;
     }
 }

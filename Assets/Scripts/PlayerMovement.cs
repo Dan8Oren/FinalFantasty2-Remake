@@ -31,15 +31,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X) && !InventoryManager.Instance.disableX)
-        {
-            if (InventoryManager.Instance.IsOpen)
-            {
-                InventoryManager.Instance.CloseInventory();
-                return;
-            }
-            InventoryManager.Instance.OpenInventory();
-        }
+        // if (Input.GetKeyDown(KeyCode.X) && !InventoryManager.Instance.disableX)
+        // {
+        //     if (InventoryManager.Instance.IsOpen)
+        //     {
+        //         InventoryManager.Instance.CloseInventory();
+        //         return;
+        //     }
+        //     InventoryManager.Instance.OpenInventory();
+        // }
 
         if (!InventoryManager.Instance.IsOpen)
         {

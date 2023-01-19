@@ -15,6 +15,8 @@ public class AnimateBeforeFight : MonoBehaviour
     private Vector3 _brainWashedPos;
     private Vector3 _cameraPos;
     private bool _isTransition = false;
+    [SerializeField ]private float cameraSpeedModifier;
+
     private void Update()
     {
         if (_isTransition)
@@ -24,7 +26,7 @@ public class AnimateBeforeFight : MonoBehaviour
                 _cmCamera.transform.position = _cameraPos;
                 return;
             }
-            _cameraPos.y = Mathf.MoveTowards(_cameraPos.y, _brainWashedPos.y,Time.deltaTime);
+            _cameraPos.y = Mathf.MoveTowards(_cameraPos.y, _brainWashedPos.y,Time.deltaTime*cameraSpeedModifier);
             _cmCamera.transform.position = _cameraPos;
         }
     }

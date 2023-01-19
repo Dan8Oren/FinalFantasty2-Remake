@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,51 +9,52 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "CharacterScriptableObject",menuName = "ScriptableObjects/CharacterData")]
 public class CharacterData : ScriptableObject
 {
-    private const int DEFAULT_AMOUNT = 5;
+    public String displayName;
     public bool isHero;
-    public Sprite characterImage;
+    public Sprite idleImage;
     public Sprite characterIcon;
-    public MeleeAttackData[] attacks; //Maximum size is 6
-    public MagicAttackData[] magics;  //Maximum size is 6
-    public int maxHP;
-    public int maxMP;
-    public int currentHP;
-    public int currentMP;
-    public int strength;  //Increases attack modifier
-    public int intelligence;  //Increases magic modifier
-    public int agility; //chance to dodge 
-    public int stamina; //Increases HP
-    public int wisdom; //Increases MP
-    public int speed; //chance to take action increases (first and more actions in total)
+    [Header("No more than 6 attacks!")]
+    public MeleeAttackData[] attacks;
+    [Header("No more than 6 magics!")]
+    public MagicAttackData[] magics;
+    public int MaxHp { get; private set; }
+    public int MaxMp { get; private set; }
+    
+    [SerializeField] private int beforeStatsMaxHp;
+    [SerializeField] private int beforeStatsMaxMp;
+    public int currentHp;
+    public int currentMp;
+    [Tooltip("Increases attack modifier")]
+    public int strength;
+    [Tooltip("Increases magic attack modifier")]
+    public int intelligence;
+    [Tooltip("Increases chance to dodge")]
+    public int agility;
+    [Tooltip("Increases HP, and chance to block")]
+    public int stamina;
+    [Tooltip("Increases MP, and chance to deflect")]
+    public int wisdom;
+    [Tooltip("chance to take action first increases")]
+    public int speed;
+    [Tooltip("decreases damage taken")]
     public int defence;
-    public int resistance;
-    public int attack;
-    public int magic;
+    
+    [SerializeField] private int beforeStatsAttack;
+    public int Attack { get; private set; }
+    [SerializeField] private int beforeStatsMagicMp;
+    public int Magic { get; private set; }
+    
     public EquipmentData[] items;
-
+    
     public void ResetStats()
     {
-        currentHP = maxHP;
-        currentMP = maxMP;
+        MaxHp = (int)Mathf.Ceil(beforeStatsMaxHp * (1 + (stamina / 100)));
+        MaxMp = (int)Mathf.Ceil(beforeStatsMaxMp * (1 + (wisdom / 100)));
+        Attack = (int)Mathf.Ceil(beforeStatsAttack * (1 + (strength / 100)));
+        Magic = (int)Mathf.Ceil(beforeStatsAttack * (1 + (Magic / 100)));
+        currentHp = MaxHp;
+        currentMp = MaxMp;
     }
     
-    CharacterData(int hp,int mp,bool isHero)
-    {
-        this.isHero = isHero;
-        maxHP = hp;
-        maxMP = mp;
-        currentHP = hp;
-        currentMP = mp;
-        strength = DEFAULT_AMOUNT; 
-        intelligence = DEFAULT_AMOUNT;
-        agility = DEFAULT_AMOUNT;
-        stamina = DEFAULT_AMOUNT;
-        wisdom = DEFAULT_AMOUNT;
-        speed = DEFAULT_AMOUNT;
-        defence = DEFAULT_AMOUNT;
-        attack = DEFAULT_AMOUNT;
-        magic = DEFAULT_AMOUNT;
-        resistance = 0;
-    }
     
 }

@@ -12,6 +12,9 @@ public class MagicMenuScript : MonoBehaviour
     public MagicAttackData[] Magics { get; private set; }
     public GameObject[] ObjectsToDisplay;
     public TextMeshProUGUI[] magicsText;
+    public TextMeshProUGUI[] InfoTexts;
+    private int _curPointerAttackIndex;
+    private CharacterData _curFighter;
 
     private void Awake()
     {
@@ -23,15 +26,36 @@ public class MagicMenuScript : MonoBehaviour
         }
         Destroy(this);
     }
-
-    public void ShowMenu(MagicAttackData[] magics)
+    
+    private void Update()
     {
-        Magics = magics;
+        if ( ObjectsToDisplay[0].activeSelf &&
+             _curPointerAttackIndex != PointerBehavior.Instance.CurIndex)
+        {
+            _curPointerAttackIndex = PointerBehavior.Instance.CurIndex;
+            UpdateInfo();
+        }
+    }
+
+    private void UpdateInfo()
+    {
+        MagicAttackData data = Magics[_curPointerAttackIndex];
+        InfoTexts[0].SetText($"Points of effect: {data.pointsOfEffect+_curFighter.Attack}," +
+                             $" Mana Cost {data.manaPointsToConsume}");
+        InfoTexts[1].SetText($"Sequence length: {data.sequence}");
+        InfoTexts[2].SetText(data.info);
+
+    }
+
+
+    public void ShowMenu(CharacterData curHero)
+    {
+        _curFighter = curHero;
+        Magics = curHero.magics;
         if (Magics.Length == 0)
         {
-            print("no magics!");
+            FightManager.Instance.messageBox.ShowDialogs(new String[]{"no magics!"},false);
             FightManager.Instance.DoGoBack();
-            //TODO: popupMassage
             return;
         }
         foreach (GameObject obj in ObjectsToDisplay)
@@ -52,9 +76,11 @@ public class MagicMenuScript : MonoBehaviour
                 magicsText[i].enabled = false;
                 continue;
             }
-            magicsText[i].SetText(Magics[i].characterName);
-            //TODO: description
+            magicsText[i].name = Magics[i].name;
+            magicsText[i].SetText(Magics[i].displayName);
         }
+        _curPointerAttackIndex = 0;
+        UpdateInfo();
     }
 
     public void CloseMenu()

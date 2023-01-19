@@ -6,10 +6,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MagicAttackData",menuName = "ScriptableObjects/MagicData")]
 public class MagicAttackData : ScriptableObject
 {
-    public String characterName;
-    public bool isOnSelf = false; //if the magic only effect the character who casts it
-    public bool isOnSameGroup = false;//if the magic effects the group of character who casts it
-    public bool effectAllGroup = false;
+    public String displayName;
+    public String info;
+    public int sequence;
+    [Tooltip("if the magic only effect the character who casts it")]
+    public bool isOnSelf = false;
+    [Tooltip("if the magic effects the group of character who casts it")]
+    public bool effectAllSameGroup = false;
+    [Tooltip("if the magic effects the enemy group")]
+    public bool effectAllEnemyGroup = false;
     public int turnsOfEffect = 1;
     public int pointsOfEffect;
     public int manaPointsToConsume; 

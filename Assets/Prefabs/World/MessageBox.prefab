@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.035865653, y: 0.09900001}
   m_AnchorMax: {x: 0.96535116, y: 0.9022613}
-  m_AnchoredPosition: {x: -0.0000023841858, y: -0.012042999}
-  m_SizeDelta: {x: 8.2472, y: 2.4001}
+  m_AnchoredPosition: {x: -0.48770142, y: -0.10839844}
+  m_SizeDelta: {x: -697.0005, y: -136.2485}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &186798973672811749
 MeshRenderer:
@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc2d1e0e1cce30418046f1fb411192b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSpace: 0
   dialogs:
   - Welcome to Final-Fantasy 2 Remake, By Dan.\nPress 'Space' to Continue...
   - You can move the player with the arrows keys,\nand interact with objects using

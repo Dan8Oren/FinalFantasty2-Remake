@@ -90,15 +90,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 29
-    m_Right: 29
-    m_Top: 32
-    m_Bottom: 32
+    m_Left: 80
+    m_Right: 80
+    m_Top: 100
+    m_Bottom: 100
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 32, y: 32}
-  m_Spacing: {x: 10, y: 10}
+  m_CellSize: {x: 10, y: 10}
+  m_Spacing: {x: 120, y: 120}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &825699972790999969
@@ -231,6 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d776c9c2b018644bb667f5adbf74089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableX: 0
   DisplayObjects:
   - {fileID: 217437384231260425}
   - {fileID: 825699972790999969}

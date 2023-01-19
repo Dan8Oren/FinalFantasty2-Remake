@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8bd3f40c5b417aae2e7f394527318e, type: 3}
   m_Name: RegularAttack
   m_EditorClassIdentifier: 
+  displayName: Regular Attack
+  sequence: 2
+  info: Simple melee attack
   turnsOfEffect: 1
   damage: 15
   hits: 1

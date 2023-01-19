@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8e81211b1e4464a7bd9fb639395b89, type: 3}
   m_Name: WeakSelfHeal
   m_EditorClassIdentifier: 
-  name: Self Heal
+  displayName: Weak Self Heal
+  info: Patch yourself with some bands
+  sequence: 2
   isOnSelf: 1
-  isOnSameGroup: 0
-  effectAllGroup: 0
+  effectAllSameGroup: 0
+  effectAllEnemyGroup: 0
   turnsOfEffect: 1
-  pointsOfEffect: 10
+  pointsOfEffect: 15
   manaPointsToConsume: 1
   intelligenceRequirement: 0
   magicEffect: {fileID: 0}

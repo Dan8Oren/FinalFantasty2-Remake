@@ -56,6 +56,10 @@ public class GameManager : MonoBehaviour
         FightLevel = 0;
         _curHeroesContainer = new Stack<CharacterData>();
         _heroInfoContainer = new List<GameObject>();
+        foreach (var hero in allHeroes)
+        {
+            hero.ResetStats();
+        }
         _canvas = GetComponent<Canvas>();
         AddHeroToGame(0);
     }
@@ -65,8 +69,9 @@ public class GameManager : MonoBehaviour
         Assert.IsFalse(heroIndex >= allHeroes.Length);
         _curHeroesContainer.Push(allHeroes[heroIndex]);
         GameObject heroInfo = Instantiate(heroInfoPrefab, heroesParent.transform);
-        heroInfo.GetComponent<HeroInfoScript>().SetHeroData(allHeroes[heroIndex]);
-        _heroInfoContainer.Add(heroInfo);
+        HeroInfoScript script = heroInfo.GetComponent<HeroInfoScript>();
+        script.SetHeroData(allHeroes[heroIndex]);
+        _heroInfoContainer.Add(script.GetCenterObject());
     }
 
     private void Update()
