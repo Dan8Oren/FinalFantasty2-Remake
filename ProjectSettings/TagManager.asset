@@ -11,6 +11,7 @@ TagManager:
   - UI
   - SpawnLocation
   - Fight Camera
+  - Pad
   layers:
   - Default
   - TransparentFX
@@ -50,4 +51,7 @@ TagManager:
     locked: 0
   - name: pointer
     uniqueID: 3258546227
+    locked: 0
+  - name: sequence
+    uniqueID: 1095827633
     locked: 0

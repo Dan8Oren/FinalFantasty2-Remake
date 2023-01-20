@@ -1,0 +1,1367 @@
+fileFormatVersion: 2
+guid: 0a22b5a022d5aba4e84c401662a64156
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_0
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 610
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98d69be8271569f40872687c541ef8c8
+      internalID: -1851589798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_1
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 610
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aee66bf5f1663d4429879f9d50c28104
+      internalID: -1803445046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_2
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 610
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95198a27ab6cda346ad6f65148f42c25
+      internalID: -1662422891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_3
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 610
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11e10865c5cfc2b4498f1a638d016e56
+      internalID: 371123997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_4
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 610
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0eaf2c0387208a4ea6c4ebb74a6ff52
+      internalID: -1809138981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_5
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 610
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6775b32a2cf88794ebfc54434676775a
+      internalID: 134088558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_6
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 610
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcc23a35cc79eb6448c5d0005c6445b8
+      internalID: -1714388322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_7
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 610
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5546a059511970c4ebcd6d7234235c2f
+      internalID: 104410497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_8
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 514
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91ca24eb19245234489b3a00a68ec029
+      internalID: 794157226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_9
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 514
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f62e148b15b9db4694afcee871ea38f
+      internalID: -953400006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_10
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 514
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a5a941ff9daec74687b1db8a3f9150d
+      internalID: 283612943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_11
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 514
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54f62a3958f7aff49b30b6cf6d85f2fc
+      internalID: 1969508095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_12
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 514
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46467c1b50f2c25438fe3a846a6af88c
+      internalID: -1506119712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_13
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 514
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d43e9f5e4d785347bd35990a8aed0d7
+      internalID: 36722314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_14
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 514
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8630746b800d0554a92f35c6d44f9500
+      internalID: 1697928031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_15
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 514
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f65be8f52595e184386c87b74ccd1b6e
+      internalID: -1888986270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_16
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 418
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd7c0993be0cdc244b904ce62081c2f5
+      internalID: 2072536082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_17
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 418
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2260b317789fc464a8826333a785ad54
+      internalID: -1974921715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_18
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 418
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31e1e3a9c6011a148963a3ebfcdf0024
+      internalID: -2104946220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_19
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 418
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b621b2b537975b846a7d64318fc47366
+      internalID: -664762822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_20
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 418
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47c6360fea9c8214ab236e9595ca50bd
+      internalID: 9373761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_21
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 418
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6b32669d9b0047479465412dbcd342f
+      internalID: 2029556229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_22
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 418
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 609084160a118c14faff7d22cad53648
+      internalID: -228798391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_23
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 418
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 262ef5757847cc34a8f11932edbfa2e5
+      internalID: -469327255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_24
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 322
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf0ca701c3df7b741a2bd961745b7809
+      internalID: -940791287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_25
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 322
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b735509e1b96cb4292b54379e23abeb
+      internalID: 1342382546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_26
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 322
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67c158fe77e7c924eb929f5251327e9b
+      internalID: 408906970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_27
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 322
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7980ed3f45b274d4c961be77d3c9a0f2
+      internalID: -159513826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_28
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 322
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 679b6298b8b344a4fb71784d72eeee27
+      internalID: -616630447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_29
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 322
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a63a7841962b6314a8d612ab7ada3ce1
+      internalID: -1394433818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_30
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 322
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 817b8c038cc7fa2429cebd46bbaac274
+      internalID: -993596031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_31
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 322
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0162e8614e456d4da66f9d60951da88
+      internalID: 1646122639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_32
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 226
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2fbdcfd80f357a46a6b6aa532ac9440
+      internalID: 1805604428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_33
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 226
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bf6a3f3e37949e4e87f644e17bcd332
+      internalID: 1453942343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_34
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 226
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f77811355c5819147ae9d18e3310d3eb
+      internalID: -331930378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_35
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 226
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af6375ad76d0c1c4c8dda44aac1da8bf
+      internalID: -472824717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_36
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 226
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6058985e0d9b864c8d17769770fd09a
+      internalID: 1165019930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_37
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 226
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d3bdf82504397c44b9b064f79302a92
+      internalID: 809511224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_38
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 226
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bc1b59e46f53a9439f6be03942cbef0
+      internalID: 244481657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_39
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 226
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98e94a40729e01f4991820a3b0f7a6d4
+      internalID: -857161828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_40
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 130
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bc9b6e465864dc4e96350e9aae1696a
+      internalID: 1352078746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_41
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 130
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84583fd4155711d449649217358a3103
+      internalID: 1975630638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_42
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 130
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 009857ebd6745bb44909eb3e6a531611
+      internalID: -404975649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_43
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 130
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82032caba47f40b4788b72d285cc93df
+      internalID: 1229472225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_44
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 130
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67c9e2cae4ee1d345aed83f60c6dbd3a
+      internalID: 632216337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_45
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 130
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3ac0db596c27a24685c0d8b52714ac0
+      internalID: -1660917091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_46
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 130
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 169269e7ac62f674eaa3d74cac93fb1a
+      internalID: 2013452571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_47
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 130
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36e661d9f91051b458d91a5f8290a5b6
+      internalID: 2086001201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_48
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 34
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 016c687870a47964d9f2c427be4ae859
+      internalID: -530149483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_49
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 34
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af6a648d788262449a2b33a03ed2ad47
+      internalID: 191668571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_50
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 34
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38b06413091cfd549939b6f15e0f7078
+      internalID: 87532751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_51
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 34
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51087f87b37f13e45ae2876f77df0196
+      internalID: 2096679852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_52
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 34
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a03097305fbd1b74894b549b55c88544
+      internalID: -162463198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_53
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 34
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 429bcacb1aad9904891c362dd9d4724e
+      internalID: -1791111480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_54
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 34
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1386b1b40649a8649b78afe664bd4a2b
+      internalID: -967211642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oneSizeKeysBlacked_55
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 34
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64da48e8f8d5a3749bfa1fee6926c495
+      internalID: 1244273714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      oneSizeKeysBlacked_55: 1244273714
+      oneSizeKeysBlacked_5: 134088558
+      oneSizeKeysBlacked_27: -159513826
+      oneSizeKeysBlacked_8: 794157226
+      oneSizeKeysBlacked_50: 87532751
+      oneSizeKeysBlacked_3: 371123997
+      oneSizeKeysBlacked_54: -967211642
+      oneSizeKeysBlacked_28: -616630447
+      oneSizeKeysBlacked_18: -2104946220
+      oneSizeKeysBlacked_40: 1352078746
+      oneSizeKeysBlacked_12: -1506119712
+      oneSizeKeysBlacked_52: -162463198
+      oneSizeKeysBlacked_13: 36722314
+      oneSizeKeysBlacked_45: -1660917091
+      oneSizeKeysBlacked_17: -1974921715
+      oneSizeKeysBlacked_29: -1394433818
+      oneSizeKeysBlacked_6: -1714388322
+      oneSizeKeysBlacked_31: 1646122639
+      oneSizeKeysBlacked_33: 1453942343
+      oneSizeKeysBlacked_36: 1165019930
+      oneSizeKeysBlacked_41: 1975630638
+      oneSizeKeysBlacked_4: -1809138981
+      oneSizeKeysBlacked_46: 2013452571
+      oneSizeKeysBlacked_22: -228798391
+      oneSizeKeysBlacked_21: 2029556229
+      oneSizeKeysBlacked_35: -472824717
+      oneSizeKeysBlacked_34: -331930378
+      oneSizeKeysBlacked_47: 2086001201
+      oneSizeKeysBlacked_39: -857161828
+      oneSizeKeysBlacked_30: -993596031
+      oneSizeKeysBlacked_53: -1791111480
+      oneSizeKeysBlacked_26: 408906970
+      oneSizeKeysBlacked_7: 104410497
+      oneSizeKeysBlacked_2: -1662422891
+      oneSizeKeysBlacked_16: 2072536082
+      oneSizeKeysBlacked_19: -664762822
+      oneSizeKeysBlacked_24: -940791287
+      oneSizeKeysBlacked_44: 632216337
+      oneSizeKeysBlacked_1: -1803445046
+      oneSizeKeysBlacked_32: 1805604428
+      oneSizeKeysBlacked_0: -1851589798
+      oneSizeKeysBlacked_43: 1229472225
+      oneSizeKeysBlacked_49: 191668571
+      oneSizeKeysBlacked_14: 1697928031
+      oneSizeKeysBlacked_37: 809511224
+      oneSizeKeysBlacked_38: 244481657
+      oneSizeKeysBlacked_42: -404975649
+      oneSizeKeysBlacked_11: 1969508095
+      oneSizeKeysBlacked_9: -953400006
+      oneSizeKeysBlacked_15: -1888986270
+      oneSizeKeysBlacked_23: -469327255
+      oneSizeKeysBlacked_51: 2096679852
+      oneSizeKeysBlacked_10: 283612943
+      oneSizeKeysBlacked_48: -530149483
+      oneSizeKeysBlacked_20: 9373761
+      oneSizeKeysBlacked_25: 1342382546
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

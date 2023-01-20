@@ -30,14 +30,15 @@ public class CharacterData : ScriptableObject
     public int intelligence;
     [Tooltip("Increases chance to dodge")]
     public int agility;
-    [Tooltip("Increases HP, and chance to block")]
+    [Tooltip("Increases HP")]
     public int stamina;
-    [Tooltip("Increases MP, and chance to deflect")]
+    [Tooltip("Increases MP")]
     public int wisdom;
     [Tooltip("chance to take action first increases")]
     public int speed;
-    [Tooltip("decreases damage taken")]
-    public int defence;
+    //not used
+    // [Tooltip("decreases damage taken")]
+    // public int defence;
     
     [SerializeField] private int beforeStatsAttack;
     public int Attack { get; private set; }

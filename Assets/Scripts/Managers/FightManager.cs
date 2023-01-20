@@ -18,12 +18,12 @@ public class FightManager : MonoBehaviour
     private const string RUN_FAILED_LOG = "Run failed";
     private const string NOT_ENOUGH_MANA = "Not Enough Mana";
     public static FightManager Instance { get; private set; }
+    public int SelectedSequenceLevel { get; private set; }
     public TextMeshProUGUI[] mainFightMenuButtons;
     public int numOfButtonsInARow;
     public DataMenuScript dataMenuScript;
     public ActionsLogScript actionsLogScript;
     public MessageBoxScript messageBox;
-    // public NextToFightScript nextToFightScript;
     public CharacterData[] EnemiesLevel1;
     public CharacterData[] EnemiesLevel2;
     public CharacterData[] EnemiesLevel3;
@@ -33,7 +33,6 @@ public class FightManager : MonoBehaviour
     private bool _actionHasTaken;
     private bool _isBackEnabled;
     
-    [SerializeField] private GameObject pointerPrefab;  //TODO: Remove Me!
     [SerializeField] private CharacterDisplayScript[] enemyRow1;
     [SerializeField] private CharacterDisplayScript[] enemyRow2;
     [SerializeField] private CharacterDisplayScript[] heroRow;
@@ -63,16 +62,16 @@ public class FightManager : MonoBehaviour
             return;
         }
         Destroy(gameObject);
-    }
-    
-    private void Start()
-    {
         EnemiesByLevels = new []{ EnemiesLevel1,EnemiesLevel2,EnemiesLevel3,EnemiesLevel4,EnemiesLevel5};
         _actionHasTaken = false;
         _isBackEnabled = false;
         _selectedObjName = null;
         _selectedObj = null;
         _curFighterIndex = 0;
+    }
+    
+    private void Start()
+    {
         _fightLevel = GameManager.Instance.FightLevel;
         _heroes = GameManager.Instance.GetHeroes();
         SetBattleRow(heroRow, _heroes,0);
@@ -86,7 +85,6 @@ public class FightManager : MonoBehaviour
         PointerBehavior.Instance.transform.SetParent(null);
         PointerBehavior.Instance.gameObject.SetActive(false);
         GetBattleOrder();
-        // nextToFightScript.SetFightOrder(_charactersFightOrder);
         _startFight = true; // to call continue fight at update and let other objects to start.
     }
 
@@ -107,7 +105,11 @@ public class FightManager : MonoBehaviour
 
         }
         HandleSelection();
-        if (_actionHasTaken)
+    }
+
+    private void LateUpdate()
+    {
+        if (_actionHasTaken && !SequenceManager.Instance.ActiveSequence)
         {
             StartCoroutine(WaitForAnimation(_charactersFightOrder[_curFighterIndex].AnimateEndTurn()));
             if (CheckWinLoss())
@@ -171,52 +173,68 @@ public class FightManager : MonoBehaviour
         }
         else if (_selectedObjName != null && _lastChosenAction.Equals(FIGHT_TEXT) && !_attackSelected)
         {
-            CharacterData curFighter = _charactersFightOrder[_curFighterIndex].data;
-            MeleeAttackData chosenAttack = GetAttack(curFighter);
-            Assert.IsFalse(chosenAttack == null);
-            actionsLogScript.AddToLog($" uses {chosenAttack.displayName} to attack");
-            float damageCalc = 0;
-            damageCalc = curFighter.Attack+chosenAttack.damage;
-            _attackSelected = true;
-            _selectedObjName = null;
-            //TODO: add multiple enemies?
-            SetAttack((int)Mathf.Ceil(damageCalc));
-            _actionHasTaken = false;
+            HandleAttackSelected();
         }
         else if (_selectedObjName != null && _lastChosenAction.Equals(MAGIC_TEXT) && !_attackSelected)
         {
-            CharacterDisplayScript curFighter = _charactersFightOrder[_curFighterIndex];
-            MagicAttackData chosenMagic = GetMagic(curFighter.data);
-            Assert.IsFalse(chosenMagic == null);
-            if (curFighter.data.currentMp < chosenMagic.manaPointsToConsume)
-            {
-                _actionHasTaken = false;
-                actionsLogScript.ClearLog();
-                actionsLogScript.messageBox.ShowDialogs(new string[] { NOT_ENOUGH_MANA },false);
-                CloseAll();
-                return;
-            }
-            float damageCalc = Mathf.Ceil(chosenMagic.pointsOfEffect +curFighter.data.Magic);
-            if (chosenMagic.isOnSelf)
-            {
-                curFighter.EffectMana(-chosenMagic.manaPointsToConsume); //consume mana
-                actionsLogScript.AddToLog($" uses {chosenMagic.displayName} for {damageCalc}");
-                curFighter.EffectHealth((int)damageCalc,actionsLogScript);
-                CloseAll();
-                return;
-            }
-            actionsLogScript.AddToLog($" uses {chosenMagic.displayName} to attack");
-            _attackSelected = true;
-            _selectedObjName = null;
-            //TODO: add multiple enemies?
-            SetAttack((int)damageCalc);
-            _actionHasTaken = false;
+            HandleMagicSelected();
         }
         else if (_selectedObjName != null && _attackSelected)
         {
-            DoAttack();
+            StartCoroutine(DoAttack());
             CloseAll();
         }
+    }
+    
+    private void HandleAttackSelected()
+    {
+        CharacterData curFighter = _charactersFightOrder[_curFighterIndex].data;
+        MeleeAttackData chosenAttack = GetAttack(curFighter);
+        Assert.IsFalse(chosenAttack == null);
+        actionsLogScript.AddToLog($" uses {chosenAttack.displayName} to attack");
+        float damageCalc = 0;
+        SelectedSequenceLevel = chosenAttack.sequence;
+        _attackSelected = true;
+        _selectedObjName = null;
+        damageCalc = curFighter.Attack + chosenAttack.damage;
+        SetAttack((int)Mathf.Ceil(damageCalc),false);
+        _actionHasTaken = false;
+    }
+
+    private void HandleMagicSelected()
+    {
+        CharacterDisplayScript curFighter = _charactersFightOrder[_curFighterIndex];
+        MagicAttackData chosenMagic = GetMagic(curFighter.data);
+        Assert.IsFalse(chosenMagic == null);
+        if (curFighter.data.currentMp < chosenMagic.manaPointsToConsume)
+        {
+            _actionHasTaken = false;
+            actionsLogScript.ClearLog();
+            actionsLogScript.messageBox.ShowDialogs(new string[] { NOT_ENOUGH_MANA }, false);
+            CloseAll();
+            return;
+        }
+        SelectedSequenceLevel = chosenMagic.sequence;
+        float damageCalc = Mathf.Ceil(chosenMagic.pointsOfEffect + curFighter.data.Magic);
+        if (chosenMagic.isOnSelf||chosenMagic.effectAllSameGroup)
+        {
+            curFighter.EffectMana(-chosenMagic.manaPointsToConsume); //consume mana
+            actionsLogScript.AddToLog($" uses {chosenMagic.displayName} for {damageCalc}");
+            if (chosenMagic.effectAllSameGroup) {
+                StartCoroutine(DoEffectAll((int)damageCalc, true));
+            }else
+            {
+                StartCoroutine(DoEffectSelf((int)damageCalc,curFighter));
+            }
+            CloseAll();
+            return;
+        }
+
+        actionsLogScript.AddToLog($" uses {chosenMagic.displayName} to attack");
+        _attackSelected = true;
+        _selectedObjName = null;
+        SetAttack((int)damageCalc,chosenMagic.effectAllEnemyGroup);
+        _actionHasTaken = false;
     }
 
     private void CloseAll()
@@ -251,17 +269,23 @@ public class FightManager : MonoBehaviour
         return null;
     }
 
-    private void DoAttack()
+    private IEnumerator DoAttack()
     {
-        foreach (var fighter in _allFighters)
+        SequenceManager.Instance.StartSequenceByLevel(SelectedSequenceLevel);
+        yield return new WaitUntil(()=>!SequenceManager.Instance.ActiveSequence);
+        if (SequenceManager.Instance.IsGood)
         {
-            if (fighter.isActiveAndEnabled && fighter.name == _selectedObjName)
+            foreach (var fighter in _allFighters)
             {
-                _allFighters[_curFighterIndex].AnimateAttack();
-                actionsLogScript.AddToLog($" '{fighter.data.displayName}' for {Mathf.Abs(_selectedCharDamage)} damage");
-                fighter.EffectHealth(_selectedCharDamage,actionsLogScript);
-                _selectedObjName = null;
-                break;
+                if (fighter.isActiveAndEnabled && fighter.name == _selectedObjName)
+                {
+                    _allFighters[_curFighterIndex].AnimateAttack();
+                    actionsLogScript.AddToLog($" '{fighter.data.displayName}'" +
+                                              $" for {Mathf.Abs(_selectedCharDamage)} damage");
+                    fighter.EffectHealth(_selectedCharDamage,actionsLogScript);
+                    _selectedObjName = null;
+                    break;
+                }
             }
         }
     }
@@ -291,7 +315,6 @@ public class FightManager : MonoBehaviour
     private void UpdateNextAttacker()
     {
         _curFighterIndex += 1;
-        // nextToFightScript.DisplayNextFighter();
         if (_curFighterIndex >= _charactersFightOrder.Count)
         {
             _curFighterIndex = 0;
@@ -480,7 +503,6 @@ public class FightManager : MonoBehaviour
                 return;
             }
         }
-        //TODO: make an enemy fight tactics at the future.
         int attackIndex = Random.Range(6,_allFighters.Count);
         while (!_allFighters[attackIndex].isActiveAndEnabled)
         {
@@ -497,7 +519,7 @@ public class FightManager : MonoBehaviour
         CharacterData curFighter = _charactersFightOrder[_curFighterIndex].data;
         switch (action)
         {
-            case FIGHT_TEXT:
+            case FIGHT_TEXT: 
                 FightMenuScript.Instance.ShowMenu(curFighter);
                 break;
             case RUN_TEXT:
@@ -529,8 +551,13 @@ public class FightManager : MonoBehaviour
         _actionHasTaken = true;
     }
 
-    private void SetAttack(int damage) //effectAllEnemyGroup?
+    private void SetAttack(int damage,bool isEffectAllEnemyGroup)
     {
+        if (isEffectAllEnemyGroup)
+        {
+            StartCoroutine(DoEffectAll(-damage,false));
+            return;
+        }
         GameObject[] allFighters = new GameObject[_allFighters.Count];
         int i = 0;
         foreach (CharacterDisplayScript character in _allFighters)
@@ -541,9 +568,41 @@ public class FightManager : MonoBehaviour
         StopCoroutine(ActivatePlayerTurn());
         _actionHasTaken = false;
         SelectCharacter(allFighters);
-        _selectedCharDamage = -damage; //Minus
+        _selectedCharDamage = -damage; //Minus + saved for after player selected an enemy.
+    }
+    
+    /**
+     * Effects all enemies or heroes health by the given amount. 
+     * amount - amount to effect all health with. (can be negative)
+     * isOnHeroes - flag to determine which group to effect.
+     */
+    private IEnumerator DoEffectAll(int amount,bool isOnHeroes)
+    {
+        SequenceManager.Instance.StartSequenceByLevel(SelectedSequenceLevel);
+        yield return new WaitUntil(()=>!SequenceManager.Instance.ActiveSequence);
+        if (SequenceManager.Instance.IsGood)
+        {
+            foreach (var fighter in _charactersFightOrder)
+            {
+                if (isOnHeroes == fighter.data.isHero)
+                {
+                    fighter.EffectHealth(amount,actionsLogScript);
+                }
+            }
+        }
+        
     }
 
+    private IEnumerator DoEffectSelf(int amount, CharacterDisplayScript caster)
+    {
+        SequenceManager.Instance.StartSequenceByLevel(SelectedSequenceLevel);
+        yield return new WaitUntil(()=>!SequenceManager.Instance.ActiveSequence);
+        if (SequenceManager.Instance.IsGood)
+        {
+            caster.EffectHealth(amount,actionsLogScript);
+        }
+    }
+    
     public void SetSelectedObject(GameObject obj)
     {
         _actionHasTaken = true;

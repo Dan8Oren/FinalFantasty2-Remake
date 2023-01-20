@@ -21,11 +21,11 @@ public class HeroInfoScript : MonoBehaviour
         image.sprite = data.characterIcon;
         heroData = data;
         nameText.SetText(data.name);
-        String info = $"Health Points: {data.currentHp}/{data.MaxHp}\n"+
-                      $"Mana Points: {data.currentMp}/{data.MaxMp}\n"+
-                      $"Attack: {data.Attack}\n"+
-                      $"Magic attack: {data.Magic}\n"+
-                      $"defence: {data.defence}\n";
+        String info = $"Health Points: {data.currentHp}/{data.MaxHp}\n" +
+                      $"Mana Points: {data.currentMp}/{data.MaxMp}\n" +
+                      $"Attack: {data.Attack}\n" +
+                      $"Magic attack: {data.Magic}\n";
+                      // $"defence: {data.defence}\n";
         infoText.SetText(info);
         healthBar.maxValue = data.MaxHp;
         healthBar.minValue = 0;
