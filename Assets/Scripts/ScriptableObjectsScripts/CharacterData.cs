@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
 using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "CharacterScriptableObject",menuName = "ScriptableObjects/CharacterData")]
@@ -11,6 +12,7 @@ public class CharacterData : ScriptableObject
 {
     public String displayName;
     public bool isHero;
+    public SpriteLibraryAsset spriteLibrary;
     public Sprite idleImage;
     public Sprite characterIcon;
     [Header("No more than 6 attacks!")]

@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565e707d0ed37ee428c1159405fec0d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSequenceActive: 0
   oneSizeSprites:
   - {fileID: -1851589798, guid: 0a22b5a022d5aba4e84c401662a64156, type: 3}
   - {fileID: -1803445046, guid: 0a22b5a022d5aba4e84c401662a64156, type: 3}
@@ -110,15 +111,43 @@ MonoBehaviour:
   - {fileID: -601441092, guid: 311db8dd63b71d64cbf730a8076f779e, type: 3}
   - {fileID: -858070794, guid: 311db8dd63b71d64cbf730a8076f779e, type: 3}
   twoSizeKeys: 090000001b0000000800000018010000190100000d000000200000007f00000017010000
-  countDownTime: 4
-  countDownDisplay: {fileID: 0}
+  defaultCountDownTime: 0
+  textDisplay: {fileID: 0}
+  completePercentageDisplay: {fileID: 0}
   oneSizePadPrefab: {fileID: 4380452368598241635, guid: 39aab0e07841ef5439459029794c5acd, type: 3}
   twoSizePadPrefab: {fileID: 5276102585446639537, guid: a655284bafc247d4aa9316284a022370, type: 3}
   level1Pads: 2
   level1Speed: 2
   level1MaxTime: 5
   level1MinTime: 2
+  level1ChanceForTwo: 70
+  level1CompletePercentage: 0
+  level2Pads: 3
+  level2Speed: 2
+  level2MaxTime: 4
+  level2MinTime: 1
+  level2ChanceForTwo: 50.9
+  level2CompletePercentage: 0
+  level3Pads: 3
+  level3Speed: 3
+  level3MaxTime: 4
+  level3MinTime: 2
+  level3ChanceForTwo: 20.8
+  level3CompletePercentage: 0
+  level4Pads: 5
+  level4Speed: 3
+  level4MaxTime: 4
+  level4MinTime: 1
+  level4ChanceForTwo: 33
+  level4CompletePercentage: 0
+  level5Pads: 5
+  level5Speed: 3
+  level5MaxTime: 6
+  level5MinTime: 1
+  level5ChanceForTwo: 0
+  level5CompletePercentage: 0
   pads: []
+  level: 0
 --- !u!223 &402027026075074356
 Canvas:
   m_ObjectHideFlags: 0
@@ -138,7 +167,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 1095827633
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &2479713054191032220
 MonoBehaviour:

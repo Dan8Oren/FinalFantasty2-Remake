@@ -294,8 +294,8 @@ MonoBehaviour:
   - Welcome to Final-Fantasy 2 Remake, By Dan.\nPress 'Space' to Continue...
   - You can move the player with the arrows keys,\nand interact with objects using
     'space'.
-  - press 'x' to go back, and While not in a fight,\nyou can press 'x' to open your
-    inventory.
+  - Press 'x' to open your inventory.\nand while in a fight, you can press 'x' to
+    go back.
   - \tGood Luck :)!
   textDisplay: {fileID: 3862608555824948122}
   timeBetweenChars: 0.03

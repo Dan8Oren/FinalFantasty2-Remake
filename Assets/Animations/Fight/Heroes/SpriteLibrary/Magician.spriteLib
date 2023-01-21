@@ -47,9 +47,9 @@ MonoBehaviour:
       m_Hash: 918338361
       m_Sprite: {fileID: 1674936882, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 1674936882, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_SpriteOverride: {fileID: -307228751, guid: 79572ca3a7b3a424ebec2cc40ac04fee, type: 3}
     m_FromMain: 1
-    m_EntryOverrideCount: 3
+    m_EntryOverrideCount: 4
   - m_Name: Dead
     m_Hash: 219670042
     m_CategoryList: []

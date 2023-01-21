@@ -7,17 +7,21 @@ using UnityEngine.Assertions;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance = null;
+    private const int MAGICIAN_INDEX = 1;
+    private const int KNIGHT_INDEX = 2;
     
+    public static GameManager Instance = null;
+    public int CurFightLevel { get; private set;}
     public GameObject[] displayObjects;
     public GameObject heroesParent;
     public GameObject heroInfoPrefab;
     public GameObject[] items;
+    public HashSet<int> CompletedFightLevels;
+    
     
     [SerializeField] public bool isStartOfGame = true;
     [SerializeField] private CharacterData[] allHeroes;
     [SerializeField] private float coins;
-    [SerializeField] private int curLevel;
     private Stack<CharacterData> _curHeroesContainer;
     private List<GameObject> _heroInfoContainer;
     private Transform _transform;
@@ -25,19 +29,9 @@ public class GameManager : MonoBehaviour
     private GameObject _heroInfo;
     private Canvas _canvas;
     private bool _isOpen;
-    
-    public bool IsOnFight {get;private set;}
-    
-    public int FightLevel
-    {
-        get { return curLevel; } 
-        set{curLevel = value;}
-        
-    }
 
     private void Awake()
     {
-        IsOnFight = false;
         //singleton pattern the prevent two scene managers
         if ( Instance == null)
         {
@@ -52,8 +46,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        CompletedFightLevels = new HashSet<int>();
+        CurFightLevel = 0;
         _isOpen = false;
-        FightLevel = 0;
         _curHeroesContainer = new Stack<CharacterData>();
         _heroInfoContainer = new List<GameObject>();
         foreach (var hero in allHeroes)
@@ -71,7 +66,7 @@ public class GameManager : MonoBehaviour
         GameObject heroInfo = Instantiate(heroInfoPrefab, heroesParent.transform);
         HeroInfoScript script = heroInfo.GetComponent<HeroInfoScript>();
         script.SetHeroData(allHeroes[heroIndex]);
-        _heroInfoContainer.Add(script.GetCenterObject());
+        _heroInfoContainer.Add(heroInfo);
     }
 
     private void Update()
@@ -85,12 +80,17 @@ public class GameManager : MonoBehaviour
 
     public void FightWon()
     {
-        FightLevel++;
-        _curHeroesContainer.Push(allHeroes[FightLevel]);
-        switch (FightLevel)
+        CompletedFightLevels.Add(CurFightLevel);
+        switch (CurFightLevel)
         {
+            case 0:
+                AddHeroToGame(KNIGHT_INDEX);
+                break;
             case 1:
-               break;
+                AddHeroToGame(MAGICIAN_INDEX);
+                break;
+            case 2:
+                break;
         }
         
     }
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
         PointerBehavior.Instance.enabled = true;
         PointerBehavior.Instance.transform.SetParent(transform);
         PointerBehavior.Instance.SetNewObjects(_heroInfoContainer.ToArray(),4,true);
-        if (!IsOnFight)
+        if (!MySceneManager.Instance.IsInFight)
         {
             _wait = WaitForPlayerToChoose();
             StartCoroutine(_wait);
@@ -126,8 +126,11 @@ public class GameManager : MonoBehaviour
         PointerBehavior.Instance.SelectedObj = null;
         CloseHeroesMenu();
         InventoryManager.Instance.enabled = true;
-        InventoryManager.Instance.ApplyItem(_heroInfo.GetComponent<HeroInfoScript>().GetData());
-        InventoryManager.Instance.CloseInventory();
+        HeroInfoScript infoScript = _heroInfo.GetComponent<HeroInfoScript>();
+        Assert.IsFalse(infoScript == null);
+        CharacterData data = infoScript.GetData();
+        Assert.IsFalse(data == null);
+        InventoryManager.Instance.ApplyItem(data);
         PointerBehavior.Instance.gameObject.SetActive(false);
     }
 
@@ -140,14 +143,13 @@ public class GameManager : MonoBehaviour
         {
             obj.SetActive(false);
         }
-
-        StartCoroutine(StallDisableX());
+        InventoryManager.Instance.disableX = false;
+        InventoryManager.Instance.CloseInventory();
 
     }
 
-    private IEnumerator StallDisableX()
+    public void SetFightLevel(int fightLevel)
     {
-        yield return new WaitForSeconds(0.1f);
-        InventoryManager.Instance.disableX = false;
+        CurFightLevel = fightLevel;
     }
 }

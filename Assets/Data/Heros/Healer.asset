@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5c92b9395ef8245a8fea91f3e75261, type: 3}
+  m_Name: Healer
+  m_EditorClassIdentifier: 
+  displayName: Healer
+  isHero: 1
+  spriteLibrary: {fileID: 7108339969198208228, guid: dd5b1833de3391642a07ca03911e0107, type: 3}
+  idleImage: {fileID: -1567094180, guid: 12cbe3e5f9a8ab84fadd54832975acb2, type: 3}
+  characterIcon: {fileID: 21300000, guid: 7144654ae846eeb48a0cc183344667d5, type: 3}
+  attacks: []
+  magics:
+  - {fileID: 11400000, guid: 29b52cb6e08bede41ae6a0f5c6e97b3e, type: 2}
+  - {fileID: 11400000, guid: c155766ac5c5558438f5536877d42f71, type: 2}
+  - {fileID: 11400000, guid: d9be8bb41566ff34b8ee75bd4e763475, type: 2}
+  beforeStatsMaxHp: 100
+  beforeStatsMaxMp: 300
+  currentHp: 100
+  currentMp: 100
+  strength: 10
+  intelligence: 30
+  agility: 15
+  stamina: 10
+  wisdom: 20
+  speed: 10
+  beforeStatsAttack: 12
+  beforeStatsMagicMp: 20
+  items: []

@@ -17,7 +17,7 @@ MonoBehaviour:
   sequence: 5
   isOnSelf: 0
   effectAllSameGroup: 0
-  effectAllEnemyGroup: 0
+  effectAllEnemyGroup: 1
   turnsOfEffect: 1
   pointsOfEffect: 40
   manaPointsToConsume: 40

@@ -9,31 +9,32 @@ using Random = UnityEngine.Random;
 
 public class MySceneManager : MonoBehaviour
 {
+    public static MySceneManager Instance = null;
     public const string k_YELLOW_FLOOR = "YellowFloor";
     public const string k_FIGHT = "FightScene";
     public const string k_PLAYER_TAG = "Player";
     private const string DOORS_TAG = "Doors";
     private const string DISABLE_AFTER_FIGHT_TAG = "DisableAfterFight";
-    private const string FIGHT_TRIGGER_TAG = "FightTrigger";
+    private const string  ENABLE_AFTER_FIGHT_TAG = "EnableAfterFight";
     private const string FIGHT_CAMERA_TAG = "Fight Camera";
-    public static MySceneManager Instance = null;
+    
+    public Rigidbody2D HeroRigid { get; private set; }
+    public bool IsInFight { get; private set; }
+    public int CurrentEntrance { get; private set; }
     public GameObject hero;
     public GameObject mainCamera;
-    public GameObject cmCamera;
+    public GameObject cmCameraObject;
+    public CinemachineVirtualCamera cmCamera;
     public GameObject fightCamera;
     public GameObject[] doors;
-    public MessageBoxScript messageBoxScript { get; private set; }
-    public Rigidbody2D HeroRigid { get; private set; }
-    public string LastSceneName { get; private set; }
+    public MessageBoxScript messageBoxScript;
+    
+    public string LastSceneName;// { get; private set; }
     [SerializeField] private float afterMovmentDelay;
-
     [SerializeField] private Animator regularSceneAnimator;
     [SerializeField] private float regTransitionWaitTime;
     [SerializeField] private float fightTransitionWaitTime;
-    public bool IsInFight { get; private set; }
-    public int CurrentEntrance { get; private set; }
-    private CinemachineVirtualCamera _cmCamera;
-    
+
     private void Awake()
     {
         //singleton pattern the prevent two scene managers
@@ -49,7 +50,6 @@ public class MySceneManager : MonoBehaviour
         HeroRigid = hero.GetComponent<Rigidbody2D>();
         regularSceneAnimator.SetTrigger("Start");
         LastSceneName = SceneManager.GetActiveScene().name;
-        _cmCamera = cmCamera.GetComponent<CinemachineVirtualCamera>();
         IsInFight = false;
         CurrentEntrance = -1;
     }
@@ -58,50 +58,56 @@ public class MySceneManager : MonoBehaviour
     {
         HeroRigid.constraints = RigidbodyConstraints2D.FreezeRotation;
         regularSceneAnimator.SetTrigger("Start");
-        if (_cmCamera.Follow == null)
+        if (cmCamera.Follow == null)
         {
-            _cmCamera.Follow = hero.transform;
+            cmCamera.Follow = hero.transform;
         }
         doors = GameObject.FindGameObjectsWithTag(DOORS_TAG);
-        var fightTrigger = GameObject.FindWithTag(FIGHT_TRIGGER_TAG);
         if (CurrentEntrance == -1)
         {
             return;
         }
 
-        if (GameManager.Instance.FightLevel > CurrentEntrance)
+        if (GameManager.Instance.CompletedFightLevels.Contains(CurrentEntrance) || LastSceneName.Equals(k_FIGHT))
         {
             foreach (var obj in GameObject.FindGameObjectsWithTag(DISABLE_AFTER_FIGHT_TAG))
             {
                 obj.SetActive(false);
             }
-        
-            if (fightTrigger != null)
+        }
+
+        if (LastSceneName.Equals(k_FIGHT))
+        {
+            foreach (var obj in GameObject.FindGameObjectsWithTag(ENABLE_AFTER_FIGHT_TAG))
             {
-                fightTrigger.SetActive(false);
-                fightTrigger = null;
+                obj.SetActive(true);
             }
         }
         
+        SpawnHeroAtLocation();
+    }
+
+    private void SpawnHeroAtLocation()
+    {
         for (int i = 0; i < doors.Length; i++)
         {
-            if (doors[i].GetComponent<DoorScript>().entranceNumber == CurrentEntrance)
+            DoorScript doorScript = doors[i].GetComponent<DoorScript>();
+            if (doorScript.entranceNumber == CurrentEntrance)
             {
                 Vector3 pos = doors[i].transform.position;
                 pos.y += 0.5f;
-                if ( SceneManager.GetActiveScene().name == k_YELLOW_FLOOR)
+                if (SceneManager.GetActiveScene().name == k_YELLOW_FLOOR)
                 {
                     pos.y -= 1f;
                 }
-                print(SceneManager.GetActiveScene().name);
-                Assert.IsFalse(hero == null);
+
                 hero.transform.position = pos;
                 mainCamera.transform.position = pos;
-                StartCoroutine(DeactivateUntilMovement(doors[i]));
-                if (fightTrigger != null)
+                if (!LastSceneName.Equals(k_FIGHT))
                 {
-                    StartCoroutine(DeactivateUntilMovement(fightTrigger));
+                    StartCoroutine(DeactivateUntilMovement(doors[i]));
                 }
+
                 return;
             }
         }
@@ -125,18 +131,20 @@ public class MySceneManager : MonoBehaviour
     }
     
     
-    public void LoadScene(int entrance,String sceneToLoad)
+    public void LoadNormalScene(int entrance,String sceneToLoad)
     {
-        if (!sceneToLoad.Equals(k_FIGHT))
-        {
-            LastSceneName = SceneManager.GetActiveScene().name;
-            CurrentEntrance = entrance;
-            regularSceneAnimator.SetTrigger("End");
-            StartCoroutine(LoadAfterTransition(regTransitionWaitTime,sceneToLoad));
-            return;
-        }
-        //TODO: fight transition
-        StartCoroutine(LoadAfterTransition(fightTransitionWaitTime,sceneToLoad));
+        LastSceneName = SceneManager.GetActiveScene().name;
+        CurrentEntrance = entrance;
+        regularSceneAnimator.SetTrigger("End");
+        StartCoroutine(LoadAfterTransition(regTransitionWaitTime,sceneToLoad));
+        
+    }
+
+    public void LoadFightScene(int fightLevel)
+    {
+        LastSceneName = SceneManager.GetActiveScene().name;
+        GameManager.Instance.SetFightLevel(fightLevel);
+        StartCoroutine(LoadAfterTransition(fightTransitionWaitTime,k_FIGHT));
     }
     
     private void OnEnable()
@@ -148,11 +156,9 @@ public class MySceneManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
-    
+
     private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("============Level Loaded==============");
-        Debug.Log(scene.name); //TODO: REMOVE ME!
         hero.SetActive(true);
         mainCamera.SetActive(true);
         if (!scene.name.Equals(k_FIGHT) && !IsInFight)
@@ -169,18 +175,8 @@ public class MySceneManager : MonoBehaviour
                 OnFightSceneLoad();
                 return;
             }
+
             OnRegularLevelLoad();
-        }
-    }
-    
-    public void FightWon()
-    {
-     print("Won");   
-        //adds loot to player.
-        GameManager.Instance.FightWon();
-        foreach (var obj in GameObject.FindGameObjectsWithTag(DISABLE_AFTER_FIGHT_TAG))
-        {
-            obj.SetActive(false);
         }
     }
 
@@ -195,7 +191,7 @@ public class MySceneManager : MonoBehaviour
 
     public IEnumerator Shake( float duration, float force)
     {
-        Transform trans = (IsInFight)?fightCamera.transform:cmCamera.transform;
+        Transform trans = (IsInFight)?fightCamera.transform:cmCameraObject.transform;
         Vector3 originalPos = trans.position;
         float activeTime = 0f;
         while (activeTime <= duration)

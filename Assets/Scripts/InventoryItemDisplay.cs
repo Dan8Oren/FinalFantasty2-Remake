@@ -9,31 +9,24 @@ public class InventoryItemDisplay : MonoBehaviour
 {
     public SpriteRenderer icon;
     public TextMeshProUGUI amountText;
-    public bool IsActive { get; private set; }
     public InventoryItemData Data { get; private set; }
-    public int Amount { get; private set; }
-
-    private void Awake()
-    {
-        Amount = 0;
-    }
+    [SerializeField] private int amount = 0;
 
     public void IncreaseAmount()
     {
-        Amount++;
-        amountText.SetText(Amount.ToString());
+        amount++;
+        amountText.SetText(amount.ToString());
     }
     
     public void DecreaseAmount()
     {
-        Amount--;
-        amountText.SetText(Amount.ToString());
+        amount--;
+        amountText.SetText(amount.ToString());
     }
     public void DisableDisplay()
     {
         icon.enabled = false;
         amountText.enabled = false;
-        IsActive = false;
     }
 
     public void ActivateDisplay(InventoryItemData itemData)
@@ -49,8 +42,11 @@ public class InventoryItemDisplay : MonoBehaviour
         icon.enabled = true;
         amountText.enabled = true;
         icon.sprite = itemData.image;
-        IsActive = true;
     }
-    
+
+    public int GetAmount()
+    {
+        return amount;
+    }
     
 }

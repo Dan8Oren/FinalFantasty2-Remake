@@ -16,7 +16,7 @@ public class PointerBehavior : MonoBehaviour
     private int _numOfObjectsInARow;
     public int CurIndex { get; private set;}
     private SpriteRenderer _spriteRenderer;
-    private bool _isText = true; //a flag to indicate if the pointer points at images or text.
+    public bool IsText { get; private set;} //a flag to indicate if the pointer points at images or text.
     private int _maxIndex;
     private bool _isMenu;
     private int _firstHeroIndex;
@@ -52,7 +52,7 @@ public class PointerBehavior : MonoBehaviour
                 SelectedObj = _objects[CurIndex];
                 return;
             }
-            if (_isText)
+            if (IsText)
             {
                 FightManager.Instance.DoChosenAction(_textMenu[CurIndex].name);
             }
@@ -143,7 +143,7 @@ public class PointerBehavior : MonoBehaviour
 
         if (jump != 0)
         {
-            if (_isText){
+            if (IsText){
                 FixEmptyTexts(jump);
             }else{
                 FixEmptyCharacters(jump);
@@ -173,7 +173,7 @@ public class PointerBehavior : MonoBehaviour
      */
     private void UpdatePointerLocation()
     {
-        if (_isText)
+        if (IsText)
         {
             UpdatePositionByTexts();
             return;
@@ -211,7 +211,7 @@ public class PointerBehavior : MonoBehaviour
     public void SetNewTexts(TextMeshProUGUI[] newButtons,int numTextsInARow)
     {
         Assert.IsFalse(newButtons.Length == 0);
-        _isText = true;
+        IsText = true;
         _isMenu = true;
         _textMenu = newButtons;
         _numOfObjectsInARow = numTextsInARow;
@@ -223,7 +223,7 @@ public class PointerBehavior : MonoBehaviour
     public void SetNewObjects(GameObject[] newObjects,int numObjectsInARow,bool isMenu)
     {
         Assert.IsFalse(newObjects.Length == 0);
-        _isText = false;
+        IsText = false;
         _isMenu = isMenu;
         _numOfObjectsInARow = numObjectsInARow;
         CurIndex = 0;
@@ -232,15 +232,5 @@ public class PointerBehavior : MonoBehaviour
         FixEmptyCharacters(1);
         UpdatePointerLocation();
     }
-
-    // private void OnEnable()
-    // {
-    //     gameObject.SetActive(true);
-    // }
-    //
-    // private void OnDisable()
-    // {
-    //     gameObject.SetActive(false);
-    // }
 
 }

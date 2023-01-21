@@ -29,7 +29,7 @@ public class FightMenuScript : MonoBehaviour
 
     private void Update()
     {
-        if (ObjectsToDisplay[0].activeSelf &&
+        if (ObjectsToDisplay[0].activeSelf && PointerBehavior.Instance.IsText &&
             _curPointerAttackIndex != PointerBehavior.Instance.CurIndex)
         {
             _curPointerAttackIndex = PointerBehavior.Instance.CurIndex;
@@ -41,7 +41,7 @@ public class FightMenuScript : MonoBehaviour
     {
         MeleeAttackData data = Attacks[_curPointerAttackIndex];
         InfoTexts[0].SetText($"Attack Power: {data.damage+_curFighter.Attack}");
-        InfoTexts[1].SetText($"Sequence length: {data.sequence}");
+        InfoTexts[1].SetText($"Sequence level: {data.sequence}");
         InfoTexts[2].SetText(data.info);
     }
 

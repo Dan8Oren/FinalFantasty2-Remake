@@ -11,15 +11,16 @@ public class SequenceManager : MonoBehaviour
     private const string FAILED_MSG = "Failed";
     private const string SUCCESS_MSG = "Success";
     public static SequenceManager Instance { get; private set;}
-    public bool ActiveSequence { get; private set;}
+    public bool isSequenceActive;
     public bool IsGood { get; private set;}
     public Sprite[] oneSizeSprites;
     [Tooltip("Indexes should match the sprites above.")]
     public KeyCode[] oneSizeKeys;
     public Sprite[] twoSizeSprites;
     public KeyCode[] twoSizeKeys;
-    public int countDownTime;
-    public TextMeshPro countDownDisplay;
+    public int defaultCountDownTime;
+    public TextMeshPro textDisplay;
+    public TextMeshPro completePercentageDisplay;
     [SerializeField] private GameObject oneSizePadPrefab;
     [SerializeField] private GameObject twoSizePadPrefab;
 
@@ -29,7 +30,9 @@ public class SequenceManager : MonoBehaviour
     [SerializeField] private float level1MaxTime;
     [SerializeField] private float level1MinTime;
     [Range(0,100)]
-    [SerializeField] private float level1ChanceForTwo;
+    [SerializeField] private int level1ChanceForTwo;
+    [Range(0,100)]
+    [SerializeField] private int level1CompletePercentage;
     [Header("===== Level 2 =======")]
     [SerializeField] private int level2Pads;
     [SerializeField] private int level2Speed;
@@ -37,6 +40,8 @@ public class SequenceManager : MonoBehaviour
     [SerializeField] private float level2MinTime;
     [Range(0,100)]
     [SerializeField] private float level2ChanceForTwo;
+    [Range(0,100)]
+    [SerializeField] private int level2CompletePercentage;
     [Header("===== Level 3 =======")]
     [SerializeField] private int level3Pads;
     [SerializeField] private int level3Speed;
@@ -44,6 +49,8 @@ public class SequenceManager : MonoBehaviour
     [SerializeField] private float level3MinTime;
     [Range(0,100)]
     [SerializeField] private float level3ChanceForTwo;
+    [Range(0,100)]
+    [SerializeField] private int level3CompletePercentage;
     [Header("===== Level 4 =======")]
     [SerializeField] private int level4Pads;
     [SerializeField] private int level4Speed;
@@ -51,6 +58,8 @@ public class SequenceManager : MonoBehaviour
     [SerializeField] private float level4MinTime;
     [Range(0,100)]
     [SerializeField] private float level4ChanceForTwo;
+    [Range(0,100)]
+    [SerializeField] private int level4CompletePercentage;
     [Header("===== Level 5 =======")]
     [SerializeField] private int level5Pads;
     [SerializeField] private int level5Speed;
@@ -58,18 +67,25 @@ public class SequenceManager : MonoBehaviour
     [SerializeField] private float level5MinTime;
     [Range(0,100)]
     [SerializeField] private float level5ChanceForTwo;
+    [Range(0,100)]
+    [SerializeField] private int level5CompletePercentage;
     [Header("===== End of levels fields =======")]
     
     
     [SerializeField] private List<PadScript> pads;
     private HashSet<int> _oneSizeTaken;
     private HashSet<int> _twoSizeTaken;
+    private int _allTaps;
     private int _goodTap;
     private Color _activeColor;
     private Image _imageRenderer;
+    private int _finalCountDownTime;
+    private int _curLevelPercentage;
 
 
     public int level = 0;//TODO: Remove me!
+    
+
     private void Start()
     {
         if (Instance != null && this != Instance)
@@ -77,7 +93,7 @@ public class SequenceManager : MonoBehaviour
             Destroy(this);
         }
         Instance = this;
-        ActiveSequence = false;
+        isSequenceActive = false;
         _imageRenderer = GetComponent<Image>();
         _activeColor = _imageRenderer.color;
         _imageRenderer.color = Color.clear;
@@ -90,12 +106,7 @@ public class SequenceManager : MonoBehaviour
         {
             StartSequenceByLevel(level);
         }
-    }
-
-
-    private void FixedUpdate()
-    {
-        if (ActiveSequence)
+        if (isSequenceActive)
         {
             foreach (var pad in pads)
             {
@@ -104,27 +115,29 @@ public class SequenceManager : MonoBehaviour
                     return;
                 }
             }
-            ActiveSequence = false;
-            if(_goodTap == 0)
+            isSequenceActive = false;
+            int percentage = (int)(((float)_goodTap / _allTaps) * 100);
+            if(percentage >= _curLevelPercentage)
             {
                 IsGood = true;
-                StartCoroutine(FinishAndResult(SUCCESS_MSG));
+                StartCoroutine(FinishAndResult(SUCCESS_MSG+$"\n {percentage}%"));
                 return;
             }
             IsGood = false;
-            StartCoroutine(FinishAndResult(FAILED_MSG));
+            StartCoroutine(FinishAndResult(FAILED_MSG+$"\n {percentage}%"));
         }
     }
+    
 
     private IEnumerator FinishAndResult(String result)
     {
-        countDownDisplay.gameObject.SetActive(true);
-        countDownDisplay.SetText(result);
-        yield return new WaitForSeconds(0.5f);
+        textDisplay.gameObject.SetActive(true);
+        textDisplay.SetText(result);
+        yield return new WaitForSeconds(1f);
         _imageRenderer.color = Color.clear;
-        countDownDisplay.gameObject.SetActive(false);
+        textDisplay.gameObject.SetActive(false);
         DestroyPads();
-        //TODO: active back all other inputs.
+        completePercentageDisplay.gameObject.SetActive(false);
     }
 
     private void DestroyPads()
@@ -137,33 +150,46 @@ public class SequenceManager : MonoBehaviour
 
     public void StartSequenceByLevel(int levelNum)
     {
-        //TODO: disable here all other inputs.
-        _imageRenderer.color = _activeColor;
-        _goodTap = 0;
-        ActiveSequence = true;
-        pads = new List<PadScript>();
-        _oneSizeTaken = new HashSet<int>();
-        _twoSizeTaken = new HashSet<int>();
+        InitializeValues(levelNum);
+        PointerBehavior.Instance.gameObject.SetActive(false);
         switch (levelNum)
         {
             case 1:
+                _curLevelPercentage = level1CompletePercentage;
                 CreateLevel(level1Pads,level1Speed,level1MaxTime,level1MinTime,level1ChanceForTwo);
                 break;
             case 2:
+                _curLevelPercentage = level2CompletePercentage;
                 CreateLevel(level2Pads,level2Speed,level2MaxTime,level2MinTime,level2ChanceForTwo);
                 break;
             case 3:
+                _curLevelPercentage = level3CompletePercentage;
                 CreateLevel(level3Pads,level3Speed,level3MaxTime,level3MinTime,level3ChanceForTwo);
                 break;
             case 4:
+                _curLevelPercentage = level4CompletePercentage;
                 CreateLevel(level4Pads,level4Speed,level4MaxTime,level4MinTime,level4ChanceForTwo);
                 break;
             case 5:
+                _curLevelPercentage = level5CompletePercentage;
                 CreateLevel(level5Pads,level5Speed,level5MaxTime,level5MinTime,level5ChanceForTwo);
                 break;
         }
-
+        completePercentageDisplay.SetText($"Percentage To Complete: {_curLevelPercentage}%");
         StartCoroutine(CountDownToSequence());
+    }
+
+    private void InitializeValues(int levelNum)
+    {
+        completePercentageDisplay.gameObject.SetActive(true);
+        _finalCountDownTime = 1 + levelNum + (defaultCountDownTime / 2);
+        _imageRenderer.color = _activeColor;
+        _goodTap = 0;
+        _allTaps = 0;
+        isSequenceActive = true;
+        pads = new List<PadScript>();
+        _oneSizeTaken = new HashSet<int>();
+        _twoSizeTaken = new HashSet<int>();
     }
 
     private void CreateLevel(int numOfPads,float speed, float maxTime,float minTime, float chanceForTwo)
@@ -171,7 +197,6 @@ public class SequenceManager : MonoBehaviour
         int ind = 0;
         while(ind < numOfPads)
         {
-            _goodTap--;
             int rand = Random.Range(0, 100);
             if (rand > chanceForTwo || (numOfPads - ind) == 1 )
             {
@@ -196,15 +221,16 @@ public class SequenceManager : MonoBehaviour
         _oneSizeTaken.Add(rand);
         GameObject obj = Instantiate(oneSizePadPrefab, transform);
         PadScript script = obj.GetComponent<PadScript>();
-        float randomTime = Random.Range(startTime,endTime) + countDownTime;
-        int maxSpawn = getAmountToSpawn(randomTime, endTime);
-        script.SetPad(oneSizeKeys[rand],oneSizeSprites[rand],speed,randomTime,maxSpawn);
+        float randomTime = Random.Range(startTime, endTime);
+        int maxSpawn = GetAmountToSpawn(randomTime, endTime);
+        _allTaps += maxSpawn;
+        script.SetPad(oneSizeKeys[rand],oneSizeSprites[rand],speed,randomTime,maxSpawn,_finalCountDownTime);
         return script;
     }
 
-    private int getAmountToSpawn(float time, float endTime)
+    private static int GetAmountToSpawn(float time, float endTime)
     {
-        int maxNum = (int)Mathf.Ceil(endTime - time);
+        int maxNum = (int)Mathf.Ceil(endTime/time);
         return Random.Range(1, maxNum);
     }
 
@@ -217,26 +243,27 @@ public class SequenceManager : MonoBehaviour
         _twoSizeTaken.Add(rand);
         GameObject obj = Instantiate(twoSizePadPrefab, transform);
         PadScript script = obj.GetComponent<PadScript>();
-        float randomTime = Random.Range(startTime,endTime) + (countDownTime+1);
-        int maxSpawn = getAmountToSpawn(randomTime, endTime);
-        script.SetPad(twoSizeKeys[rand],twoSizeSprites[rand],speed,randomTime,maxSpawn);
+        float randomTime = Random.Range(startTime,endTime);
+        int maxSpawn = GetAmountToSpawn(randomTime, endTime);
+        _allTaps += maxSpawn;
+        script.SetPad(twoSizeKeys[rand],twoSizeSprites[rand],speed,randomTime,maxSpawn,_finalCountDownTime);
         return script;
     }
 
     private IEnumerator CountDownToSequence()
     {
-        countDownDisplay.gameObject.SetActive(true);
-        countDownDisplay.SetText("Sequence starts in");
+        textDisplay.gameObject.SetActive(true);
+        textDisplay.SetText("Sequence starts in");
         yield return new WaitForSeconds(0.7f);
-        while (countDownTime > 0)
+        while (_finalCountDownTime > 0)
         {
-            countDownDisplay.SetText(countDownTime.ToString());
+            textDisplay.SetText(_finalCountDownTime.ToString());
             yield return new WaitForSeconds(1f);
-            countDownTime--;
+            _finalCountDownTime--;
         }
-        countDownDisplay.SetText("Go");
+        textDisplay.SetText("Go");
         yield return new WaitForSeconds(0.3f);
-        countDownDisplay.gameObject.SetActive(false);
+        textDisplay.gameObject.SetActive(false);
     }
 
     public void GoodTapIncrease()

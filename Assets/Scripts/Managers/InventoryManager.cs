@@ -80,7 +80,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (capacity <= Inventory.Count)
         {
-            print("INVENTORY IS FULL");
+            MySceneManager.Instance.messageBoxScript.ShowDialogs(new String[]{"INVENTORY IS FULL"},false);
             return;
         }
         if (_items.TryGetValue(itemData,out InventoryItemDisplay value))
@@ -103,7 +103,7 @@ public class InventoryManager : MonoBehaviour
         if (_items.TryGetValue(itemData,out InventoryItemDisplay value))
         {
             value.DecreaseAmount();
-            if (value.Amount == 0)
+            if (value.GetAmount() == 0)
             {
                 value.DisableDisplay();
                 Inventory.Remove(value);
@@ -115,7 +115,15 @@ public class InventoryManager : MonoBehaviour
     public void OpenInventory()
     {
         IsOpen = true;
-        _canvas.worldCamera = Camera.main;
+        if (MySceneManager.Instance.IsInFight)
+        {
+            _canvas.worldCamera = MySceneManager.Instance.fightCamera.GetComponent<Camera>();
+        }
+        else
+        {
+            _canvas.worldCamera = Camera.main;
+        }
+        
         Vector3 pos = _transform.position;
         pos.z = 0;
         _transform.position = pos;
@@ -133,7 +141,7 @@ public class InventoryManager : MonoBehaviour
         PointerBehavior.Instance.transform.SetParent(transform);
         PointerBehavior.Instance.gameObject.SetActive(true);
         PointerBehavior.Instance.SetNewObjects(Inventory.Values.ToArray(),NUM_ITEMS_IN_A_ROW,true);
-        if (!GameManager.Instance.IsOnFight)
+        if (!MySceneManager.Instance.IsInFight)
         {
             _wait = WaitForPlayerToChoose();
             StartCoroutine(_wait);
@@ -143,7 +151,6 @@ public class InventoryManager : MonoBehaviour
     private IEnumerator WaitForPlayerToChoose()
     {
         yield return new WaitUntil(() => (PointerBehavior.Instance.SelectedObj != null));
-        print("waitUntil");
         _selectedItem = PointerBehavior.Instance.SelectedObj;
         PointerBehavior.Instance.SelectedObj = null;
         GameManager.Instance.OpenHeroesMenu();
@@ -166,7 +173,6 @@ public class InventoryManager : MonoBehaviour
 
         disableX = false;
         IsOpen = false;
-        PointerBehavior.Instance.enabled = false;
         PointerBehavior.Instance.gameObject.SetActive(false);
     }
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Fire Ball
   info: A mighty Fire ball whice effects one target.
-  sequence: 5
+  sequence: 4
   isOnSelf: 0
   effectAllSameGroup: 0
   effectAllEnemyGroup: 0

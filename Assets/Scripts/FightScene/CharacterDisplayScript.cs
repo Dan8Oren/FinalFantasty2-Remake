@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.U2D.Animation;
 using UnityEngine.UI;
 
 public class CharacterDisplayScript : MonoBehaviour
 {
-    private static readonly float GameWonAnimationTime = 4f;
+    private static readonly float GameWonAnimationTime = 6f;
     private static readonly float RegularAnimationTime = 1f;
     public TextMeshPro characterNum;
     public CharacterData data;
@@ -23,11 +24,13 @@ public class CharacterDisplayScript : MonoBehaviour
     [SerializeField] private float winWaitTime;
     private SpriteRenderer _image;
     private Animator _animator;
+    private SpriteLibrary _spriteLibrary;
 
     private void Start()
     {
         _image = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _spriteLibrary = GetComponent<SpriteLibrary>();
     }
     
     /**
@@ -37,9 +40,10 @@ public class CharacterDisplayScript : MonoBehaviour
     public void SetScriptable(CharacterData newScript)
     {
         data = newScript;
-        if (_image == null)
+        Start();
+        if (data.isHero)
         {
-            _image = GetComponent<SpriteRenderer>();
+            _spriteLibrary.spriteLibraryAsset = data.spriteLibrary;
         }
         _image.sprite = newScript.idleImage;
         slider.maxValue = data.MaxHp;

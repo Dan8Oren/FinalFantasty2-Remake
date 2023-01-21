@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4699489123218974367}
   m_Layer: 6
   m_Name: FightTrigger
-  m_TagString: FightTrigger
+  m_TagString: DisableAfterFight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

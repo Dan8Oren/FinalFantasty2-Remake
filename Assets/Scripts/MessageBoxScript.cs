@@ -8,7 +8,7 @@ using UnityEngine.Assertions;
 public class MessageBoxScript : MonoBehaviour
 {
     public bool enableSpace;
-    [SerializeField] private String[] dialogs;
+    [SerializeField] private List<String> dialogs;
     [SerializeField] private TextMeshPro textDisplay;
     [SerializeField] private float timeBetweenChars;
     [SerializeField] private bool freezeHero;
@@ -16,7 +16,6 @@ public class MessageBoxScript : MonoBehaviour
     [SerializeField] private bool isLoop = false;
     [SerializeField] private float timeBeforeLoop;
     [SerializeField] private float timeAfterLoop;
-    
     private Rigidbody2D _heroRigid;
     private IEnumerator _activeDialog;
     private int _curDialogIndex;
@@ -27,7 +26,7 @@ public class MessageBoxScript : MonoBehaviour
         gameObject.SetActive(true);
         _curDialogIndex = 0;
         // textDisplay.SetText(dialogs[_curDialogIndex]);
-        if (dialogs.Length > 0)
+        if (dialogs.Count > 0)
         {
             _activeDialog = AnimateDialog(dialogs[_curDialogIndex]);
             StartCoroutine(_activeDialog); 
@@ -43,6 +42,7 @@ public class MessageBoxScript : MonoBehaviour
 
     private void Start()
     {
+
         _heroRigid = MySceneManager.Instance.hero.GetComponent<Rigidbody2D>();
         if (freezeHero)
         {
@@ -75,7 +75,7 @@ public class MessageBoxScript : MonoBehaviour
                 StopCoroutine(_activeDialog);
             }
             _curDialogIndex++;
-            if (_curDialogIndex >= dialogs.Length)
+            if (_curDialogIndex >= dialogs.Count)
             {
                 if (MySceneManager.Instance.IsInFight)
                 {
@@ -86,6 +86,8 @@ public class MessageBoxScript : MonoBehaviour
                         FightManager.Instance.ContinueFight();
                     }
                 }
+                dialogs.Clear();
+                _curDialogIndex = 0;
                 gameObject.SetActive(false);
                 this.enabled = false;
                 return;
@@ -99,18 +101,41 @@ public class MessageBoxScript : MonoBehaviour
     {
         char[] chars = dialog.Replace("\\n", "\n").Replace("\\t", "\t").ToCharArray();
         String tempToShow = new string("");
+        bool isOnHtml = false;
+        int closing = 0;
         foreach (var c in chars)
         {
+            if (closing == 2)
+            {
+                isOnHtml = false;
+            }
             tempToShow += c;
             textDisplay.SetText(tempToShow);
-            yield return new WaitForSeconds(timeBetweenChars);
+            if (!isOnHtml)
+            {
+                yield return new WaitForSeconds(timeBetweenChars);
+            }
+            if (c == '<' && !isOnHtml)
+            {
+                closing = 0;
+                isOnHtml = true;
+            }
+            
+            else
+            {
+                if (c == '>')
+                {
+                    closing++;
+                }
+            }
+            
         }
         if (isLoop)
         {
             yield return new WaitForSeconds(timeAfterLoop);
             textDisplay.SetText("");
             _curDialogIndex++;
-            if (_curDialogIndex >= dialogs.Length)
+            if (_curDialogIndex >= dialogs.Count)
             {
                 _curDialogIndex = 0;
             }
@@ -123,7 +148,7 @@ public class MessageBoxScript : MonoBehaviour
     {
         if (newDialogs != null)
         {
-            dialogs = newDialogs;
+            dialogs.AddRange(newDialogs);
         }
         if (!MySceneManager.Instance.IsInFight && toFreezeOrContinue)
         {
@@ -134,7 +159,7 @@ public class MessageBoxScript : MonoBehaviour
         if (enabled)
         {
             _curDialogIndex = 0;
-            Assert.IsFalse(dialogs.Length == 0);
+            Assert.IsFalse(dialogs.Count == 0);
             _activeDialog = AnimateDialog(dialogs[_curDialogIndex]);
             StartCoroutine(_activeDialog);
         }

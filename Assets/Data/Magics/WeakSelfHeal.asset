@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Weak Self Heal
   info: Patch yourself with some bands
-  sequence: 2
+  sequence: 1
   isOnSelf: 1
   effectAllSameGroup: 0
   effectAllEnemyGroup: 0

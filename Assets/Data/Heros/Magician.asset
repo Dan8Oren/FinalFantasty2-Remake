@@ -14,26 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Magician
   isHero: 1
+  spriteLibrary: {fileID: 7108339969198208228, guid: 2ead27b8b7da0bb489aa0ee8af0a7a34, type: 3}
   idleImage: {fileID: -307228751, guid: 79572ca3a7b3a424ebec2cc40ac04fee, type: 3}
   characterIcon: {fileID: 21300000, guid: 5a8e4e47aedc7924bb3d7fa18f672e6e, type: 3}
   attacks:
   - {fileID: 11400000, guid: ecff1df2f37d58047b64194cbb0038e5, type: 2}
-  - {fileID: 11400000, guid: c50b1f7e64d89ce40b827b2376422924, type: 2}
-  - {fileID: 11400000, guid: 7f027d94f14a61647847839363715c19, type: 2}
   magics:
   - {fileID: 11400000, guid: d9be8bb41566ff34b8ee75bd4e763475, type: 2}
+  - {fileID: 11400000, guid: adb246f5f0fa14942835a421c200502d, type: 2}
   - {fileID: 11400000, guid: 1aadfcb530e4d984baad835191eddf12, type: 2}
+  - {fileID: 11400000, guid: 8b9cad7a41e2d00478d9707b871faabc, type: 2}
   beforeStatsMaxHp: 150
   beforeStatsMaxMp: 80
-  currentHp: 0
-  currentMp: 0
+  currentHp: 150
+  currentMp: 80
   strength: 10
   intelligence: 20
   agility: 10
   stamina: 10
   wisdom: 20
   speed: 6
-  defence: 5
   beforeStatsAttack: 5
   beforeStatsMagicMp: 20
   items: []

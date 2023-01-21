@@ -29,7 +29,7 @@ public class MagicMenuScript : MonoBehaviour
     
     private void Update()
     {
-        if ( ObjectsToDisplay[0].activeSelf &&
+        if ( ObjectsToDisplay[0].activeSelf && PointerBehavior.Instance.IsText &&
              _curPointerAttackIndex != PointerBehavior.Instance.CurIndex)
         {
             _curPointerAttackIndex = PointerBehavior.Instance.CurIndex;
@@ -42,7 +42,7 @@ public class MagicMenuScript : MonoBehaviour
         MagicAttackData data = Magics[_curPointerAttackIndex];
         InfoTexts[0].SetText($"Points of effect: {data.pointsOfEffect+_curFighter.Attack}," +
                              $" Mana Cost {data.manaPointsToConsume}");
-        InfoTexts[1].SetText($"Sequence length: {data.sequence}");
+        InfoTexts[1].SetText($"Sequence level: {data.sequence}");
         InfoTexts[2].SetText(data.info);
 
     }
@@ -63,11 +63,11 @@ public class MagicMenuScript : MonoBehaviour
             obj.SetActive(true);
         }
 
-        setDisplay();
+        SetDisplay();
         SetPointerToMenu();
     }
 
-    private void setDisplay()
+    private void SetDisplay()
     {
         for (int i = 0; i <magicsText.Length; i++)
         {

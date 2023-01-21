@@ -12,6 +12,8 @@ TagManager:
   - SpawnLocation
   - Fight Camera
   - Pad
+  - Wall
+  - EnableAfterFight
   layers:
   - Default
   - TransparentFX

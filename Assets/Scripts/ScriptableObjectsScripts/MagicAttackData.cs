@@ -11,9 +11,9 @@ public class MagicAttackData : ScriptableObject
     public int sequence;
     [Tooltip("if the magic only effect the character who casts it")]
     public bool isOnSelf = false;
-    [Tooltip("if the magic effects the group of character who casts it")]
+    [Tooltip("if the magic effects all of the group, of the character who casts it")]
     public bool effectAllSameGroup = false;
-    [Tooltip("if the magic effects the enemy group")]
+    [Tooltip("if the magic effects all of the enemy group")]
     public bool effectAllEnemyGroup = false;
     public int turnsOfEffect = 1;
     public int pointsOfEffect;
