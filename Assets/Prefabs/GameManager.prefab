@@ -58,10 +58,11 @@ MonoBehaviour:
   items: []
   isStartOfGame: 1
   allHeroes:
-  - {fileID: 11400000, guid: 68547ccc9805ced49a3f18dafd52c4b2, type: 2}
+  - {fileID: 11400000, guid: 4cf981d9d5cdb2945b41c779d120ae17, type: 2}
   - {fileID: 11400000, guid: ff136cdff904d6241ace5d87131c6fcf, type: 2}
+  - {fileID: 11400000, guid: 3b9aef8bf28095f498dd17f0b53faf1b, type: 2}
+  - {fileID: 11400000, guid: 68547ccc9805ced49a3f18dafd52c4b2, type: 2}
   coins: 0
-  curLevel: 0
 --- !u!223 &8334986092708598164
 Canvas:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class MessageBoxScript : MonoBehaviour
     private IEnumerator _activeDialog;
     private int _curDialogIndex;
     private bool _isContinue;
+    private bool _isPlaying;
 
     private void OnEnable()
     {
@@ -99,6 +100,7 @@ public class MessageBoxScript : MonoBehaviour
 
     private IEnumerator AnimateDialog(string dialog)
     {
+        _isPlaying = true;
         char[] chars = dialog.Replace("\\n", "\n").Replace("\\t", "\t").ToCharArray();
         String tempToShow = new string("");
         bool isOnHtml = false;
@@ -142,6 +144,7 @@ public class MessageBoxScript : MonoBehaviour
             yield return new WaitForSeconds(timeBeforeLoop);
             StartCoroutine(AnimateDialog(dialogs[_curDialogIndex]));
         }
+        _isPlaying = false;
     }
     
     public void ShowDialogs(string[] newDialogs,bool toFreezeOrContinue)
@@ -156,7 +159,7 @@ public class MessageBoxScript : MonoBehaviour
         }
         _isContinue = toFreezeOrContinue;
         gameObject.SetActive(true);
-        if (enabled)
+        if (!_isPlaying)
         {
             _curDialogIndex = 0;
             Assert.IsFalse(dialogs.Count == 0);
@@ -164,8 +167,6 @@ public class MessageBoxScript : MonoBehaviour
             StartCoroutine(_activeDialog);
         }
         this.enabled = true;
-        
-        
     }
     
     

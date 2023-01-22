@@ -143,6 +143,7 @@ public class InventoryManager : MonoBehaviour
         PointerBehavior.Instance.SetNewObjects(Inventory.Values.ToArray(),NUM_ITEMS_IN_A_ROW,true);
         if (!MySceneManager.Instance.IsInFight)
         {
+            MySceneManager.Instance.HeroRigid.constraints = RigidbodyConstraints2D.FreezeAll;
             _wait = WaitForPlayerToChoose();
             StartCoroutine(_wait);
         }
@@ -174,6 +175,10 @@ public class InventoryManager : MonoBehaviour
         disableX = false;
         IsOpen = false;
         PointerBehavior.Instance.gameObject.SetActive(false);
+        if (!MySceneManager.Instance.IsInFight)
+        {
+            MySceneManager.Instance.HeroRigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 
     public void ApplyItem(CharacterData heroData)

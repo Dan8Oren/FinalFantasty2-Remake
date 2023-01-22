@@ -41,6 +41,8 @@ public class RedQueenRoom : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            SoundManager.Instance.StopPlaying();
+            SoundManager.Instance.PlayBeforeFight();
             _cmCamera = MySceneManager.Instance.cmCamera;
             _cameraPos = _cmCamera.transform.position;
             _cmCamera.Follow = null;

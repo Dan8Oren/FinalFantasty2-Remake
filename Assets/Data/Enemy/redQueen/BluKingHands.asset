@@ -23,7 +23,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f145eb47748699345ba4ea982b8fc8a8, type: 2}
   beforeStatsMaxHp: 200
   beforeStatsMaxMp: 200
-  currentHp: 200
+  currentHp: -24
   currentMp: 200
   strength: 30
   intelligence: 30

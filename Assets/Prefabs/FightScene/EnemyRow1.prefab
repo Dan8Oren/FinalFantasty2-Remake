@@ -102,6 +102,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5348424941260498905, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348424941260498905, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7553272066127415185, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
       propertyPath: m_Name
       value: Enemy (2)
@@ -176,6 +184,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5348424941260498905, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348424941260498905, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7553272066127415185, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -247,6 +263,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4486296749451857086, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348424941260498905, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348424941260498905, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}

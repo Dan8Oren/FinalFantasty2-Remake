@@ -19827,22 +19827,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7982924590600152667, guid: c316e3650bf8b1a4eae72e77d450d2bd, type: 3}
     - target: {fileID: 4935807547449706275, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
-      propertyPath: allHeroes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4935807547449706275, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
-      propertyPath: allHeroes.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 68547ccc9805ced49a3f18dafd52c4b2, type: 2}
-    - target: {fileID: 4935807547449706275, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
-      propertyPath: allHeroes.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: ff136cdff904d6241ace5d87131c6fcf, type: 2}
-    - target: {fileID: 4935807547449706275, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
-      propertyPath: allHeroes.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 4cf981d9d5cdb2945b41c779d120ae17, type: 2}
-    - target: {fileID: 4935807547449706275, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
       propertyPath: displayObjects.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -20186,6 +20170,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 202674830303534282, guid: a60db6843137e0144b75ff5b3a24c8bc, type: 3}
+      propertyPath: m_Depth
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3495555954435723330, guid: a60db6843137e0144b75ff5b3a24c8bc, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.01
@@ -20301,6 +20289,10 @@ PrefabInstance:
     - target: {fileID: 7456014942582703476, guid: a60db6843137e0144b75ff5b3a24c8bc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.000007987022
+      objectReference: {fileID: 0}
+    - target: {fileID: 7656358834838233866, guid: a60db6843137e0144b75ff5b3a24c8bc, type: 3}
+      propertyPath: m_UpscaleRT
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a60db6843137e0144b75ff5b3a24c8bc, type: 3}

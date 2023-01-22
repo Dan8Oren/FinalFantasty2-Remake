@@ -40,7 +40,7 @@ public class FightMenuScript : MonoBehaviour
     private void UpdateInfo()
     {
         MeleeAttackData data = Attacks[_curPointerAttackIndex];
-        InfoTexts[0].SetText($"Attack Power: {data.damage+_curFighter.Attack}");
+        InfoTexts[0].SetText($"Attack Power: {Mathf.Abs(data.damage)+_curFighter.Attack}");
         InfoTexts[1].SetText($"Sequence level: {data.sequence}");
         InfoTexts[2].SetText(data.info);
     }
@@ -50,10 +50,9 @@ public class FightMenuScript : MonoBehaviour
     {
         Attacks = curHero.attacks;
         _curFighter = curHero;
-        if (attacksTexts.Length == 0)
+        if (Attacks.Length == 0)
         {
-            FightManager.Instance.messageBox.ShowDialogs(new String[]{"no attacks!"},false);
-            FightManager.Instance.DoGoBack();
+            StartCoroutine(WaitForPlayer());
             return;
         }
         foreach (GameObject obj in ObjectsToDisplay)
@@ -63,6 +62,17 @@ public class FightMenuScript : MonoBehaviour
 
         setDisplay();
         SetPointerToMenu();
+    }
+
+    private IEnumerator WaitForPlayer()
+    {
+        MessageBoxScript msgBox =FightManager.Instance.messageBox;
+        msgBox.ShowDialogs(new String[]{"\t no attacks!"},false);
+        msgBox.enableSpace = true;
+        PointerBehavior.Instance.gameObject.SetActive(false);
+        yield return new WaitUntil(() => !msgBox.gameObject.activeSelf);
+        PointerBehavior.Instance.gameObject.SetActive(true);
+        FightManager.Instance.DoGoBack();
     }
 
     private void setDisplay()

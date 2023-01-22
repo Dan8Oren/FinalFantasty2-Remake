@@ -35,6 +35,8 @@ public class PinkBedRoomAnimation : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            SoundManager.Instance.StopPlaying();
+            SoundManager.Instance.PlayBeforeFight();
             _cmCamera = MySceneManager.Instance.cmCameraObject.GetComponent<CinemachineVirtualCamera>();
             _brainWashedPos = brainWashed.transform.position;
             _cameraPos = _cmCamera.transform.position;

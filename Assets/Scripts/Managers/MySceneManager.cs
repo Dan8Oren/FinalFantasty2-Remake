@@ -67,25 +67,22 @@ public class MySceneManager : MonoBehaviour
         {
             return;
         }
+        UpdateSceneObjectsByProgress();
+        SpawnHeroAtLocation();
+    }
 
-        if (GameManager.Instance.CompletedFightLevels.Contains(CurrentEntrance) || LastSceneName.Equals(k_FIGHT))
+    private void UpdateSceneObjectsByProgress()
+    {
+        if (GameManager.Instance.CompletedFightLevels.Contains(CurrentEntrance)
+            || LastSceneName.Equals(k_FIGHT))
         {
             foreach (var obj in GameObject.FindGameObjectsWithTag(DISABLE_AFTER_FIGHT_TAG))
             {
                 obj.SetActive(false);
             }
         }
-
-        if (LastSceneName.Equals(k_FIGHT))
-        {
-            foreach (var obj in GameObject.FindGameObjectsWithTag(ENABLE_AFTER_FIGHT_TAG))
-            {
-                obj.SetActive(true);
-            }
-        }
-        
-        SpawnHeroAtLocation();
     }
+    
 
     private void SpawnHeroAtLocation()
     {
@@ -159,6 +156,7 @@ public class MySceneManager : MonoBehaviour
 
     private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
+        SoundManager.Instance.PlayThemeByScene();
         hero.SetActive(true);
         mainCamera.SetActive(true);
         if (!scene.name.Equals(k_FIGHT) && !IsInFight)
@@ -185,7 +183,6 @@ public class MySceneManager : MonoBehaviour
         GameObject obj = GameObject.FindGameObjectWithTag(FIGHT_CAMERA_TAG);
         Assert.IsFalse(obj == null);
         fightCamera = obj;
-        // obj.GetComponent<Camera>();
     }
     
 

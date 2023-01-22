@@ -15,7 +15,7 @@ MonoBehaviour:
   displayName: Whirlwind
   sequence: 3
   info: Spins and attacks all enemies
-  damage: 15
+  damage: -15
   effectAllEnemyGroup: 1
   agilityRequirement: 10
   strengthRequirement: 5

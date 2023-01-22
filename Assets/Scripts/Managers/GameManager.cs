@@ -7,9 +7,10 @@ using UnityEngine.Assertions;
 
 public class GameManager : MonoBehaviour
 {
+    private const int KNIGHT_INDEX = 0;
     private const int MAGICIAN_INDEX = 1;
-    private const int KNIGHT_INDEX = 2;
-    
+    private const int HEALER_INDEX = 2;
+
     public static GameManager Instance = null;
     public int CurFightLevel { get; private set;}
     public GameObject[] displayObjects;
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
             hero.ResetStats();
         }
         _canvas = GetComponent<Canvas>();
-        AddHeroToGame(0);
+        AddHeroToGame(allHeroes.Length-1); //add warrior
     }
 
     private void AddHeroToGame(int heroIndex)
@@ -89,14 +90,16 @@ public class GameManager : MonoBehaviour
             case 1:
                 AddHeroToGame(MAGICIAN_INDEX);
                 break;
-            case 2:
-                break;
         }
         
     }
     
     public CharacterData[] GetHeroes()
     {
+        if (_curHeroesContainer == null)
+        {
+            Start();
+        }
         return _curHeroesContainer.ToArray(); 
     }
 
@@ -150,6 +153,10 @@ public class GameManager : MonoBehaviour
 
     public void SetFightLevel(int fightLevel)
     {
+        if (fightLevel == HEALER_INDEX)
+        {
+            AddHeroToGame(HEALER_INDEX);
+        }
         CurFightLevel = fightLevel;
     }
 }

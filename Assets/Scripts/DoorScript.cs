@@ -30,6 +30,7 @@ public class DoorScript : MonoBehaviour
             _counter++;
             if (_counter == 1)
             {
+                StartCoroutine(HandleAfterFightSounds());
                 _messageBoxScript.ShowDialogs(dialogs,true);
             }
             return;
@@ -48,6 +49,15 @@ public class DoorScript : MonoBehaviour
             AnimateDoor(openDoorSprite);
             StartCoroutine(LoadNextScene());
         }
+    }
+
+    private IEnumerator HandleAfterFightSounds()
+    {
+        SoundManager.Instance.StopPlaying();
+        SoundManager.Instance.PlayJoinedTheTeam();
+        yield return new WaitForSeconds(5f);
+        SoundManager.Instance.StopPlaying();
+        SoundManager.Instance.PlayThemeByScene();
     }
 
     // Plays the Door open animation

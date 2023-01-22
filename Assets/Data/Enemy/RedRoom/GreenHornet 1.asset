@@ -22,7 +22,7 @@ MonoBehaviour:
   magics: []
   beforeStatsMaxHp: 35
   beforeStatsMaxMp: 20
-  currentHp: -15
+  currentHp: 35
   currentMp: 20
   strength: 5
   intelligence: 5

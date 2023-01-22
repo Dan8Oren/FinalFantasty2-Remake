@@ -23,7 +23,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 54ba7e765330e3b449ee477f0c446d3b, type: 2}
   beforeStatsMaxHp: 100
   beforeStatsMaxMp: 50
-  currentHp: -24
+  currentHp: 0
   currentMp: 50
   strength: 5
   intelligence: 5
@@ -32,5 +32,5 @@ MonoBehaviour:
   wisdom: 5
   speed: 5
   beforeStatsAttack: 10
-  beforeStatsMagicMp: 15
+  beforeStatsMagicMp: 0
   items: []

@@ -8,26 +8,24 @@ using UnityEngine.SceneManagement;
 
 public class SpecialMessageBox : MonoBehaviour
 {
-    public bool enableSpace;
+
+    public GameObject pressStart;
     [SerializeField] private List<String> dialogs;
     [SerializeField] private TextMeshPro textDisplay;
     [SerializeField] private float timeBetweenChars;
     [SerializeField] private int spaceCount;
-
-    private void Start()
-    {
-
-    }
+    private bool _mainMessageFinished;
 
     // Update is called once per frame
     private void Update()
     {
         if (spaceCount > 3)
         {
-            Destroy(GameManager.Instance);
-            Destroy(MySceneManager.Instance);
-            Destroy(InventoryManager.Instance);
+            Destroy(SoundManager.Instance.gameObject);
             SceneManager.LoadScene("MainMenu");
+            Destroy(GameManager.Instance.gameObject);
+            Destroy(MySceneManager.Instance.gameObject);
+            Destroy(InventoryManager.Instance.gameObject);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -36,10 +34,17 @@ public class SpecialMessageBox : MonoBehaviour
         }
     }
 
+    private IEnumerator NewGame()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void ShowDialog(string newDialogs, bool toAdd)
     {
         if (toAdd)
         {
+            _mainMessageFinished = false;
             dialogs.Add(newDialogs);
         }
         else
@@ -82,15 +87,19 @@ public class SpecialMessageBox : MonoBehaviour
             }
 
         }
+
+        _mainMessageFinished = true;
     }
 
     public IEnumerator StartLoop(float time)
     {
+        yield return new WaitUntil(() => _mainMessageFinished);
         foreach (var str in dialogs)
         {
             textDisplay.SetText(str);
             yield return new WaitForSeconds(time);
         }
+        pressStart.SetActive(true);
         StartCoroutine(StartLoop(time));
     }
 

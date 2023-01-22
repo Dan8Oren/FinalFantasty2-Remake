@@ -99,6 +99,7 @@ public class PadScript : MonoBehaviour
         if (_onTarget && 
             _activeKeyTap != null && _activeKeyTap.gameObject.activeSelf)
         {
+            SoundManager.Instance.PlayGoodSequenceClick(FightManager.Instance.fightAudio);
             maxSpawn--;
             _spawned--;
             goodActive.SetActive(true);

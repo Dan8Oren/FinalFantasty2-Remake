@@ -14,7 +14,7 @@ public class CharacterDisplayScript : MonoBehaviour
     public TextMeshPro characterNum;
     public CharacterData data;
     public bool IsStun { get; private set;}
-    [SerializeField] private Slider slider;
+    [SerializeField] private HealthBar healthDisplay;
     [SerializeField] private float screenShakeTime;
     [SerializeField] private float screenShakeForce;
     [SerializeField] private float moveSpeed;
@@ -46,8 +46,8 @@ public class CharacterDisplayScript : MonoBehaviour
             _spriteLibrary.spriteLibraryAsset = data.spriteLibrary;
         }
         _image.sprite = newScript.idleImage;
-        slider.maxValue = data.MaxHp;
-        slider.value = data.currentHp;
+        healthDisplay.InitializeSlider(data.currentHp,data.MaxHp);
+        gameObject.name = data.name + characterNum.ToString();
     }
     
     /**
@@ -63,8 +63,9 @@ public class CharacterDisplayScript : MonoBehaviour
         data.currentHp += pointsOfEffect;
         if (data.currentHp <= 0)
         {
+            SoundManager.Instance.PlayDeath(FightManager.Instance.fightAudio);
             LogDeadCharacter(actionsLogScript);
-            slider.value = 0;
+            healthDisplay.SetHealth(0);
             if (_animator == null)
             {
                 gameObject.SetActive(false);
@@ -77,7 +78,7 @@ public class CharacterDisplayScript : MonoBehaviour
         {
             data.currentHp = data.MaxHp;
         }
-        slider.value = data.currentHp;
+        healthDisplay.SetHealth(data.currentHp);
     }
 
     private void LogDeadCharacter(ActionsLogScript actionsLogScript)
@@ -97,12 +98,10 @@ public class CharacterDisplayScript : MonoBehaviour
     public void EffectMana(int pointsOfEffect)
     {
         data.currentMp += pointsOfEffect;
-        print(data.currentMp);
         if (data.currentMp > data.MaxMp)
         {
             data.currentMp = data.MaxMp;
         }
-        slider.value = data.currentHp;
     }
 
     public float AnimateTurn()

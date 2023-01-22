@@ -92,7 +92,6 @@ public class PlayerMovement : MonoBehaviour
         {
             ContactPoint2D p = col.contacts[0];
             _colNormal = p.normal;
-            print(_colNormal);
             _wallColide = true;
         }
     }
@@ -102,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
         if (col.gameObject.CompareTag("Wall"))
         {
             _wallColide = false;
+            _collisionFix = Vector2.zero;
         }
     }
 

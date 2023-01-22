@@ -15,9 +15,8 @@ MonoBehaviour:
   displayName: Smash
   sequence: 4
   info: Smashes one target with force
-  turnsOfEffect: 1
-  damage: 30
-  hits: 1
+  damage: -30
+  effectAllEnemyGroup: 0
   agilityRequirement: 0
   strengthRequirement: 15
   attackEffect: {fileID: 0}

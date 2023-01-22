@@ -15,9 +15,8 @@ MonoBehaviour:
   displayName: Regular Attack
   sequence: 2
   info: Simple melee attack
-  turnsOfEffect: 1
-  damage: 15
-  hits: 1
+  damage: -15
+  effectAllEnemyGroup: 0
   agilityRequirement: 5
   strengthRequirement: 5
   attackEffect: {fileID: 0}

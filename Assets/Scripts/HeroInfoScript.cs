@@ -25,16 +25,17 @@ public class HeroInfoScript : MonoBehaviour
                       $"Mana Points: {data.currentMp}/{data.MaxMp}\n" +
                       $"Attack: {data.Attack}\n" +
                       $"Magic attack: {data.Magic}\n";
-                      // $"defence: {data.defence}\n";
         infoText.SetText(info);
         healthBar.maxValue = data.MaxHp;
         healthBar.minValue = 0;
         healthBar.value = data.currentHp;
     }
 
-
-    public GameObject GetCenterObject()
+    private void Awake()
     {
-        return image.gameObject;
+        if (heroData != null)
+        {
+            SetHeroData(heroData);
+        }
     }
 }

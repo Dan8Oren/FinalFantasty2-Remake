@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1033713847432526979, guid: aecbf9e0f1e57c64a8faededd015b951, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000015258789
+      objectReference: {fileID: 0}
     - target: {fileID: 1398471255315636389, guid: aecbf9e0f1e57c64a8faededd015b951, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -98,6 +102,10 @@ PrefabInstance:
     - target: {fileID: 2680213605188595673, guid: aecbf9e0f1e57c64a8faededd015b951, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 38.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844682728872664365, guid: aecbf9e0f1e57c64a8faededd015b951, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 3354227683776919106, guid: aecbf9e0f1e57c64a8faededd015b951, type: 3}
       propertyPath: idle

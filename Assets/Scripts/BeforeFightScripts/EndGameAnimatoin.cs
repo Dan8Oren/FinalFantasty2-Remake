@@ -7,6 +7,7 @@ using UnityEngine;
 public class EndGameAnimatoin : MonoBehaviour
 {
     public SpecialMessageBox specialMessageBox;
+    public GameObject endGame;
     [SerializeField] private GameObject cameraPos;
     [SerializeField ]private float cameraSpeedModifier;
     [SerializeField ]private float cakesTime;
@@ -22,7 +23,7 @@ public class EndGameAnimatoin : MonoBehaviour
     {
         if (_isTransition)
         {
-            if (_cameraPos.y >=_Pos.y)
+            if (_cameraPos.y <=_Pos.y)
             {
                 if (!_isTransitionEnd)
                 {
@@ -46,7 +47,7 @@ public class EndGameAnimatoin : MonoBehaviour
         {
             specialMessageBox.ShowDialog($"<color={color}>Cake</color>",true);
         }
-
+        
         StartCoroutine(specialMessageBox.StartLoop(cakesTime));
     }
 
@@ -55,6 +56,9 @@ public class EndGameAnimatoin : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            SoundManager.Instance.StopPlaying();
+            SoundManager.Instance.PlayEndGame();
+            endGame.SetActive(true);
             _cmCamera = MySceneManager.Instance.cmCamera;
             _Pos = cameraPos.transform.position;
             _cameraPos = _cmCamera.transform.position;

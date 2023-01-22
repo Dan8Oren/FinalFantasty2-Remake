@@ -15,9 +15,8 @@ MonoBehaviour:
   displayName: Power Attack
   sequence: 4
   info: Attacking with all you got!
-  turnsOfEffect: 1
-  damage: 30
-  hits: 1
+  damage: -30
+  effectAllEnemyGroup: 0
   agilityRequirement: 7
   strengthRequirement: 10
   attackEffect: {fileID: 0}

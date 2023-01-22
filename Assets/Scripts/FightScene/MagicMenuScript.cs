@@ -40,7 +40,7 @@ public class MagicMenuScript : MonoBehaviour
     private void UpdateInfo()
     {
         MagicAttackData data = Magics[_curPointerAttackIndex];
-        InfoTexts[0].SetText($"Points of effect: {data.pointsOfEffect+_curFighter.Attack}," +
+        InfoTexts[0].SetText($"Points of effect: {Mathf.Abs(data.pointsOfEffect)+_curFighter.Magic}," +
                              $" Mana Cost {data.manaPointsToConsume}");
         InfoTexts[1].SetText($"Sequence level: {data.sequence}");
         InfoTexts[2].SetText(data.info);
@@ -54,8 +54,7 @@ public class MagicMenuScript : MonoBehaviour
         Magics = curHero.magics;
         if (Magics.Length == 0)
         {
-            FightManager.Instance.messageBox.ShowDialogs(new String[]{"no magics!"},false);
-            FightManager.Instance.DoGoBack();
+            StartCoroutine(WaitForPlayer());;
             return;
         }
         foreach (GameObject obj in ObjectsToDisplay)
@@ -66,7 +65,18 @@ public class MagicMenuScript : MonoBehaviour
         SetDisplay();
         SetPointerToMenu();
     }
-
+    
+    private IEnumerator WaitForPlayer()
+    {
+        MessageBoxScript msgBox =FightManager.Instance.messageBox;
+        msgBox.ShowDialogs(new String[]{"\t no magics!"},false);
+        msgBox.enableSpace = true;
+        PointerBehavior.Instance.gameObject.SetActive(false);
+        yield return new WaitUntil(() => !msgBox.gameObject.activeSelf);
+        PointerBehavior.Instance.gameObject.SetActive(true);
+        FightManager.Instance.DoGoBack();
+    }
+    
     private void SetDisplay()
     {
         for (int i = 0; i <magicsText.Length; i++)
@@ -95,9 +105,5 @@ public class MagicMenuScript : MonoBehaviour
     {
         PointerBehavior.Instance.SetNewTexts(magicsText,NUM_MAGICS_IN_A_ROW);
     }
-
-    // private void Update()
-    // {
-    //     throw new NotImplementedException();
-    // }
+    
 }

@@ -19,7 +19,7 @@ MonoBehaviour:
   effectAllSameGroup: 0
   effectAllEnemyGroup: 1
   turnsOfEffect: 1
-  pointsOfEffect: 15
+  pointsOfEffect: -15
   manaPointsToConsume: 0
   intelligenceRequirement: 0
   magicEffect: {fileID: 0}

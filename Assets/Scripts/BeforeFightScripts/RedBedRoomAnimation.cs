@@ -31,6 +31,8 @@ public class RedBedRoomAnimation : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            SoundManager.Instance.StopPlaying();
+            SoundManager.Instance.PlayBeforeFight();
             _cmCamera = MySceneManager.Instance.cmCamera;
             _magicianPos = magician.transform.position;
             _cameraPos = _cmCamera.transform.position;
