@@ -6,14 +6,12 @@ Screen resolution: 16x9
 TODO
 
 ## Intervention
-- maybe changing the game from it's original story making it an areana style game with waves.
-- adding fight log and heath bar to the fight scene (maybe fighting order).
-- adding durability to equipment repairing them with coins.
+My Mehanic intervension is adding a sequence game after each action the player takes (excluding item use and trying to run).
+The squence is an event in game where buttons appear on screen and the player needs to click at the buttons at the same time thier matching key is on top of them. 
 
 ## Mechanics
 - [ ] Player's Hero:
     - [ ] movment, left,right,up,down
-    - [ ] interaction with npc's or objects
     - [ ] entering a door loading a new scene/transffering to a new position
     - [ ] having attribuits,items and stats.
     
@@ -25,7 +23,4 @@ TODO
     - [ ] player fight menu, (attack,magic,run,inventory..) 
     - [ ] enemies with diffrent attacks,magics.
    
-- [ ] Shop mehanics:
-    - [ ] being able to buy/sell items with coins
-    - [ ] healing with coins
     
