@@ -15,7 +15,7 @@ public class MagicAttackData : ScriptableObject
 
     [Tooltip("if the magic effects all of the enemy group")]
     public bool effectAllEnemyGroup;
-    
+
     public int pointsOfEffect;
     public int manaPointsToConsume;
 }

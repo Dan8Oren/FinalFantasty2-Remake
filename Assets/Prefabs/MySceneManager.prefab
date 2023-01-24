@@ -54,8 +54,7 @@ MonoBehaviour:
   fightCamera: {fileID: 0}
   doors: []
   messageBoxScript: {fileID: 5598509943157179435}
-  LastSceneName: 
-  afterMovmentDelay: 0.5
+  afterMovementDelay: 0.5
   regularSceneAnimator: {fileID: 7183527141809893450}
   regTransitionWaitTime: 1
   fightTransitionWaitTime: 0

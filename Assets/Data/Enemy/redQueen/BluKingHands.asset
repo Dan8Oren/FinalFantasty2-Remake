@@ -30,5 +30,5 @@ MonoBehaviour:
   stamina: 30
   wisdom: 30
   speed: 30
-  currentHp: -3
+  currentHp: -41
   currentMp: 150

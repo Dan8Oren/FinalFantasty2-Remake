@@ -21,17 +21,20 @@ public class CharacterData : ScriptableObject
 
     [Tooltip("Increases attack modifier")] public int strength;
 
-    [Tooltip("Increases magic attack modifier")] public int intelligence;
+    [Tooltip("Increases magic attack modifier")]
+    public int intelligence;
 
     [Tooltip("Increases HP")] public int stamina;
 
     [Tooltip("Increases MP")] public int wisdom;
 
-    [Tooltip("chance to take action first increases")] public int speed;
-    public int MaxHp { get; private set; }
-    public int MaxMp { get; private set; }
+    [Tooltip("chance to take action first increases")]
+    public int speed;
+
     public int currentHp;
     public int currentMp;
+    public int MaxHp { get; private set; }
+    public int MaxMp { get; private set; }
 
     /** Additional Melee attack of the character by his current stats.**/
     public int Attack { get; private set; }
