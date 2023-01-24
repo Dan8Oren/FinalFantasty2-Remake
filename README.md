@@ -21,6 +21,7 @@ Please run the MainMenu scene first. :)
 
 ## Intervention
 My Mehanic intervension is adding a sequence game after each action the player takes (excluding item use and trying to run).
-The squence is an event in game where buttons appear on screen and the player needs to click at the buttons at the same time thier matching key is on top of them. 
+The squence is an event in game where buttons appear on screen and the player needs to click at the buttons at the same time thier matching key is on top of them.
+I also added a small window for the fight log for each event in the turns, to keep track of what happend.
 
 
