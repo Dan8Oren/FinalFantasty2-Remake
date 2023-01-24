@@ -250,12 +250,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 80
-    m_Right: 80
-    m_Top: 100
-    m_Bottom: 50
+    m_Left: 150
+    m_Right: 150
+    m_Top: 360
+    m_Bottom: 200
   m_ChildAlignment: 0
-  m_Spacing: 20
+  m_Spacing: 220
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0

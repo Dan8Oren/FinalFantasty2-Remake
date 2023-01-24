@@ -1,8 +1,11 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * On active,Sets an "Active" Animator bool parameter to true and then to false.
+ * waits each time named animationTime,and deactivates the game object at the end.
+ */
+[RequireComponent(typeof(Animator))]
 public class ActiveScript : MonoBehaviour
 {
     public Animator animator;
@@ -15,12 +18,10 @@ public class ActiveScript : MonoBehaviour
 
     private IEnumerator Activate()
     {
-        animator.SetBool("Active",true);
+        animator.SetBool("Active", true);
         yield return new WaitForSeconds(animationTime);
-        animator.SetBool("Active",false);
+        animator.SetBool("Active", false);
         yield return new WaitForSeconds(animationTime);
         gameObject.SetActive(false);
     }
-    
-    
 }

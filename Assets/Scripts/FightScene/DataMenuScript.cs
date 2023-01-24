@@ -1,30 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/**
+ * Displays the hero's by health and mana points, at the fight scene.
+ */
 public class DataMenuScript : MonoBehaviour
 {
+    private const string DEAD_TEXT = "DEAD";
     public TextMeshProUGUI[] namesTexts;
-    public TextMeshProUGUI[] HPTexts;
-    public TextMeshProUGUI[] ManaTexts;
+    public TextMeshProUGUI[] hpTexts;
+    public TextMeshProUGUI[] manaTexts;
 
     private CharacterData[] _heroesDatas;
+
     private void Start()
     {
         _heroesDatas = GameManager.Instance.GetHeroes();
-        for (int i=0;i<namesTexts.Length;i++)
+        for (var i = 0; i < namesTexts.Length; i++)
         {
-            if (i>=_heroesDatas.Length)
+            if (i >= _heroesDatas.Length)
             {
                 namesTexts[i].enabled = false;
-                HPTexts[i].enabled = false;
-                ManaTexts[i].enabled = false;
+                hpTexts[i].enabled = false;
+                manaTexts[i].enabled = false;
                 continue;
             }
+
             namesTexts[i].SetText(_heroesDatas[i].name);
-            HPTexts[i].SetText($"{_heroesDatas[i].currentHp}/{_heroesDatas[i].MaxHp}");
-            ManaTexts[i].SetText($"{_heroesDatas[i].currentMp}");
+            hpTexts[i].SetText($"{_heroesDatas[i].currentHp}/{_heroesDatas[i].MaxHp}");
+            manaTexts[i].SetText($"{_heroesDatas[i].currentMp}");
         }
     }
 
@@ -32,18 +36,15 @@ public class DataMenuScript : MonoBehaviour
     {
         if (_heroesDatas == null)
         {
-            _heroesDatas = GameManager.Instance.GetHeroes();
+            Start();
+            return;
         }
-        for (int i=0;i<_heroesDatas.Length;i++)
+        for (var i = 0; i < _heroesDatas.Length; i++)
         {
-            int hp = _heroesDatas[i].currentHp;
-            HPTexts[i].SetText($"{hp}/{_heroesDatas[i].MaxHp}");
-            ManaTexts[i].SetText($"{_heroesDatas[i].currentMp}");
-            if (hp <=0)
-            {
-                HPTexts[i].SetText("DEAD");
-            }
-            
+            var hp = _heroesDatas[i].currentHp;
+            hpTexts[i].SetText($"{hp}/{_heroesDatas[i].MaxHp}");
+            manaTexts[i].SetText($"{_heroesDatas[i].currentMp}");
+            if (hp <= 0) hpTexts[i].SetText(DEAD_TEXT);
         }
     }
 }

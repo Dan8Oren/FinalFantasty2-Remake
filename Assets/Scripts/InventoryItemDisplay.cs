@@ -1,34 +1,40 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InventoryItemDisplay : MonoBehaviour
 {
     public SpriteRenderer icon;
     public TextMeshProUGUI amountText;
+    [SerializeField] private int amount;
     public InventoryItemData Data { get; private set; }
-    [SerializeField] private int amount = 0;
 
+    /**
+     * Increase the amount and updates the display
+     */
     public void IncreaseAmount()
     {
         amount++;
         amountText.SetText(amount.ToString());
     }
-    
+
+    /**
+     * Decrease the amount and updates the display
+     */
     public void DecreaseAmount()
     {
         amount--;
         amountText.SetText(amount.ToString());
     }
+
     public void DisableDisplay()
     {
         icon.enabled = false;
         amountText.enabled = false;
     }
 
+    /**
+     * Sets the display to show a new item at the inventory by a given InventoryItemData scriptable object.
+     */
     public void ActivateDisplay(InventoryItemData itemData)
     {
         if (itemData == null)
@@ -48,5 +54,4 @@ public class InventoryItemDisplay : MonoBehaviour
     {
         return amount;
     }
-    
 }

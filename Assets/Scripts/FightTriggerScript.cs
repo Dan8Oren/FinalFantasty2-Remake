@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FightTriggerScript : MonoBehaviour
@@ -9,21 +7,22 @@ public class FightTriggerScript : MonoBehaviour
     [SerializeField] private int roomDoorNum;
     [SerializeField] private float transitionWaitTime;
     [SerializeField] private float waitTimeBeforeTransition;
+
+    /**
+     * Loads a fight scene by the roomDoorNum field.
+     */
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (GameManager.Instance.CompletedFightLevels.Contains(roomDoorNum))
-        {
-            return;
-        }
-        if (col.CompareTag("Player"))
-        {
-            StartCoroutine(LoadFight());
-        }
+        if (GameManager.Instance.CompletedFightLevels.Contains(roomDoorNum)) return;
+        if (col.CompareTag("Player")) StartCoroutine(LoadFight());
     }
-    
+
+    /**
+     * Animates the transition from the world to the fight scene.
+     */
     private IEnumerator LoadFight()
     {
-        Rigidbody2D rigidbody2D = MySceneManager.Instance.hero.GetComponent<Rigidbody2D>();
+        var rigidbody2D = MySceneManager.Instance.hero.GetComponent<Rigidbody2D>();
         rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
         yield return new WaitForSeconds(waitTimeBeforeTransition);
         fightTransition.SetTrigger("Start");
@@ -31,5 +30,4 @@ public class FightTriggerScript : MonoBehaviour
         rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         MySceneManager.Instance.LoadFightScene(roomDoorNum);
     }
-
 }

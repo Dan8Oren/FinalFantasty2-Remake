@@ -14,12 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Heal Group
   info: A Power full healing whice effects all heroes.
-  sequence: 5
+  sequence: 4
   isOnSelf: 0
   effectAllSameGroup: 1
   effectAllEnemyGroup: 0
-  turnsOfEffect: 2
-  pointsOfEffect: 10
-  manaPointsToConsume: 1
-  intelligenceRequirement: 7
-  magicEffect: {fileID: 0}
+  pointsOfEffect: 30
+  manaPointsToConsume: 10

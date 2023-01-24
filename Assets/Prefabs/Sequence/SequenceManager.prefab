@@ -116,6 +116,8 @@ MonoBehaviour:
   completePercentageDisplay: {fileID: 0}
   oneSizePadPrefab: {fileID: 4380452368598241635, guid: 39aab0e07841ef5439459029794c5acd, type: 3}
   twoSizePadPrefab: {fileID: 5276102585446639537, guid: a655284bafc247d4aa9316284a022370, type: 3}
+  afterFirstMessageTime: 0.7
+  afterGoTime: 0.3
   level1Pads: 2
   level1Speed: 2
   level1MaxTime: 5
@@ -142,12 +144,10 @@ MonoBehaviour:
   level4CompletePercentage: 0
   level5Pads: 5
   level5Speed: 3
-  level5MaxTime: 6
+  level5MaxTime: 8
   level5MinTime: 1
   level5ChanceForTwo: 0
-  level5CompletePercentage: 0
-  pads: []
-  level: 0
+  level5CompletePercentage: 70
 --- !u!223 &402027026075074356
 Canvas:
   m_ObjectHideFlags: 0

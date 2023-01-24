@@ -1,16 +1,16 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
+/**
+ * A special message box for the end of the game event.
+ */
 public class SpecialMessageBox : MonoBehaviour
 {
-
     public GameObject pressStart;
-    [SerializeField] private List<String> dialogs;
+    [SerializeField] private List<string> dialogs;
     [SerializeField] private TextMeshPro textDisplay;
     [SerializeField] private float timeBetweenChars;
     [SerializeField] private int spaceCount;
@@ -28,16 +28,7 @@ public class SpecialMessageBox : MonoBehaviour
             Destroy(InventoryManager.Instance.gameObject);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            spaceCount++;
-        }
-    }
-
-    private IEnumerator NewGame()
-    {
-        yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("MainMenu");
+        if (Input.GetKeyDown(KeyCode.Space)) spaceCount++;
     }
 
     public void ShowDialog(string newDialogs, bool toAdd)
@@ -55,16 +46,13 @@ public class SpecialMessageBox : MonoBehaviour
 
     private IEnumerator AnimateDialog(string dialog)
     {
-        char[] chars = dialog.Replace("\\n", "\n").Replace("\\t", "\t").ToCharArray();
-        String tempToShow = new string("");
-        bool isOnHtml = false;
-        int closing = 0;
+        var chars = dialog.Replace("\\n", "\n").Replace("\\t", "\t").ToCharArray();
+        var tempToShow = new string("");
+        var isOnHtml = false;
+        var closing = 0;
         foreach (var c in chars)
         {
-            if (closing == 2)
-            {
-                isOnHtml = false;
-            }
+            if (closing == 2) isOnHtml = false;
 
             tempToShow += c;
             textDisplay.SetText(tempToShow);
@@ -80,17 +68,16 @@ public class SpecialMessageBox : MonoBehaviour
             }
             else
             {
-                if (c == '>')
-                {
-                    closing++;
-                }
+                if (c == '>') closing++;
             }
-
         }
 
         _mainMessageFinished = true;
     }
 
+    /**
+     * Loops through all cakes text display's
+     */
     public IEnumerator StartLoop(float time)
     {
         yield return new WaitUntil(() => _mainMessageFinished);
@@ -99,10 +86,8 @@ public class SpecialMessageBox : MonoBehaviour
             textDisplay.SetText(str);
             yield return new WaitForSeconds(time);
         }
+
         pressStart.SetActive(true);
         StartCoroutine(StartLoop(time));
     }
-
 }
-
-

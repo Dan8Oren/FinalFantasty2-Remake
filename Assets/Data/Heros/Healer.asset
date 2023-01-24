@@ -22,16 +22,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29b52cb6e08bede41ae6a0f5c6e97b3e, type: 2}
   - {fileID: 11400000, guid: c155766ac5c5558438f5536877d42f71, type: 2}
   - {fileID: 11400000, guid: d9be8bb41566ff34b8ee75bd4e763475, type: 2}
-  beforeStatsMaxHp: 100
+  beforeStatsMaxHp: 130
   beforeStatsMaxMp: 300
-  currentHp: 100
-  currentMp: 100
+  beforeStatsAttack: 12
+  beforeStatsMagic: 0
   strength: 10
   intelligence: 30
-  agility: 15
   stamina: 10
   wisdom: 20
   speed: 10
-  beforeStatsAttack: 12
-  beforeStatsMagicMp: 20
-  items: []
+  currentHp: 90
+  currentMp: 280

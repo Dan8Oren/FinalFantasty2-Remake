@@ -19843,24 +19843,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5792147142746605522, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
-      propertyPath: m_Spacing
-      value: 100
+      propertyPath: m_ChildScaleWidth
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5792147142746605522, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
-      propertyPath: m_Padding.m_Top
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 5792147142746605522, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
-      propertyPath: m_Padding.m_Left
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 5792147142746605522, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
-      propertyPath: m_Padding.m_Right
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 5792147142746605522, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
-      propertyPath: m_Padding.m_Bottom
-      value: 150
+      propertyPath: m_ChildScaleHeight
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6162117208662522997, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
       propertyPath: m_SizeDelta.y
@@ -20021,6 +20009,34 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7759406883211602582, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
   m_PrefabInstance: {fileID: 1814621306}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1814621308 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2232260757504956813, guid: 8c0152741f06e1e4a800bdde6a82905d, type: 3}
+  m_PrefabInstance: {fileID: 1814621306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1814621309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814621308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!95 &2037096991 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3334730852405416086, guid: 86d4ea20df8b60147ab1d17d79e32cef, type: 3}
@@ -20037,6 +20053,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 553653509920603426, guid: c0f8af620ed985e42a01f35d75087021, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 825699972790999969, guid: c0f8af620ed985e42a01f35d75087021, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -20045,6 +20065,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1550925134}
+    - target: {fileID: 5513970275823933944, guid: c0f8af620ed985e42a01f35d75087021, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5513970275823933944, guid: c0f8af620ed985e42a01f35d75087021, type: 3}
+      propertyPath: m_Padding.m_Right
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 6365065937647261565, guid: c0f8af620ed985e42a01f35d75087021, type: 3}
       propertyPath: m_Pivot.x
       value: 0

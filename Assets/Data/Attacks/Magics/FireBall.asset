@@ -18,8 +18,5 @@ MonoBehaviour:
   isOnSelf: 0
   effectAllSameGroup: 0
   effectAllEnemyGroup: 0
-  turnsOfEffect: 1
   pointsOfEffect: -50
-  manaPointsToConsume: 30
-  intelligenceRequirement: 15
-  magicEffect: {fileID: 0}
+  manaPointsToConsume: 20

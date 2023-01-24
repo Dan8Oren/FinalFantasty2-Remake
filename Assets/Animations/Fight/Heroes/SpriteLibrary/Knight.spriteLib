@@ -28,16 +28,6 @@ MonoBehaviour:
     m_Hash: 1227385
     m_CategoryList: []
     m_OverrideEntries:
-    - m_Name: warriorFight_1
-      m_Hash: 29068207
-      m_Sprite: {fileID: -918310320, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
-      m_FromMain: 1
-      m_SpriteOverride: {fileID: 1518620196, guid: ef83b83bbdb4da345b8a22be663e374e, type: 3}
-    - m_Name: warriorFight_2
-      m_Hash: 414374421
-      m_Sprite: {fileID: -760953800, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
-      m_FromMain: 1
-      m_SpriteOverride: {fileID: 10582712, guid: ef83b83bbdb4da345b8a22be663e374e, type: 3}
     - m_Name: warriorFight_3
       m_Hash: 800451203
       m_Sprite: {fileID: 1460727277, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
@@ -49,7 +39,7 @@ MonoBehaviour:
       m_FromMain: 1
       m_SpriteOverride: {fileID: 1558506112, guid: ef83b83bbdb4da345b8a22be663e374e, type: 3}
     m_FromMain: 1
-    m_EntryOverrideCount: 4
+    m_EntryOverrideCount: 2
   - m_Name: Dead
     m_Hash: 219670042
     m_CategoryList: []
@@ -83,11 +73,16 @@ MonoBehaviour:
       m_SpriteOverride: {fileID: 1558506112, guid: ef83b83bbdb4da345b8a22be663e374e, type: 3}
     - m_Name: warriorFight_3
       m_Hash: 800451203
-      m_Sprite: {fileID: 1460727277, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_Sprite: {fileID: -918310320, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -672352786, guid: ef83b83bbdb4da345b8a22be663e374e, type: 3}
+      m_SpriteOverride: {fileID: 1518620196, guid: ef83b83bbdb4da345b8a22be663e374e, type: 3}
+    - m_Name: Entry
+      m_Hash: 719368820
+      m_Sprite: {fileID: -760953800, guid: cd1073288ee547a47981b48a49c7a5a7, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 10582712, guid: ef83b83bbdb4da345b8a22be663e374e, type: 3}
     m_FromMain: 1
-    m_EntryOverrideCount: 2
+    m_EntryOverrideCount: 3
   - m_Name: Won
     m_Hash: 517855760
     m_CategoryList: []

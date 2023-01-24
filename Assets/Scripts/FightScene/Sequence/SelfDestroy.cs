@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SelfDestroy : MonoBehaviour
@@ -9,9 +6,6 @@ public class SelfDestroy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (transform.position.y < posYToDestroy)
-        {
-            Destroy(gameObject);
-        }
+        if (transform.position.y < posYToDestroy) Destroy(gameObject);
     }
 }

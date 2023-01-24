@@ -1,20 +1,18 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using TMPro;
 using UnityEngine;
 
 public class FightMenuScript : MonoBehaviour
 {
     private const int NUM_ATTACKS_IN_A_ROW = 2;
-    public static FightMenuScript Instance { get; private set; }
-    public MeleeAttackData[] Attacks { get; private set; }
     public GameObject[] ObjectsToDisplay;
     public TextMeshProUGUI[] attacksTexts;
     public TextMeshProUGUI[] InfoTexts;
-    private int _curPointerAttackIndex;
     private CharacterData _curFighter;
+    private int _curPointerAttackIndex;
+    public static FightMenuScript Instance { get; private set; }
+    public MeleeAttackData[] Attacks { get; private set; }
+
     private void Awake()
     {
         if (Instance == null || Instance == this)
@@ -23,6 +21,7 @@ public class FightMenuScript : MonoBehaviour
             CloseMenu();
             return;
         }
+
         Destroy(this);
     }
 
@@ -37,37 +36,41 @@ public class FightMenuScript : MonoBehaviour
         }
     }
 
+    /**
+     * Updates the info displayed about the current magic the pointer points at.
+     */
     private void UpdateInfo()
     {
-        MeleeAttackData data = Attacks[_curPointerAttackIndex];
-        InfoTexts[0].SetText($"Attack Power: {Mathf.Abs(data.damage)+_curFighter.Attack}");
+        var data = Attacks[_curPointerAttackIndex];
+        InfoTexts[0].SetText($"Attack Power: {Mathf.Abs(data.damage) + _curFighter.Attack}");
         InfoTexts[1].SetText($"Sequence level: {data.sequence}");
         InfoTexts[2].SetText(data.info);
     }
 
-
+    /**
+     * Displays the fight menu by the given character melee attacks.
+     * returns and displays a message if there are none.
+     */
     public void ShowMenu(CharacterData curHero)
     {
         Attacks = curHero.attacks;
         _curFighter = curHero;
         if (Attacks.Length == 0)
         {
-            StartCoroutine(WaitForPlayer());
+            StartCoroutine(DisplayNoAttacks());
             return;
         }
-        foreach (GameObject obj in ObjectsToDisplay)
-        {
-            obj.SetActive(true);
-        }
 
-        setDisplay();
+        foreach (var obj in ObjectsToDisplay) obj.SetActive(true);
+
+        SetDisplay();
         SetPointerToMenu();
     }
 
-    private IEnumerator WaitForPlayer()
+    private IEnumerator DisplayNoAttacks()
     {
-        MessageBoxScript msgBox =FightManager.Instance.messageBox;
-        msgBox.ShowDialogs(new String[]{"\t no attacks!"},false);
+        var msgBox = FightManager.Instance.messageBox;
+        msgBox.ShowDialogs(new[] { "\t no attacks!" }, false);
         msgBox.enableSpace = true;
         PointerBehavior.Instance.gameObject.SetActive(false);
         yield return new WaitUntil(() => !msgBox.gameObject.activeSelf);
@@ -75,15 +78,17 @@ public class FightMenuScript : MonoBehaviour
         FightManager.Instance.DoGoBack();
     }
 
-    private void setDisplay()
+    private void SetDisplay()
     {
-        for (int i = 0; i <attacksTexts.Length; i++)
+        for (var i = 0; i < attacksTexts.Length; i++)
         {
-            if (i>= Attacks.Length)
+            attacksTexts[i].enabled = true;
+            if (i >= Attacks.Length)
             {
                 attacksTexts[i].enabled = false;
                 continue;
             }
+
             attacksTexts[i].name = Attacks[i].name;
             attacksTexts[i].SetText(Attacks[i].displayName);
             _curPointerAttackIndex = 0;
@@ -93,14 +98,14 @@ public class FightMenuScript : MonoBehaviour
 
     public void CloseMenu()
     {
-        foreach (GameObject obj in ObjectsToDisplay)
-        {
-            obj.SetActive(false);
-        }
+        foreach (var obj in ObjectsToDisplay) obj.SetActive(false);
     }
 
+    /**
+     * Sets the pointer to point at the fight's actions.
+     */
     public void SetPointerToMenu()
     {
-        PointerBehavior.Instance.SetNewTexts(attacksTexts,NUM_ATTACKS_IN_A_ROW);
+        PointerBehavior.Instance.SetNewTexts(attacksTexts, NUM_ATTACKS_IN_A_ROW);
     }
 }

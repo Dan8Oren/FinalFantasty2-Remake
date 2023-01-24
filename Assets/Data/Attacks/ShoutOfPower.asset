@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd8bd3f40c5b417aae2e7f394527318e, type: 3}
-  m_Name: Smash
+  m_Name: ShoutOfPower
   m_EditorClassIdentifier: 
-  displayName: Smash
-  sequence: 4
-  info: Smashes one target with force
-  damage: -30
-  effectAllEnemyGroup: 0
+  displayName: Shout Of Power
+  sequence: 3
+  info: Powerfull shout sound waves that effects all enemy team!
+  damage: -10
+  effectAllEnemyGroup: 1

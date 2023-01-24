@@ -21196,7 +21196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magician: {fileID: 979042460}
-  cameraTransitionTime: 4
   cameraSpeedModifier: 1
 --- !u!1001 &4772634164608327986
 PrefabInstance:
@@ -21208,6 +21207,10 @@ PrefabInstance:
     - target: {fileID: 4772634164533340332, guid: 95030945e0cd98641848ee981a5daeff, type: 3}
       propertyPath: m_Name
       value: npcChat
+      objectReference: {fileID: 0}
+    - target: {fileID: 4772634164533340332, guid: 95030945e0cd98641848ee981a5daeff, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4772634164533340332, guid: 95030945e0cd98641848ee981a5daeff, type: 3}
       propertyPath: m_TagString

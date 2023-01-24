@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217437384231260425}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -232,15 +232,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableX: 0
-  DisplayObjects:
+  displayObjects:
   - {fileID: 217437384231260425}
   - {fileID: 825699972790999969}
   pointerPrefab: {fileID: 7853782835087831519, guid: 907d32e9014520846a7febfeacde73d2, type: 3}
   startingItems:
   - {fileID: 11400000, guid: 118eedd1cbfd79b48936e1686c78976b, type: 2}
   - {fileID: 11400000, guid: a27284bc5b2e3aa4597f327eaf700407, type: 2}
-  capacity: 50
   inventorySlotPrefab: {fileID: 7926576271282401306, guid: 93f9fc0e459faa84cb6abafbdab7f5a3, type: 3}
+  capacity: 50
 --- !u!223 &2459637984965493809
 Canvas:
   m_ObjectHideFlags: 0

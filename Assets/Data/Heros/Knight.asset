@@ -20,19 +20,18 @@ MonoBehaviour:
   attacks:
   - {fileID: 11400000, guid: ecff1df2f37d58047b64194cbb0038e5, type: 2}
   - {fileID: 11400000, guid: c50b1f7e64d89ce40b827b2376422924, type: 2}
+  - {fileID: 11400000, guid: 9980b5d101d74e444b2c6230cd3a1aeb, type: 2}
   magics:
   - {fileID: 11400000, guid: 54ba7e765330e3b449ee477f0c446d3b, type: 2}
   - {fileID: 11400000, guid: 29b52cb6e08bede41ae6a0f5c6e97b3e, type: 2}
   beforeStatsMaxHp: 200
   beforeStatsMaxMp: 20
-  currentHp: 200
-  currentMp: 20
+  beforeStatsAttack: 9
+  beforeStatsMagic: 0
   strength: 20
   intelligence: 10
-  agility: 10
   stamina: 25
   wisdom: 5
   speed: 4
-  beforeStatsAttack: 9
-  beforeStatsMagicMp: 6
-  items: []
+  currentHp: 200
+  currentMp: 20

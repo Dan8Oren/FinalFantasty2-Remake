@@ -1,37 +1,35 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
 public class RedQueenRoom : MonoBehaviour
 {
     public GameObject[] activateOnTrigger;
+
     [SerializeField] private Vector3 posToLook;
     [SerializeField] private float objectsDelayTime;
-    private CinemachineVirtualCamera _cmCamera;
+    [SerializeField] private float cameraSpeedModifier;
     private Vector3 _cameraPos;
-    private bool _isTransition = false;
-    [SerializeField ]private float cameraSpeedModifier;
+
+    private CinemachineVirtualCamera _cmCamera;
+    private bool _isTransition;
 
     private void Start()
     {
-        foreach (var obj in activateOnTrigger)
-        {
-            obj.SetActive(false);
-        }
+        foreach (var obj in activateOnTrigger) obj.SetActive(false);
     }
 
     private void Update()
     {
         if (_isTransition)
         {
-            if (_cameraPos.y >=posToLook.y)
+            if (_cameraPos.y >= posToLook.y)
             {
                 _cmCamera.transform.position = _cameraPos;
                 return;
             }
-            _cameraPos.y = Mathf.MoveTowards(_cameraPos.y, posToLook.y,Time.deltaTime*cameraSpeedModifier);
+
+            _cameraPos.y = Mathf.MoveTowards(_cameraPos.y, posToLook.y, Time.deltaTime * cameraSpeedModifier);
             _cmCamera.transform.position = _cameraPos;
         }
     }
@@ -51,12 +49,12 @@ public class RedQueenRoom : MonoBehaviour
         }
     }
 
+    /**
+     * activates the scene event objects at a given time delay.
+     */
     private IEnumerator ActivateObjectsWithDelay(float time)
     {
         yield return new WaitForSeconds(time);
-        foreach (var obj in activateOnTrigger)
-        {
-            obj.SetActive(true);
-        }
+        foreach (var obj in activateOnTrigger) obj.SetActive(true);
     }
 }

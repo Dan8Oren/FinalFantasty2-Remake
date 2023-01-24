@@ -98,11 +98,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc2d1e0e1cce30418046f1fb411192b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSpace: 0
   dialogs: []
   textDisplay: {fileID: 5933977950159991120}
   timeBetweenChars: 0.03
   freezeHero: 0
-  isNPC: 1
+  isNpc: 1
+  isLoop: 0
+  timeBeforeLoop: 0
+  timeAfterLoop: 0
 --- !u!1 &7317933936574840396
 GameObject:
   m_ObjectHideFlags: 0

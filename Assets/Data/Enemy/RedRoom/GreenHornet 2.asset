@@ -22,14 +22,12 @@ MonoBehaviour:
   magics: []
   beforeStatsMaxHp: 35
   beforeStatsMaxMp: 20
-  currentHp: 35
-  currentMp: 20
+  beforeStatsAttack: 15
+  beforeStatsMagic: 0
   strength: 5
   intelligence: 5
-  agility: 5
   stamina: 5
   wisdom: 5
   speed: 5
-  beforeStatsAttack: 15
-  beforeStatsMagicMp: 10
-  items: []
+  currentHp: -24
+  currentMp: 20

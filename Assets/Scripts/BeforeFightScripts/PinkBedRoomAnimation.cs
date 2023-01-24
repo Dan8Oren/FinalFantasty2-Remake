@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
-using Cinemachine.Editor;
 using UnityEngine;
 
 public class PinkBedRoomAnimation : MonoBehaviour
@@ -10,22 +7,25 @@ public class PinkBedRoomAnimation : MonoBehaviour
     [SerializeField] private GameObject brainWashed;
     [SerializeField] private Animator brainWashedAnimator;
     [SerializeField] private float cameraTransitionTime;
-    private CinemachineVirtualCamera _cmCamera;
+    [SerializeField] private float cameraSpeedModifier;
     private Vector3 _brainWashedPos;
     private Vector3 _cameraPos;
-    private bool _isTransition = false;
-    [SerializeField ]private float cameraSpeedModifier;
+
+    private CinemachineVirtualCamera _cmCamera;
+    private bool _isTransition;
+
 
     private void Update()
     {
         if (_isTransition)
         {
-            if (_cameraPos.y >=_brainWashedPos.y)
+            if (_cameraPos.y >= _brainWashedPos.y)
             {
                 _cmCamera.transform.position = _cameraPos;
                 return;
             }
-            _cameraPos.y = Mathf.MoveTowards(_cameraPos.y, _brainWashedPos.y,Time.deltaTime*cameraSpeedModifier);
+
+            _cameraPos.y = Mathf.MoveTowards(_cameraPos.y, _brainWashedPos.y, Time.deltaTime * cameraSpeedModifier);
             _cmCamera.transform.position = _cameraPos;
         }
     }

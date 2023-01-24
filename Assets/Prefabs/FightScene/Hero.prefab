@@ -105,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3882700597155360932, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
       propertyPath: winWaitTime
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3882700597155360932, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
       propertyPath: turnDistance
@@ -132,6 +132,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4486296749451857086, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348424941260498905, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348424941260498905, guid: d5b16a389a0ae414bb7e4e776ab94be8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -180,7 +188,7 @@ Animator:
   m_GameObject: {fileID: 2674507111194180053}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9da2e3c1e2d10b347b84e681442656d6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3d5775e8ecbe1b44a98098f4f82cbf5a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -218,4 +226,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Library: []
-  m_SpriteLibraryAsset: {fileID: 0}
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 4e4ad8fbc8dd1584795fe0f9fbaa4dfb, type: 3}

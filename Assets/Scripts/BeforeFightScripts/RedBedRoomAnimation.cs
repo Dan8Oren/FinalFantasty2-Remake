@@ -1,27 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
 public class RedBedRoomAnimation : MonoBehaviour
 {
     [SerializeField] private GameObject magician;
-    private CinemachineVirtualCamera _cmCamera;
-    private Vector3 _magicianPos;
+    [SerializeField] private float cameraSpeedModifier;
     private Vector3 _cameraPos;
-    private bool _isTransition = false;
-    [SerializeField ]private float cameraSpeedModifier;
+    private CinemachineVirtualCamera _cmCamera;
+    private bool _isTransition;
+    private Vector3 _magicianPos;
 
     private void Update()
     {
         if (_isTransition)
         {
-            if (_cameraPos.y >=_magicianPos.y)
+            if (_cameraPos.y >= _magicianPos.y)
             {
                 _cmCamera.transform.position = _cameraPos;
                 return;
             }
-            _cameraPos.y = Mathf.MoveTowards(_cameraPos.y, _magicianPos.y,Time.deltaTime*cameraSpeedModifier);
+
+            _cameraPos.y = Mathf.MoveTowards(_cameraPos.y, _magicianPos.y, Time.deltaTime * cameraSpeedModifier);
             _cmCamera.transform.position = _cameraPos;
         }
     }
