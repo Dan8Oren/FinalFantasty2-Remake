@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public int CurFightLevel { get; private set; }
-
+    
+    private void Start()
+    {
+        foreach (var hero in allHeroes) hero.ResetStats();
+        AddHeroToGame(allHeroes.Length - 1); //add warrior
+    }
+    
     private void Awake()
     {
         //singleton pattern the prevent two scene managers
@@ -26,11 +33,8 @@ public class GameManager : MonoBehaviour
         _isOpen = false;
         _curHeroesContainer = new Stack<CharacterData>();
         _heroInfoContainer = new List<GameObject>();
-        foreach (var hero in allHeroes) hero.ResetStats();
         _canvas = GetComponent<Canvas>();
-        AddHeroToGame(allHeroes.Length - 1); //add warrior
     }
-    
 
     private void Update()
     {
