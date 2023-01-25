@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,15 +7,19 @@ using UnityEngine.Assertions;
 
 public class MessageBoxScript : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
-        _heroRigid = MySceneManager.Instance.hero.GetComponent<Rigidbody2D>();
-        if (freezeHero) FreezeHero();
         if (!GameManager.Instance.isStartOfGame && !isNpc)
         {
             if (_activeDialog != null) StopCoroutine(_activeDialog);
             gameObject.SetActive(false);
         }
+    }
+
+    private void Start()
+    {
+        _heroRigid = MySceneManager.Instance.hero.GetComponent<Rigidbody2D>();
+        if (freezeHero) FreezeHero();
     }
 
     private void Update()
@@ -25,6 +30,7 @@ public class MessageBoxScript : MonoBehaviour
             _curDialogIndex++;
             if (_curDialogIndex >= dialogs.Count)
             {
+                _isPlaying = false;
                 if (MySceneManager.Instance.IsInFight)
                 {
                     enableSpace = false;
@@ -95,14 +101,10 @@ public class MessageBoxScript : MonoBehaviour
             yield return new WaitForSeconds(timeBeforeLoop);
             StartCoroutine(AnimateDialog(dialogs[_curDialogIndex]));
         }
-
-        _isPlaying = false;
     }
 
     /**
-     * Used to skip the display of html code
-     * <
-     * >
+     * Used to skip the display of html code (<>)
      * as a character character.
      */
     private static bool HandleHtmlText(char c, bool isOnHtml, ref int closing)

@@ -121,6 +121,7 @@ public class InventoryManager : MonoBehaviour
 
         PointerBehavior.Instance.transform.SetParent(transform);
         PointerBehavior.Instance.gameObject.SetActive(true);
+        PointerBehavior.Instance.disableSpace = false;
         PointerBehavior.Instance.SetNewObjects(Inventory.Values.ToArray(), NUM_ITEMS_IN_A_ROW, true);
         if (!MySceneManager.Instance.IsInFight)
         {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+[DefaultExecutionOrder(-999)]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public int CurFightLevel { get; private set; }
-
 
     private void Awake()
     {
@@ -21,10 +21,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
         CompletedFightLevels = new HashSet<int>();
         CurFightLevel = 0;
         _isOpen = false;
@@ -34,6 +30,7 @@ public class GameManager : MonoBehaviour
         _canvas = GetComponent<Canvas>();
         AddHeroToGame(allHeroes.Length - 1); //add warrior
     }
+    
 
     private void Update()
     {
@@ -76,7 +73,6 @@ public class GameManager : MonoBehaviour
      */
     public CharacterData[] GetHeroes()
     {
-        if (_curHeroesContainer == null) Start();
         return _curHeroesContainer.ToArray();
     }
 

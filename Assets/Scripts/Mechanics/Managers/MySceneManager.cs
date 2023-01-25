@@ -100,7 +100,10 @@ public class MySceneManager : MonoBehaviour
         if (obj != null)
         {
             obj.SetActive(false);
-            yield return new WaitUntil(() => Input.anyKey);
+            yield return new WaitUntil(() =>
+                (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow) ||
+                 Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) &&
+                    !InventoryManager.Instance.IsOpen);
             yield return new WaitForSeconds(afterMovementDelay);
             obj.SetActive(true);
         }

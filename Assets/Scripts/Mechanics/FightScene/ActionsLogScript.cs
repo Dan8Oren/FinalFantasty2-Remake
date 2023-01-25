@@ -16,10 +16,9 @@ public class ActionsLogScript : MonoBehaviour
     private string _log;
     private int _roundCounter;
 
-    private void Start()
+    private void Awake()
     {
         _emptyLog = new Regex(EMPTY_LOG_PATTERN);
-        messageBox.gameObject.SetActive(false);
         _data = new Stack<string>();
         _roundCounter = 1;
         _log = $"{_roundCounter}. ";

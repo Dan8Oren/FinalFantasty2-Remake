@@ -16,7 +16,7 @@ public class PointerBehavior : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private TextMeshProUGUI[] _textMenu;
 
-    //a flag to indicate if the pointer points at Gameobject or text.
+    //a flag to indicate if the pointer points at Game-object or text.
     public bool IsText { get; private set; }
 
     //the current index the pointer points at.

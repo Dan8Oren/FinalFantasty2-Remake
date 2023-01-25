@@ -34,7 +34,7 @@ public class FightManager : MonoBehaviour
         _allFighters.AddRange(enemyRow1);
         _allFighters.AddRange(enemyRow2);
         _allFighters.AddRange(heroRow);
-        InitializePointer();
+        PointerBehavior.Instance.gameObject.SetActive(false);
         SetBattleOrder();
         _startFight = true; // to call continue fight at update and let other objects to start.
     }
@@ -66,16 +66,9 @@ public class FightManager : MonoBehaviour
         }
     }
 
-    private void InitializePointer()
-    {
-        var pointerTrans = PointerBehavior.Instance.transform;
-        // pointerTrans.SetParent(null);
-        // pointerTrans.localScale = Vector3.one*50;
-        PointerBehavior.Instance.gameObject.SetActive(false);
-    }
-
     private void InitializeValues()
     {
+        messageBox.gameObject.SetActive(false);
         _enemiesByLevels = new[] { enemiesLevel1, enemiesLevel2, enemiesLevel3 };
         _actionHasTaken = false;
         _isBackEnabled = false;
