@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Smash
   sequence: 4
   info: Smashes one target with force
-  damage: -30
+  pointsOfEffect: -30
   effectAllEnemyGroup: 0

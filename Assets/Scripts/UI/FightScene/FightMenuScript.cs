@@ -11,7 +11,7 @@ public class FightMenuScript : MonoBehaviour
     private CharacterData _curFighter;
     private int _curPointerAttackIndex;
     public static FightMenuScript Instance { get; private set; }
-    public MeleeAttackData[] Attacks { get; private set; }
+    public RegularAttackData[] Attacks { get; private set; }
 
     private void Awake()
     {
@@ -42,7 +42,7 @@ public class FightMenuScript : MonoBehaviour
     private void UpdateInfo()
     {
         var data = Attacks[_curPointerAttackIndex];
-        InfoTexts[0].SetText($"Attack Power: {Mathf.Abs(data.damage) + _curFighter.Attack}");
+        InfoTexts[0].SetText($"Attack Power: {Mathf.Abs(data.pointsOfEffect) + _curFighter.Attack}");
         InfoTexts[1].SetText($"Sequence level: {data.sequence}");
         InfoTexts[2].SetText(data.info);
     }

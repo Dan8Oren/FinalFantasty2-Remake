@@ -35,15 +35,15 @@ public class CharacterDisplayScript : MonoBehaviour
      * Adds to the character health points the given pointsOfEffect. (could be negative)
      * and uses 'actionsLogScript' inorder to log if the character has died.
      */
-    public void EffectHealth(int pointsOfEffect, ActionsLogScript actionsLogScript)
+    public void EffectHealth(int pointsOfEffect)
     {
         HandleAttackEffects(pointsOfEffect);
         data.currentHp += pointsOfEffect;
         if (data.currentHp <= 0)
         {
             SoundManager.Instance.PlayDeath(FightManager.Instance.fightAudio);
-            LogDeadCharacter(actionsLogScript);
-            actionsLogScript.ShowLog();
+            LogDeadCharacter(FightManager.Instance.actionsLogScript);
+            FightManager.Instance.actionsLogScript.ShowLog();
             healthDisplay.SetHealth(0);
             if (_animator == null)
             {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
 
@@ -10,7 +11,7 @@ public class CharacterData : ScriptableObject
     public Sprite idleImage;
     public Sprite characterIcon;
 
-    [Header("No more than 6 attacks!")] public MeleeAttackData[] attacks;
+    [Header("No more than 6 attacks!")] public RegularAttackData[] attacks;
 
     [Header("No more than 6 magics!")] public MagicAttackData[] magics;
 
@@ -54,4 +55,52 @@ public class CharacterData : ScriptableObject
         currentHp = MaxHp;
         currentMp = MaxMp;
     }
+    
+    /**
+     * Calculates a Melee fight action points of effect by the player's stats.
+     * *Assumes the attack is valid*
+     */
+    public int CalculateMeleeDamage(RegularAttackData chosenAttack)
+    {
+        if (chosenAttack.pointsOfEffect < 0) return (int)Mathf.Floor(chosenAttack.pointsOfEffect - Attack);
+        return (int)Mathf.Ceil(chosenAttack.pointsOfEffect + Attack);
+    }
+
+    /**
+     * Calculates a Magic fight action points of effect by the player's stats.
+     * *Assumes the attack is valid*
+     */
+    public int CalculateMagicEffect(MagicAttackData chosenAttack)
+    {
+        if (chosenAttack.pointsOfEffect < 0) return (int)Mathf.Floor(chosenAttack.pointsOfEffect - Magic);
+        return (int)Mathf.Ceil(chosenAttack.pointsOfEffect + Magic);
+    }
+    
+    /**
+     * gets the selected magic attack of the current fighter by the name given from the pointer.
+     * below is where the name is being set.
+     * <see cref="SetSelectedObject" />
+     */
+    public MagicAttackData GetMagic(String magicName)
+    {
+        foreach (var magic in magics)
+            if (magic.name.Equals(magicName))
+                return magic;
+        return null;
+    }
+
+    /**
+     * gets the selected melee attack of the current fighter by the name given from the pointer.
+     * below is where the name is being set.
+     * <see cref="SetSelectedObject" />
+     */
+    public RegularAttackData GetAttack(String attackName)
+    {
+        foreach (var attack in attacks)
+            if (attack.name.Equals(attackName))
+                return attack;
+        return null;
+    }
+    
+    
 }

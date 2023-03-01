@@ -1,13 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MeleeAttackData", menuName = "ScriptableObjects/MeleeAttackData")]
-public class MeleeAttackData : ScriptableObject
+[CreateAssetMenu(fileName = "RegularAttackData", menuName = "ScriptableObjects/RegularAttackData")]
+public class RegularAttackData : AttackData
 {
-    public string displayName;
-    public int sequence;
-    public string info;
-    public int pointsOfEffect;
-
-    [Tooltip("if the attack effects all of the enemy group")]
-    public bool effectAllEnemyGroup;
+    //See AttackData for details
 }

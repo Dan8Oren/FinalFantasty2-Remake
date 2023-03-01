@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mechanics.FightScene;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -27,13 +28,14 @@ public class FightManager : MonoBehaviour
     private void Start()
     {
         InitializeValues();
-        SetEnemyRowDisplay(heroRow, _heroes, 0);
-        SetEnemyRowDisplay(enemyRow1, _enemiesByLevels[_fightLevel], 0);
-        SetEnemyRowDisplay(enemyRow2, _enemiesByLevels[_fightLevel], enemyRow1.Length);
+        SetRowDisplay(heroRow, _heroes, 0);
+        SetRowDisplay(enemyRow1, _enemiesByLevels[_fightLevel], 0);
+        SetRowDisplay(enemyRow2, _enemiesByLevels[_fightLevel], enemyRow1.Length);
         _allFighters = new List<CharacterDisplayScript>();
         _allFighters.AddRange(enemyRow1);
         _allFighters.AddRange(enemyRow2);
         _allFighters.AddRange(heroRow);
+        _enemyBehavior = new EnemyBehavior(_allFighters);
         PointerBehavior.Instance.gameObject.SetActive(false);
         SetBattleOrder();
         _startFight = true; // to call continue fight at update and let other objects to start.
@@ -176,9 +178,9 @@ public class FightManager : MonoBehaviour
     private void HandleAttackSelected()
     {
         var curFighter = _charactersFightOrder[curFighterIndex].data;
-        var chosenAttack = GetAttack(curFighter);
+        var chosenAttack = curFighter.GetAttack(_selectedObjName);
         Assert.IsFalse(chosenAttack == null);
-        var damageCalc = CalculateMeleeDamage(chosenAttack, curFighter);
+        var damageCalc = curFighter.CalculateMeleeDamage(chosenAttack);
         selectedSequenceLevel = chosenAttack.sequence;
         if (chosenAttack.effectAllEnemyGroup)
         {
@@ -192,32 +194,14 @@ public class FightManager : MonoBehaviour
 
         SetAttack(damageCalc, chosenAttack.displayName);
     }
-
-    /**
-     * Calculates a Melee fight action points of effect by the player's stats.
-     */
-    private int CalculateMeleeDamage(MeleeAttackData chosenAttack, CharacterData curFighter)
-    {
-        if (chosenAttack.damage < 0) return (int)Mathf.Floor(chosenAttack.damage - curFighter.Attack);
-        return (int)Mathf.Ceil(chosenAttack.damage + curFighter.Attack);
-    }
-
-    /**
-     * Calculates a Magic fight action points of effect by the player's stats.
-     */
-    private int CalculateMagicEffect(MagicAttackData chosenAttack, CharacterData curFighter)
-    {
-        if (chosenAttack.pointsOfEffect < 0) return (int)Mathf.Floor(chosenAttack.pointsOfEffect - curFighter.Attack);
-        return (int)Mathf.Ceil(chosenAttack.pointsOfEffect + curFighter.Attack);
-    }
-
+    
     /**
      * Updates the fight by the current magic selected.
      */
     private void HandleMagicSelected()
     {
         var curFighter = _charactersFightOrder[curFighterIndex];
-        var chosenMagic = GetMagic(curFighter.data);
+        var chosenMagic = curFighter.data.GetMagic(_selectedObjName);
         Assert.IsFalse(chosenMagic == null);
         if (curFighter.data.currentMp < chosenMagic.manaPointsToConsume)
         {
@@ -229,7 +213,7 @@ public class FightManager : MonoBehaviour
         }
 
         selectedSequenceLevel = chosenMagic.sequence;
-        var damageCalc = CalculateMagicEffect(chosenMagic, curFighter.data);
+        var damageCalc = curFighter.data.CalculateMagicEffect(chosenMagic);
         if (chosenMagic.isOnSelf || chosenMagic.effectAllSameGroup || chosenMagic.effectAllEnemyGroup)
         {
             HandleNoTargetActions(curFighter, chosenMagic, damageCalc);
@@ -274,33 +258,7 @@ public class FightManager : MonoBehaviour
         _attackSelected = false;
         _selectedObjName = null;
     }
-
-    /**
-     * gets the selected magic attack of the current fighter by the name given from the pointer.
-     * below is where the name is being set.
-     * <see cref="SetSelectedObject" />
-     */
-    private MagicAttackData GetMagic(CharacterData curFighter)
-    {
-        foreach (var magic in curFighter.magics)
-            if (magic.name.Equals(_selectedObjName))
-                return magic;
-        return null;
-    }
-
-    /**
-     * gets the selected melee attack of the current fighter by the name given from the pointer.
-     * below is where the name is being set.
-     * <see cref="SetSelectedObject" />
-     */
-    private MeleeAttackData GetAttack(CharacterData curFighter)
-    {
-        foreach (var attack in curFighter.attacks)
-            if (attack.name.Equals(_selectedObjName))
-                return attack;
-        return null;
-    }
-
+    
     /**
      * Activates the sequence of the current attack selected and acts after it is finished.
      */
@@ -318,7 +276,7 @@ public class FightManager : MonoBehaviour
                     _allFighters[curFighterIndex].AnimateAttack();
                     actionsLogScript.AddToLog($" '{fighter.data.displayName}'" +
                                               $" for {Mathf.Abs(_selectedCharDamage)} points");
-                    fighter.EffectHealth(_selectedCharDamage, actionsLogScript);
+                    fighter.EffectHealth(_selectedCharDamage);
                     _selectedObjName = null;
                     break;
                 }
@@ -343,7 +301,7 @@ public class FightManager : MonoBehaviour
         switch (res.Data.id)
         {
             case InventoryItemData.k_HEALTH_POTION_ID:
-                _charactersFightOrder[curFighterIndex].EffectHealth(res.Data.pointsOfEffect, actionsLogScript);
+                _charactersFightOrder[curFighterIndex].EffectHealth(res.Data.pointsOfEffect);
                 actionsLogScript.AddToLog($" {res.Data.pointsOfEffect} Health");
                 break;
             case InventoryItemData.k_MANA_POTION_ID:
@@ -466,7 +424,9 @@ public class FightManager : MonoBehaviour
             {
                 _isBackEnabled = false;
                 actionsLogScript.AddToLog($"'{curFighter.data.displayName}' - (Enemy {curFighter.characterNum.text}),");
-                MakeEnemyAction(curFighter);
+                _enemyBehavior.MakeEnemyAction(curFighter);
+                _actionHasTaken = true;
+                _finishedSequence = true;
             }
         }));
     }
@@ -484,7 +444,8 @@ public class FightManager : MonoBehaviour
     }
 
     /**
-     * Stalls the progra
+     * Plays the given animation and stalls the game by the given time.
+     * invokes an action afterword.
      */
     private IEnumerator WaitForAnimation(Func<float> curAnimation, Action afterAnimationAction)
     {
@@ -516,7 +477,7 @@ public class FightManager : MonoBehaviour
             i++;
             if (!fighter.isActiveAndEnabled) continue;
             temp.Add(fighter, fighter.data.speed);
-            if (i < 6) _totalEnemiesSpeed += fighter.data.speed;
+            if (i < k_NUM_OF_HEROES) _totalEnemiesSpeed += fighter.data.speed;
             _totalHeroesSpeed += fighter.data.speed;
         }
 
@@ -524,7 +485,7 @@ public class FightManager : MonoBehaviour
             temp.OrderBy(x => -x.Value).ToDictionary(x => x.Key, x => x.Value).Keys.ToArray());
     }
 
-    private void SetEnemyRowDisplay(CharacterDisplayScript[] battleRow, CharacterData[] infoRow, int startInd)
+    private void SetRowDisplay(CharacterDisplayScript[] battleRow, CharacterData[] infoRow, int startInd)
     {
         for (var i = 0; i < battleRow.Length; i++)
         {
@@ -537,82 +498,6 @@ public class FightManager : MonoBehaviour
             if (!infoRow[i + startInd].isHero) infoRow[i + startInd].ResetStats();
             battleRow[i].SetScriptable(infoRow[i + startInd]);
         }
-    }
-
-    /**
-     * makes a randomize enemy action by his attacks and magics
-     */
-    private void MakeEnemyAction(CharacterDisplayScript curFighter)
-    {
-        var fighter = curFighter.data;
-        var damage = RandomizeEnemyAttack(fighter, fighter.magics, fighter.attacks);
-        if (damage == 0) return;
-        var attackIndex = Random.Range(6, _allFighters.Count);
-        while (!_allFighters[attackIndex].isActiveAndEnabled) attackIndex = Random.Range(6, _allFighters.Count);
-        var heroToAttack = _allFighters[attackIndex];
-        actionsLogScript.AddToLog($" on '{heroToAttack.data.displayName}' for {Mathf.Abs(damage)} points");
-        heroToAttack.EffectHealth(damage, actionsLogScript);
-        _actionHasTaken = true;
-        _finishedSequence = true;
-    }
-
-    /**
-     * gets a random enemy attack and initializes it if no hero needs to be selected.
-     * other wise return the attack damage.
-     * <returns> The chosen attack's calculated damage or zero if attack all-ready accord. </returns>
-     * >
-     */
-    private int RandomizeEnemyAttack(CharacterData fighter,
-        MagicAttackData[] magics, MeleeAttackData[] attacks)
-    {
-        bool isOnSelf = false, effectAllEnemyGroup = false;
-        var magicOrAttack = Random.Range(0, 2);
-        if (fighter.magics.Length == 0) magicOrAttack = 0;
-
-        if (fighter.attacks.Length == 0) magicOrAttack = 1;
-        var damage = 0;
-        if (magicOrAttack == 0)
-        {
-            var actionInd = Random.Range(0, attacks.Length);
-            actionsLogScript.AddToLog($" Uses {attacks[actionInd].displayName}");
-            damage = CalculateMeleeDamage(attacks[actionInd], fighter);
-            effectAllEnemyGroup = attacks[actionInd].effectAllEnemyGroup;
-        }
-        else
-        {
-            var actionInd = Random.Range(0, magics.Length);
-            actionsLogScript.AddToLog($" Uses {magics[actionInd].displayName}");
-            damage = CalculateMagicEffect(magics[actionInd], fighter);
-            isOnSelf = magics[actionInd].isOnSelf;
-            effectAllEnemyGroup = magics[actionInd].effectAllEnemyGroup;
-        }
-
-        if (HandleNoTargetEnemyAction(isOnSelf, effectAllEnemyGroup, damage)) return 0;
-
-        return damage;
-    }
-
-    private bool HandleNoTargetEnemyAction(bool isOnSelf, bool effectAllEnemyGroup, int damage)
-    {
-        _finishedSequence = true;
-        _actionHasTaken = true;
-        if (isOnSelf)
-        {
-            actionsLogScript.AddToLog($" for {Mathf.Abs(damage)}");
-            _charactersFightOrder[curFighterIndex].EffectHealth(damage, actionsLogScript);
-            return true;
-        }
-
-        if (effectAllEnemyGroup)
-        {
-            actionsLogScript.AddToLog($" on all heroes for {Mathf.Abs(damage)} points");
-            foreach (var character in _charactersFightOrder)
-                if (character.data.isHero)
-                    character.EffectHealth(damage, actionsLogScript);
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -663,7 +548,7 @@ public class FightManager : MonoBehaviour
     }
 
     /**
-     * sets the damage of the selected attack and sends the pointer to select a target.
+     * sets the pointsOfEffect of the selected attack and sends the pointer to select a target.
      */
     private void SetAttack(int damage, string actionName)
     {
@@ -701,7 +586,7 @@ public class FightManager : MonoBehaviour
             actionsLogScript.AddToLog($" to Effects All {groupToAttack} for {Mathf.Abs(amount)} points!");
             foreach (var fighter in _charactersFightOrder)
                 if (isOnHeroes == fighter.data.isHero)
-                    fighter.EffectHealth(amount, actionsLogScript);
+                    fighter.EffectHealth(amount);
         }
         else
         {
@@ -721,7 +606,7 @@ public class FightManager : MonoBehaviour
         SequenceManager.Instance.StartSequenceByLevel(selectedSequenceLevel);
         yield return new WaitUntil(() => !SequenceManager.Instance.isSequenceActive);
         if (SequenceManager.Instance.IsGood)
-            caster.EffectHealth(amount, actionsLogScript);
+            caster.EffectHealth(amount);
         else
             actionsLogScript.AddToLog(FAILED_SEQUENCE_MSG);
         _finishedSequence = true;
@@ -753,8 +638,14 @@ public class FightManager : MonoBehaviour
         StartCoroutine(ActivatePlayerTurn());
     }
 
+    public  List<CharacterDisplayScript> GetFightOrder()
+    {
+        return _charactersFightOrder;
+    }
+
     #region Constants
 
+    public const int k_NUM_OF_HEROES = 6;
     private const string FIGHT_TEXT = "fight";
     private const string RUN_TEXT = "run";
     private const string ITEMS_TEXT = "items";
@@ -763,7 +654,6 @@ public class FightManager : MonoBehaviour
     private const string NOT_ENOUGH_MANA = "Not Enough Mana";
     private const string FAILED_SEQUENCE_MSG = "\n !! but, sequence was failed !!";
     private const string WON_BATTLE_TEXT = "You Won \n All enemies are dead!";
-    private const int POINTER_FIGHT_SCALE = 50;
 
     #endregion
 
@@ -792,6 +682,7 @@ public class FightManager : MonoBehaviour
 
     #region Private Fields
 
+    private EnemyBehavior _enemyBehavior;
     private CharacterData[][] _enemiesByLevels;
     private int _fightLevel;
     private CharacterData[] _heroes;

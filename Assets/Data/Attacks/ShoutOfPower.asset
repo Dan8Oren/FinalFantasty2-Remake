@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Shout Of Power
   sequence: 3
   info: Powerfull shout sound waves that effects all enemy team!
-  damage: -10
+  pointsOfEffect: -10
   effectAllEnemyGroup: 1
