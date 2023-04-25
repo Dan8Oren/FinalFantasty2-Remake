@@ -1,8 +1,3 @@
-## Demo 🎮
-![](https://github.com/Dan8Oren/FinalFantasty2-Remake/blob/0d5b0a9db104c4d507185fbee686b96d466f9f34/FinalFantasy2-Dan_Oren-Demo.mp4)
-
-
-
 # Project 3: 80’s - Final Fantasy 2
 
 Screen resolution: 16x9
@@ -31,3 +26,7 @@ I also added a small window for the fight log for each event in the turns, to ke
 
 \
 ![](https://github.com/Dan8Oren/FinalFantasty2-Remake/blob/0d5b0a9db104c4d507185fbee686b96d466f9f34/Sequance-example.gif)
+
+
+## Full Demo 🎮
+![](https://github.com/Dan8Oren/FinalFantasty2-Remake/blob/0d5b0a9db104c4d507185fbee686b96d466f9f34/FinalFantasy2-Dan_Oren-Demo.mp4)
