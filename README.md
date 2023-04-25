@@ -1,3 +1,8 @@
+## Demo 🎮
+![](https://github.com/Dan8Oren/FinalFantasty2-Remake/blob/0d5b0a9db104c4d507185fbee686b96d466f9f34/FinalFantasy2-Dan_Oren-Demo.mp4)
+
+
+
 # Project 3: 80’s - Final Fantasy 2
 
 Screen resolution: 16x9
@@ -24,4 +29,5 @@ My Mehanic intervension is adding a sequence game after each action the player t
 The squence is an event in game where buttons appear on screen and the player needs to click at the buttons at the same time thier matching key is on top of them.
 I also added a small window for the fight log for each event in the turns, to keep track of what happend.
 
-
+\
+![](https://github.com/Dan8Oren/FinalFantasty2-Remake/blob/0d5b0a9db104c4d507185fbee686b96d466f9f34/Sequance-example.gif)
